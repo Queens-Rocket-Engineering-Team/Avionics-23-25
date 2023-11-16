@@ -622,7 +622,7 @@
     (property "Reference" "C1" (at 172.72 85.09 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "C" (at 172.72 87.63 0)
+    (property "Value" "0.1u" (at 172.72 87.63 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "" (at 169.8752 90.17 0)

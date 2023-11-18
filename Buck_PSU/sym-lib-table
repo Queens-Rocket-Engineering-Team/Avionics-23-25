@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "QRET_Buck_PSU")(type "KiCad")(uri "${KIPRJMOD}/QRET_Buck_PSU-symbols/2023-11-16_18-39-38.kicad_sym")(options "")(descr ""))
+)

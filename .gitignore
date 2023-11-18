@@ -11,6 +11,7 @@
 *.kicad_prl
 *.sch-bak
 *~
+
 _autosave-*
 *.tmp
 *-save.pro
@@ -28,5 +29,12 @@ fp-info-cache
 *.xml
 *.csv
 
+## All changes to .gitignore made by Oak below (So Kennan can troubleshoot if I break something)
+
 # Weird file Mac computers make for no reason
 .DS_Store
+
+# .lck files - KiCad creates a .lck (lock) file when you open a schematic/layout that prevents anyone else from opening it up unless the file is deleted
+# It is usually deleted when you close the schematic/pcb, but it you stage and commit while the file is still open then you end up commiting the file
+# p.s. I tested this on a new local branch first and everything was fine
+*.lck

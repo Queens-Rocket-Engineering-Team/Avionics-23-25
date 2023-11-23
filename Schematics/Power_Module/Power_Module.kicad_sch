@@ -1,0 +1,18 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 11b1f19b-ce82-4fce-baf6-0357ef2e3f24)
+
+  (paper "A4")
+
+  (title_block
+    (title "QRET 23-24 SRAD Power Module")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

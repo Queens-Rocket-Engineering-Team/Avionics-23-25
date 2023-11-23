@@ -1,0 +1,18 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid c9a01778-8bed-4fe7-bd5a-975b80c0ed6a)
+
+  (paper "A4")
+
+  (title_block
+    (title "QRET 23-24 SRAD GPS Module")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

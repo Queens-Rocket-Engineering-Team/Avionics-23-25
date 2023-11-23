@@ -1,0 +1,18 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid e77d0584-110f-4b35-98c2-0ebac97a828e)
+
+  (paper "A4")
+
+  (title_block
+    (title "QRET 23-24 SRAD Sensors Module")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

@@ -1,4 +1,4 @@
 (fp_lib_table
   (version 7)
-  (lib (name "QRET_Buck_PSU-footprints")(type "KiCad")(uri "${KIPRJMOD}/QRET_Buck_PSU-footprints")(options "")(descr ""))
+  (lib (name "QRET_Buck_PSU-footprints")(type "KiCad")(uri "${KIPRJMOD}/QRET_Buck_PSU-footprints.pretty")(options "")(descr ""))
 )

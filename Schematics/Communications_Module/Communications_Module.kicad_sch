@@ -1,0 +1,18 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid ace06731-9b48-45c3-868d-c65fed1a8f9b)
+
+  (paper "A4")
+
+  (title_block
+    (title "QRET 23-24 SRAD Communications Module")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

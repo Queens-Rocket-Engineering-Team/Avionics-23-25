@@ -1,0 +1,18 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 29db4100-776d-46b8-a17b-170206e82f23)
+
+  (paper "A4")
+
+  (title_block
+    (title "QRET 23-24 SRAD Altimeter Module")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

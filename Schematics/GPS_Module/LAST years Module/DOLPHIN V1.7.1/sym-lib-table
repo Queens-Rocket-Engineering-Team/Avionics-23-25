@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "QRET_GPS_Components")(type "KiCad")(uri "${KIPRJMOD}/QRET_GPS_Components.kicad_sym")(options "")(descr ""))
+)

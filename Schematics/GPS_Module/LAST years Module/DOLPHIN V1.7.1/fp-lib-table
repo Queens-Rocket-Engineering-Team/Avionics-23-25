@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name "RF_GPS")(type "KiCad")(uri "/Users/finn/Desktop/QRET/RF_GPS.pretty")(options "")(descr ""))
+  (lib (name "QRET_GPS_Footprints")(type "KiCad")(uri "${KIPRJMOD}/QRET_GPS_Footprints.pretty")(options "")(descr ""))
+)

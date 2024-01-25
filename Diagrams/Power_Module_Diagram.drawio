@@ -1,59 +1,62 @@
-<mxfile host="app.diagrams.net" modified="2023-11-25T21:01:04.482Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0" etag="mJpzFXu9NSKqHCk6B-Pq" version="22.1.4" type="device">
+<mxfile host="app.diagrams.net" modified="2024-01-23T09:01:00.022Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0" etag="EmDlHEIkDmBvZy_DpEoi" version="22.1.21" type="device">
   <diagram name="Page-1" id="m4HbVYhpBsFxY-E0fdw8">
-    <mxGraphModel dx="1114" dy="576" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1354" dy="576" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="GqpDL0QlQFK2nMcuySfG-1" value="&lt;div&gt;Stack Edge Connector&lt;/div&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="160" y="240" width="120" height="60" as="geometry" />
+        <mxCell id="GqpDL0QlQFK2nMcuySfG-1" value="&lt;div&gt;Stack Edge Connector&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="120" y="220" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-1" target="OGrVCalkd1I5AWNYH76K-2">
+        <mxCell id="OGrVCalkd1I5AWNYH76K-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="OGrVCalkd1I5AWNYH76K-1" target="OGrVCalkd1I5AWNYH76K-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-1" value="Power Connector 1" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="520" y="120" width="120" height="60" as="geometry" />
+        <mxCell id="OGrVCalkd1I5AWNYH76K-1" value="&lt;div&gt;Primary Battery&lt;/div&gt;&lt;div&gt;Connector&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="600" y="120" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-2" target="GqpDL0QlQFK2nMcuySfG-1">
+        <mxCell id="hXLBwO_EClvlFiFGR2fn-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-2" target="hXLBwO_EClvlFiFGR2fn-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-2" value="Screw Switch Connector 1" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="360" y="120" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-3" target="OGrVCalkd1I5AWNYH76K-4">
+        <mxCell id="hXLBwO_EClvlFiFGR2fn-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-2" target="hXLBwO_EClvlFiFGR2fn-3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-3" value="Power Connector 2" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="520" y="200" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-4" target="GqpDL0QlQFK2nMcuySfG-1">
+        <mxCell id="hXLBwO_EClvlFiFGR2fn-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-2" target="GqpDL0QlQFK2nMcuySfG-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-4" value="Screw Switch Connector 2" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="360" y="200" width="120" height="60" as="geometry" />
+        <mxCell id="OGrVCalkd1I5AWNYH76K-2" value="&lt;div&gt;Primary Screw&lt;/div&gt;&lt;div&gt;Switch Connector&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="440" y="120" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-5" target="OGrVCalkd1I5AWNYH76K-6">
+        <mxCell id="OGrVCalkd1I5AWNYH76K-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="OGrVCalkd1I5AWNYH76K-3" target="OGrVCalkd1I5AWNYH76K-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-5" value="Power Connector 3" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="520" y="280" width="120" height="60" as="geometry" />
+        <mxCell id="OGrVCalkd1I5AWNYH76K-3" value="&lt;div&gt;Secondary Battery&lt;/div&gt;&lt;div&gt;Connector&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="600" y="320" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-6" target="GqpDL0QlQFK2nMcuySfG-1">
+        <mxCell id="hXLBwO_EClvlFiFGR2fn-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-4" target="hXLBwO_EClvlFiFGR2fn-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-6" value="Screw Switch Connector 3" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="360" y="280" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-7" target="OGrVCalkd1I5AWNYH76K-8">
+        <mxCell id="hXLBwO_EClvlFiFGR2fn-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-4" target="GqpDL0QlQFK2nMcuySfG-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-7" value="Power Connector 4" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="520" y="360" width="120" height="60" as="geometry" />
+        <mxCell id="OGrVCalkd1I5AWNYH76K-4" value="&lt;div&gt;Secondary Screw&lt;/div&gt;&lt;div&gt;Switch Connector&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="440" y="320" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="OGrVCalkd1I5AWNYH76K-8" target="GqpDL0QlQFK2nMcuySfG-1">
+        <mxCell id="hXLBwO_EClvlFiFGR2fn-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="hXLBwO_EClvlFiFGR2fn-1" target="GqpDL0QlQFK2nMcuySfG-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="OGrVCalkd1I5AWNYH76K-8" value="Screw Switch Connector 4" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="360" y="360" width="120" height="60" as="geometry" />
+        <mxCell id="hXLBwO_EClvlFiFGR2fn-1" value="Primary 3.3V&lt;br&gt;Buck Converter" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="hXLBwO_EClvlFiFGR2fn-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="hXLBwO_EClvlFiFGR2fn-2" target="GqpDL0QlQFK2nMcuySfG-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hXLBwO_EClvlFiFGR2fn-2" value="Secondary 3.3V&lt;br&gt;Buck Converter" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="hXLBwO_EClvlFiFGR2fn-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="hXLBwO_EClvlFiFGR2fn-3" target="GqpDL0QlQFK2nMcuySfG-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hXLBwO_EClvlFiFGR2fn-3" value="Primary 5.0V&lt;br&gt;Buck Converter" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="220" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -2,6 +2,8 @@
 
 This directory contains all schematics involved in this iteration of the Avionics system.
 
+Schematics are made using KiCAD 7.
+
 ## Backplane
 - Single, large PCB
 - Connects all stack "modules" (PCBs)

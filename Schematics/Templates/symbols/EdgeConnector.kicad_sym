@@ -54,7 +54,7 @@
     (property "Value" "Stack Female Edge Connector" (at 6.35 22.86 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "footprints:CONN_10018784_AMP" (at 0 -13.335 0)
+    (property "Footprint" "footprints:AMPHENOL_10018784-10210TLF" (at 0 -13.335 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (at -6.35 -19.05 0)

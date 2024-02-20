@@ -1268,6 +1268,187 @@
         )
       )
     )
+<<<<<<< Updated upstream
+=======
+    (symbol "QRET_Edge_Connector:Stack Male Edge Connector" (in_bom yes) (on_board yes)
+      (property "Reference" "J" (at -8.89 21.59 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Value" "Stack Male Edge Connector" (at 6.35 21.59 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "Connector_PCBEdge:BUS_PCIexpress_x1" (at 0 -14.605 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "" (at -6.35 -20.32 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_keywords" "pcie" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_description" "QRET SRAD Male Stack Edge Connector (PCIe x1 Connector)" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_fp_filters" "*PCIexpress*" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "Stack Male Edge Connector_0_1"
+        (rectangle (start -11.43 20.32) (end 11.43 -20.32)
+          (stroke (width 0.254) (type default))
+          (fill (type background))
+        )
+      )
+      (symbol "Stack Male Edge Connector_1_1"
+        (text "TENTATIVE" (at 0 0.635 900)
+          (effects (font (size 1.5 1.5)))
+        )
+        (pin power_in line (at 15.24 17.145 180) (length 3.81)
+          (name "BATT_A" (effects (font (size 1.27 1.27))))
+          (number "A1" (effects (font (size 1.27 1.27))))
+        )
+        (pin power_in line (at 15.24 -8.89 180) (length 3.81)
+          (name "BATT_B" (effects (font (size 1.27 1.27))))
+          (number "A10" (effects (font (size 1.27 1.27))))
+        )
+        (pin power_in line (at 15.24 -13.335 180) (length 3.81)
+          (name "GND_B" (effects (font (size 1.27 1.27))))
+          (number "A11" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 -13.335 180) (length 3.81) hide
+          (name "GND_B" (effects (font (size 1.27 1.27))))
+          (number "A12" (effects (font (size 1.27 1.27))))
+        )
+        (pin power_in line (at 15.24 -17.78 180) (length 3.81)
+          (name "3.3V_B" (effects (font (size 1.27 1.27))))
+          (number "A13" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 -13.335 180) (length 3.81) hide
+          (name "GND_B" (effects (font (size 1.27 1.27))))
+          (number "A14" (effects (font (size 1.27 1.27))))
+        )
+        (pin bidirectional line (at -15.24 3.81 0) (length 3.81)
+          (name "CAN_H" (effects (font (size 1.27 1.27))))
+          (number "A15" (effects (font (size 1.27 1.27))))
+        )
+        (pin output line (at -15.24 17.78 0) (length 3.81)
+          (name "DB_IND" (effects (font (size 1.27 1.27))))
+          (number "A16" (effects (font (size 1.27 1.27))))
+        )
+        (pin no_connect line (at -15.24 -15.24 0) (length 3.81)
+          (name "Reserved" (effects (font (size 1.27 1.27))))
+          (number "A17" (effects (font (size 1.27 1.27))))
+        )
+        (pin no_connect line (at -15.24 -10.16 0) (length 3.81)
+          (name "Reserved" (effects (font (size 1.27 1.27))))
+          (number "A18" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 17.145 180) (length 3.81) hide
+          (name "BATT_A" (effects (font (size 1.27 1.27))))
+          (number "A2" (effects (font (size 1.27 1.27))))
+        )
+        (pin power_in line (at 15.24 12.7 180) (length 3.81)
+          (name "GND_A" (effects (font (size 1.27 1.27))))
+          (number "A3" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 12.7 180) (length 3.81) hide
+          (name "GND_A" (effects (font (size 1.27 1.27))))
+          (number "A4" (effects (font (size 1.27 1.27))))
+        )
+        (pin power_in line (at 15.24 8.255 180) (length 3.81)
+          (name "3.3V_A" (effects (font (size 1.27 1.27))))
+          (number "A5" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 12.7 180) (length 3.81) hide
+          (name "GND_A" (effects (font (size 1.27 1.27))))
+          (number "A6" (effects (font (size 1.27 1.27))))
+        )
+        (pin power_in line (at 15.24 3.81 180) (length 3.81)
+          (name "5.0V_A" (effects (font (size 1.27 1.27))))
+          (number "A7" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 12.7 180) (length 3.81) hide
+          (name "GND_A" (effects (font (size 1.27 1.27))))
+          (number "A8" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 -8.89 180) (length 3.81) hide
+          (name "BATT_B" (effects (font (size 1.27 1.27))))
+          (number "A9" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 17.145 180) (length 3.81) hide
+          (name "BATT_A" (effects (font (size 1.27 1.27))))
+          (number "B1" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 -8.89 180) (length 3.81) hide
+          (name "BATT_B" (effects (font (size 1.27 1.27))))
+          (number "B10" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 -13.335 180) (length 3.81) hide
+          (name "GND_B" (effects (font (size 1.27 1.27))))
+          (number "B11" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 -13.335 180) (length 3.81) hide
+          (name "GND_B" (effects (font (size 1.27 1.27))))
+          (number "B12" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 -17.78 180) (length 3.81) hide
+          (name "3.3V_B" (effects (font (size 1.27 1.27))))
+          (number "B13" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 -13.335 180) (length 3.81) hide
+          (name "GND_B" (effects (font (size 1.27 1.27))))
+          (number "B14" (effects (font (size 1.27 1.27))))
+        )
+        (pin bidirectional line (at -15.24 7.62 0) (length 3.81)
+          (name "CAN_L" (effects (font (size 1.27 1.27))))
+          (number "B15" (effects (font (size 1.27 1.27))))
+        )
+        (pin no_connect line (at -15.24 -7.62 0) (length 3.81)
+          (name "Reserved" (effects (font (size 1.27 1.27))))
+          (number "B16" (effects (font (size 1.27 1.27))))
+        )
+        (pin no_connect line (at -15.24 -12.7 0) (length 3.81)
+          (name "Reserved" (effects (font (size 1.27 1.27))))
+          (number "B17" (effects (font (size 1.27 1.27))))
+        )
+        (pin no_connect line (at -15.24 -5.08 0) (length 3.81)
+          (name "Reserved" (effects (font (size 1.27 1.27))))
+          (number "B18" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 17.145 180) (length 3.81) hide
+          (name "BATT_A" (effects (font (size 1.27 1.27))))
+          (number "B2" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 12.7 180) (length 3.81) hide
+          (name "GND_A" (effects (font (size 1.27 1.27))))
+          (number "B3" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 12.7 180) (length 3.81) hide
+          (name "GND_A" (effects (font (size 1.27 1.27))))
+          (number "B4" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 8.255 180) (length 3.81) hide
+          (name "3.3V_A" (effects (font (size 1.27 1.27))))
+          (number "B5" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 12.7 180) (length 3.81) hide
+          (name "GND_A" (effects (font (size 1.27 1.27))))
+          (number "B6" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 3.81 180) (length 3.81) hide
+          (name "5.0V_A" (effects (font (size 1.27 1.27))))
+          (number "B7" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 12.7 180) (length 3.81) hide
+          (name "GND_A" (effects (font (size 1.27 1.27))))
+          (number "B8" (effects (font (size 1.27 1.27))))
+        )
+        (pin passive line (at 15.24 -8.89 180) (length 3.81) hide
+          (name "BATT_B" (effects (font (size 1.27 1.27))))
+          (number "B9" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
+>>>>>>> Stashed changes
     (symbol "Regulator_Linear:AMS1117-3.3" (in_bom yes) (on_board yes)
       (property "Reference" "U" (at -3.81 3.175 0)
         (effects (font (size 1.27 1.27)))
@@ -1633,6 +1814,61 @@
         )
       )
     )
+<<<<<<< Updated upstream
+=======
+    (symbol "power:+5V" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
+      (property "Reference" "#PWR" (at 0 -3.81 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Value" "+5V" (at 0 3.556 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_keywords" "global power" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_description" "Power symbol creates a global label with name \"+5V\"" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "+5V_0_1"
+        (polyline
+          (pts
+            (xy -0.762 1.27)
+            (xy 0 2.54)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 2.54)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0 2.54)
+            (xy 0.762 1.27)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+      )
+      (symbol "+5V_1_1"
+        (pin power_in line (at 0 0 90) (length 0) hide
+          (name "+5V" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
+>>>>>>> Stashed changes
     (symbol "power:GND" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
       (property "Reference" "#PWR" (at 0 -6.35 0)
         (effects (font (size 1.27 1.27)) hide)
@@ -1890,7 +2126,16 @@
   (no_connect (at 20.066 235.966) (uuid 3412ce33-a8cb-4a45-8557-4353907163c1))
   (no_connect (at 30.226 230.886) (uuid 57f4dfd2-0a3f-4133-89b8-3726d2d7dadc))
   (no_connect (at 27.305 71.12) (uuid 5d867075-957d-4506-b82d-3f416249f25c))
+<<<<<<< Updated upstream
   (no_connect (at 47.625 66.04) (uuid a5a821f1-9689-412e-9841-27e01bb3ec99))
+=======
+  (no_connect (at 358.394 149.86) (uuid 5e3e9c80-f36c-474c-b10a-4fe87e0bb223))
+  (no_connect (at 358.394 147.32) (uuid 92115b85-c9ae-4d81-ac07-1cf80e7ae7d6))
+  (no_connect (at 47.625 66.04) (uuid a5a821f1-9689-412e-9841-27e01bb3ec99))
+  (no_connect (at 358.394 139.7) (uuid c4305766-3dee-4d1b-b011-b75165109552))
+  (no_connect (at 358.394 144.78) (uuid d260c911-fe53-41e0-96a4-8d3a08e6aa8f))
+  (no_connect (at 358.394 142.24) (uuid d6150552-2934-417f-822f-c3c2e28e8f36))
+>>>>>>> Stashed changes
 
   (wire (pts (xy 200.025 41.275) (xy 200.025 42.545))
     (stroke (width 0) (type default))
@@ -1928,6 +2173,13 @@
     (stroke (width 0) (type default))
     (uuid 0be07173-5062-47fa-8f36-1b1fb53c45ca)
   )
+<<<<<<< Updated upstream
+=======
+  (wire (pts (xy 393.954 129.54) (xy 393.954 130.81))
+    (stroke (width 0) (type default))
+    (uuid 0c01a33d-4ea7-4c17-a768-cc52690de632)
+  )
+>>>>>>> Stashed changes
   (wire (pts (xy 200.025 32.385) (xy 210.185 32.385))
     (stroke (width 0) (type default))
     (uuid 0d632599-07c3-46f7-84bd-40e7360ac56f)
@@ -1973,6 +2225,13 @@
     (stroke (width 0) (type default))
     (uuid 12b7e27e-27ba-4daa-9e56-9da1ef23f81d)
   )
+<<<<<<< Updated upstream
+=======
+  (wire (pts (xy 388.874 130.81) (xy 393.954 130.81))
+    (stroke (width 0) (type default))
+    (uuid 139ae21b-9b3a-47bf-8a4d-059ba2f3d84c)
+  )
+>>>>>>> Stashed changes
   (wire (pts (xy 194.31 146.685) (xy 194.31 153.035))
     (stroke (width 0) (type default))
     (uuid 1450aa24-6647-46d1-9b25-e9b250f394f0)
@@ -1981,6 +2240,13 @@
     (stroke (width 0) (type default))
     (uuid 1453e392-d6e1-4ecc-8251-237812122865)
   )
+<<<<<<< Updated upstream
+=======
+  (wire (pts (xy 405.384 121.92) (xy 405.384 123.19))
+    (stroke (width 0) (type default))
+    (uuid 16eae198-5067-4e28-acc4-290b1bcdb846)
+  )
+>>>>>>> Stashed changes
   (wire (pts (xy 176.276 216.916) (xy 176.276 230.886))
     (stroke (width 0) (type default))
     (uuid 16ec223c-0b18-46ee-ab40-5b98824a28b4)
@@ -2638,6 +2904,13 @@
     (stroke (width 0) (type default))
     (uuid c9ba66f7-0d15-42d5-ab2f-eb6fa460c370)
   )
+<<<<<<< Updated upstream
+=======
+  (wire (pts (xy 388.874 121.92) (xy 405.384 121.92))
+    (stroke (width 0) (type default))
+    (uuid caba5275-db6e-4a9f-a44b-8a726b709ddc)
+  )
+>>>>>>> Stashed changes
   (wire (pts (xy 184.785 150.495) (xy 186.055 150.495))
     (stroke (width 0) (type default))
     (uuid cf119c9a-4a29-4039-b58e-ea482c7cebac)
@@ -5622,6 +5895,16 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
+<<<<<<< Updated upstream
+=======
+  (global_label "CAN_H" (shape input) (at 358.394 130.81 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid c0165660-a20d-4ea4-a94c-d7454e50be6c)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 349.4216 130.81 0)
+      (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
+>>>>>>> Stashed changes
   (global_label "V_DIODE" (shape input) (at 143.256 229.616 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid ce21af1c-3ae1-4c07-8597-00b31e6a7c58)
@@ -5699,6 +5982,16 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
+<<<<<<< Updated upstream
+=======
+  (global_label "CAN_L" (shape input) (at 358.394 127 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid f159ecf0-8406-445e-b0a5-a7b14f640ae8)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 349.724 127 0)
+      (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
+>>>>>>> Stashed changes
   (global_label "CAN_RX" (shape input) (at 210.185 145.415 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid f8903aaa-0b11-4b0d-8fdf-88b23020f7a2)
@@ -6716,6 +7009,39 @@
     )
   )
 
+<<<<<<< Updated upstream
+=======
+  (symbol (lib_id "power:+5V") (at 393.954 129.54 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 63679964-2fe4-468a-bd54-879657087c59)
+    (property "Reference" "#PWR041" (at 393.954 133.35 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+5V" (at 393.954 124.46 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 393.954 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 393.954 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 20ac5937-c366-41d5-ae69-919f8f29549f))
+    (instances
+      (project "Altimeter_Module"
+        (path "/29db4100-776d-46b8-a17b-170206e82f23"
+          (reference "#PWR041") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "#PWR042") (unit 1)
+        )
+      )
+    )
+  )
+
+>>>>>>> Stashed changes
   (symbol (lib_id "power:GND") (at 160.02 45.085 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 65b390a1-b07a-46f6-be89-3159a69f6af7)
@@ -7413,6 +7739,39 @@
     )
   )
 
+<<<<<<< Updated upstream
+=======
+  (symbol (lib_id "power:GND") (at 405.384 123.19 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 9013c87a-96c9-4645-915e-72367926056c)
+    (property "Reference" "#PWR042" (at 405.384 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 405.384 128.27 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 405.384 123.19 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 405.384 123.19 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 1a5efce6-f808-4e12-93bf-a433ac72c6aa))
+    (instances
+      (project "Altimeter_Module"
+        (path "/29db4100-776d-46b8-a17b-170206e82f23"
+          (reference "#PWR042") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "#PWR037") (unit 1)
+        )
+      )
+    )
+  )
+
+>>>>>>> Stashed changes
   (symbol (lib_id "Device:R_US") (at 40.386 221.996 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 91fdbc93-196e-42d5-a57b-d5a33c4638e9)
@@ -7555,6 +7914,74 @@
     )
   )
 
+<<<<<<< Updated upstream
+=======
+  (symbol (lib_id "QRET_Edge_Connector:Stack Male Edge Connector") (at 373.634 134.62 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 9bdabe74-0171-4537-8e90-bf757d9d3a05)
+    (property "Reference" "J2" (at 373.634 107.95 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "Stack Male Edge Connector" (at 373.634 110.49 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Connector_PCBEdge:BUS_PCIexpress_x1" (at 373.634 147.955 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 367.284 153.67 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "A1" (uuid 1a376574-b418-482c-8cdb-41ffd3e4bfd0))
+    (pin "A10" (uuid eba3e3a1-9487-49e7-8500-1e7f98c58a71))
+    (pin "A11" (uuid bceabfc1-16c0-4354-8320-72476650acf1))
+    (pin "A12" (uuid 57dd9ff9-d4c3-409c-abaf-55ccd0a3d6b2))
+    (pin "A13" (uuid 8b9552c5-aaec-4b74-97e7-e82a2e54f155))
+    (pin "A14" (uuid 0b9d47da-af52-45a1-9f80-2a82d452b9b4))
+    (pin "A15" (uuid cc1be706-280b-4118-ace5-f98dd98ebbc4))
+    (pin "A16" (uuid c1806a62-fafa-405f-82f6-55da066dd07b))
+    (pin "A17" (uuid fee0d4ee-d8e6-4d77-973a-3cb0da8f0a79))
+    (pin "A18" (uuid 2c4f5d2b-7cbe-4d2f-aac9-295d1f1df263))
+    (pin "A2" (uuid ea272b58-00a7-4880-af82-48ee37c4a196))
+    (pin "A3" (uuid fd0e5fc6-50e0-4cb3-9d70-378be4fd9680))
+    (pin "A4" (uuid df898cc2-377e-4d47-a52d-442d2ebb2d26))
+    (pin "A5" (uuid cac04823-7679-488d-ac70-e6799b8d5ed0))
+    (pin "A6" (uuid a14169e9-40e3-4d56-b2bb-e114392a7163))
+    (pin "A7" (uuid 62ead79b-d23a-4b13-b19f-74b9cab5c885))
+    (pin "A8" (uuid 2a61a98f-3c02-4a19-8216-e673e90c4cc5))
+    (pin "A9" (uuid bfac65a7-4bcb-42d3-8198-4ac61219041c))
+    (pin "B1" (uuid 81c511cc-bc28-4a12-a483-1078fb842b43))
+    (pin "B10" (uuid 98607426-754f-4430-bf6b-99f3b5be8c13))
+    (pin "B11" (uuid a2e095f8-e915-44a9-a4a7-c71c503f9dee))
+    (pin "B12" (uuid 8d6ee1be-02cb-49ba-ae49-2f314037dd05))
+    (pin "B13" (uuid 099e0fb0-9a6a-477a-aadb-75e23dc14d4d))
+    (pin "B14" (uuid 8e58e510-0192-4d8f-b996-08a3905bb9ca))
+    (pin "B15" (uuid ba5e7735-3221-445e-866e-d23fd74fdc3c))
+    (pin "B16" (uuid 1ea2c216-a7df-4c1d-a115-841270dc85b7))
+    (pin "B17" (uuid b3e85910-c6d4-4a81-bdd5-27235aa7b9e7))
+    (pin "B18" (uuid 4db09610-e736-4e3c-91e5-2f4fb8dade09))
+    (pin "B2" (uuid c21b8944-b171-4860-a628-71c5e98c5043))
+    (pin "B3" (uuid 67cc78d2-0878-448c-9455-000f9a6515de))
+    (pin "B4" (uuid 0a86d680-976b-41fc-919c-bfbcb52706ab))
+    (pin "B5" (uuid d7376cc5-427c-4834-b50d-6fcab1962ba7))
+    (pin "B6" (uuid b7cbe27d-ace2-41ed-9216-22577ca24f2c))
+    (pin "B7" (uuid 2327c7f2-c13e-4829-837c-a53d17135ec6))
+    (pin "B8" (uuid 159f6271-31f2-4ac6-9d38-f89a07084244))
+    (pin "B9" (uuid 2dad4998-3063-4a1d-ad99-d1feeac6dc3f))
+    (instances
+      (project "Altimeter_Module"
+        (path "/29db4100-776d-46b8-a17b-170206e82f23"
+          (reference "J2") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "J2") (unit 1)
+        )
+      )
+    )
+  )
+
+>>>>>>> Stashed changes
   (symbol (lib_id "Device:FerriteBead") (at 266.7 34.29 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a1c1ab9c-f6d7-4636-8ec4-a86820fda302)

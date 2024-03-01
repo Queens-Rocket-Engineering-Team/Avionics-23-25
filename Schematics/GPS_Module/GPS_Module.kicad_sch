@@ -2602,9 +2602,6 @@
   (junction (at 179.832 95.377) (diameter 0) (color 0 0 0 0)
     (uuid 01b61f54-7bd4-4d93-8cab-c5d3a4390c83)
   )
-  (junction (at 218.694 246.253) (diameter 0) (color 0 0 0 0)
-    (uuid 0412d789-8e8e-4cf3-9f4b-694209246127)
-  )
   (junction (at 388.874 181.483) (diameter 0) (color 0 0 0 0)
     (uuid 08937a09-0088-43ce-b679-b1c2e87e340d)
   )
@@ -2640,6 +2637,9 @@
   )
   (junction (at 33.02 102.235) (diameter 0) (color 0 0 0 0)
     (uuid 28fdb41f-9106-461f-a34c-c5639fb89048)
+  )
+  (junction (at 41.91 222.123) (diameter 0) (color 0 0 0 0)
+    (uuid 49278e16-a117-4328-a918-95e121d88a7d)
   )
   (junction (at 155.829 40.005) (diameter 0) (color 0 0 0 0)
     (uuid 4c7ec21d-b92b-4e8f-b7ab-7abd0487e9f3)
@@ -2755,6 +2755,9 @@
   (junction (at 28.956 30.988) (diameter 0) (color 0 0 0 0)
     (uuid e0db4048-ad9a-4221-8b75-217b3862ac2b)
   )
+  (junction (at 218.694 246.253) (diameter 0) (color 0 0 0 0)
+    (uuid e210f017-e3b3-49db-8e07-4fe2303e794a)
+  )
   (junction (at 25.273 242.443) (diameter 0) (color 0 0 0 0)
     (uuid e215d675-150e-4f71-880b-14f013b6b4d2)
   )
@@ -2772,10 +2775,13 @@
   (no_connect (at 212.598 27.178) (uuid 4e83ee36-8b9b-4b4b-9a08-6e5290b71c50))
   (no_connect (at 366.014 163.703) (uuid 6cc5f2ac-4cc8-417a-a5eb-51ebe62b128e))
   (no_connect (at 31.75 239.903) (uuid 72ce2c78-1c30-4715-962b-af485b19837a))
+  (no_connect (at 336.296 203.073) (uuid 8b6a8ccd-b4e4-48c9-b29b-08f2286cbbbf))
   (no_connect (at 221.488 27.178) (uuid 962532fe-0d0a-4851-8f34-a7782553cc12))
+  (no_connect (at 336.296 222.123) (uuid a6f927ff-ee13-4752-8d28-2bc3efda296e))
   (no_connect (at 57.15 234.823) (uuid b365aa8f-c9ea-467b-a5c9-4696fa658f6d))
   (no_connect (at 376.174 158.623) (uuid ba18ac37-28fe-44d0-a708-1a71bdc0008c))
   (no_connect (at 57.15 232.283) (uuid bc217008-bb9d-482c-9b6a-37c3c5987c1b))
+  (no_connect (at 336.296 184.023) (uuid f968e956-e6e7-4c3b-8c48-cd3ab89f903c))
 
   (wire (pts (xy 156.083 60.579) (xy 156.083 55.245))
     (stroke (width 0) (type default))
@@ -3117,10 +3123,6 @@
     (stroke (width 0) (type default))
     (uuid 5cbd6d92-9fdd-49fd-a6be-16a81b448ee4)
   )
-  (wire (pts (xy 203.835 246.253) (xy 218.694 246.253))
-    (stroke (width 0) (type default))
-    (uuid 60951652-466e-4330-bfed-edc9fb8bbd9e)
-  )
   (wire (pts (xy 347.726 191.643) (xy 347.726 200.533))
     (stroke (width 0) (type default))
     (uuid 60ac3d91-0b5d-43fc-ae6f-7627a5840b71)
@@ -3160,6 +3162,10 @@
   (wire (pts (xy 371.856 87.884) (xy 376.428 87.884))
     (stroke (width 0) (type default))
     (uuid 69cc7197-6d8f-4633-83da-ed3cf59211fe)
+  )
+  (wire (pts (xy 41.91 222.123) (xy 37.465 222.123))
+    (stroke (width 0) (type default))
+    (uuid 6aed2189-a07b-438d-b02e-bf16793d052e)
   )
   (polyline (pts (xy 169.799 13.335) (xy 169.799 67.945))
     (stroke (width 0) (type default))
@@ -3262,7 +3268,7 @@
     (stroke (width 0) (type default))
     (uuid 8a2f2027-15c6-4898-8efa-2421b3b3ca5b)
   )
-  (wire (pts (xy 218.694 246.253) (xy 219.075 246.253))
+  (wire (pts (xy 203.835 246.253) (xy 218.694 246.253))
     (stroke (width 0) (type default))
     (uuid 8a66c1b9-4a8b-4f04-8864-849a7e01ecd4)
   )
@@ -3357,6 +3363,10 @@
   (wire (pts (xy 295.656 191.643) (xy 347.726 191.643))
     (stroke (width 0) (type default))
     (uuid a646bdc9-2ddd-4076-9128-9311e7856ff7)
+  )
+  (wire (pts (xy 28.956 214.503) (xy 28.956 219.964))
+    (stroke (width 0) (type default))
+    (uuid a830152a-cb38-4348-8237-27fd5f336885)
   )
   (wire (pts (xy 411.099 206.248) (xy 404.876 206.248))
     (stroke (width 0) (type default))
@@ -3465,6 +3475,10 @@
   (wire (pts (xy 293.116 208.153) (xy 290.576 208.153))
     (stroke (width 0) (type default))
     (uuid cf4b91f3-8897-40a0-b037-c9d48d50e606)
+  )
+  (wire (pts (xy 37.465 214.503) (xy 28.956 214.503))
+    (stroke (width 0) (type default))
+    (uuid cfb880bc-332b-4264-a186-ef378e1525eb)
   )
   (wire (pts (xy 396.494 173.863) (xy 397.764 173.863))
     (stroke (width 0) (type default))
@@ -3577,6 +3591,10 @@
   (wire (pts (xy 63.119 235.077) (xy 60.579 235.077))
     (stroke (width 0) (type default))
     (uuid f756d0ff-d3f2-4763-8670-fb28c35dce82)
+  )
+  (wire (pts (xy 218.694 246.253) (xy 219.075 246.253))
+    (stroke (width 0) (type default))
+    (uuid f8f8df0a-f6f1-40b8-a1b5-bd5d5ed96fba)
   )
   (wire (pts (xy 406.4 211.328) (xy 404.876 211.328))
     (stroke (width 0) (type default))
@@ -3740,6 +3758,10 @@
     (effects (font (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
     (uuid 67a242c7-586c-4ab3-a59e-7f08ed15064b)
   )
+  (text "0603 or 0402" (at 214.122 260.477 90)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 76b75f1c-6481-4dad-a2f3-be98527af01f)
+  )
   (text "Decoupling Capacitors for VBAT and VDD" (at 14.986 17.018 0)
     (effects (font (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
     (uuid 78152c96-5cd9-4e86-b467-c1ce5e72f5c4)
@@ -3790,7 +3812,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid c764d7a0-bd01-4443-bf1d-56acb0291ec3)
   )
-  (text "needed if same node as 1000u?" (at 364.617 231.521 0)
+  (text "needed if same node as 1000u?" (at 385.953 232.283 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid cb457750-07c6-457e-afbe-480e4697898c)
   )
@@ -3879,6 +3901,13 @@
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 22552398-c8e4-4bf1-9d61-705d7ba9939b)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 15.5811 234.823 0)
+      (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
+  (global_label "GPS_GND" (shape output) (at 44.45 250.063 270) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 2ade399d-af30-41b7-95c8-c7b5bcc79019)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 44.45 261.6358 90)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -4075,6 +4104,13 @@
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 9457c58f-e1ae-4b23-bd3f-3e43da75a0de)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 157.5912 233.426 0)
+      (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
+  (global_label "GPS_GND" (shape output) (at 28.956 219.964 270) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 97aa9775-908c-4ff7-b51f-4bc10b71252a)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 28.956 231.5368 90)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -4721,6 +4757,50 @@
     )
   )
 
+  (symbol (lib_id "Device:C") (at 38.481 36.068 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 1d5fe120-dcb4-4f90-8223-7d48cd63a379)
+    (property "Reference" "C2" (at 39.243 34.417 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "100nf" (at 37.211 38.1 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 39.4462 39.878 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 38.481 36.068 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C1525" (at 35.052 36.068 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (pin "1" (uuid 9794d5ad-bd05-4310-9ab5-202cafb243e5))
+    (pin "2" (uuid 83e2a7fc-5077-47d6-b252-d11bf6221c1b))
+    (instances
+      (project "CANBUSALL"
+        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
+          (reference "C2") (unit 1)
+        )
+      )
+      (project "canbusv1"
+        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
+          (reference "C1") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "C19") (unit 1)
+        )
+      )
+      (project "GPS_Module"
+        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
+          (reference "C16") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:PWR_FLAG") (at 245.999 32.893 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1e6ec30d-e268-4e9b-ae1f-dbb11030f74f)
@@ -4860,26 +4940,26 @@
     )
   )
 
-  (symbol (lib_id "Device:C") (at 155.829 33.655 0) (unit 1)
+  (symbol (lib_id "Device:C") (at 225.933 251.714 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
-    (uuid 21cb16f4-0414-48d8-947d-bd87bb3a18fe)
-    (property "Reference" "C2" (at 155.956 31.877 0)
+    (uuid 212ad4bf-329f-458f-9931-661079bafa63)
+    (property "Reference" "C2" (at 226.695 250.063 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "100nf" (at 154.686 35.433 0)
+    (property "Value" "100nf" (at 224.663 253.746 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 156.7942 37.465 0)
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 226.8982 255.524 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 155.829 33.655 0)
+    (property "Datasheet" "~" (at 225.933 251.714 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1525" (at 152.4 33.655 90)
+    (property "LCSC" "C14663" (at 222.504 251.714 90)
       (effects (font (size 1.27 1.27)))
     )
-    (pin "1" (uuid 66845f91-06c6-4dcc-a8b2-d008cc18d93d))
-    (pin "2" (uuid b6b0b9bf-2e6a-4f23-9c0b-8f4d4a1b9706))
+    (pin "1" (uuid 31590ee3-36c1-4e0a-a46f-e1b783b16c1a))
+    (pin "2" (uuid 608614f9-88ac-40e3-be42-59ecae3aa4af))
     (instances
       (project "CANBUSALL"
         (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
@@ -4898,51 +4978,7 @@
       )
       (project "GPS_Module"
         (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
-          (reference "C5") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Device:C") (at 38.481 36.068 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 247bfadb-4f07-4aa3-9919-7a5b3b8f9bd3)
-    (property "Reference" "C2" (at 38.735 34.163 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "100nf" (at 37.211 37.973 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 39.4462 39.878 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 38.481 36.068 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C14663" (at 35.433 36.068 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (pin "1" (uuid 6f92a24b-f916-493f-bb16-7b562ee8f541))
-    (pin "2" (uuid 3958147b-3e11-4d69-b962-58125ebe42c8))
-    (instances
-      (project "CANBUSALL"
-        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
-          (reference "C2") (unit 1)
-        )
-      )
-      (project "canbusv1"
-        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
-          (reference "C1") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "C19") (unit 1)
-        )
-      )
-      (project "GPS_Module"
-        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
-          (reference "C16") (unit 1)
+          (reference "C22") (unit 1)
         )
       )
     )
@@ -5119,13 +5155,13 @@
     (property "Value" "100nf" (at 102.489 35.687 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 104.7242 37.465 0)
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 104.7242 37.465 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 103.759 33.655 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C1525" (at 100.33 33.655 90)
+    (property "LCSC" "C14663" (at 100.33 33.655 90)
       (effects (font (size 1.27 1.27)))
     )
     (pin "1" (uuid 11657118-c108-4c3e-8858-3921620bd9f5))
@@ -5687,6 +5723,50 @@
     )
   )
 
+  (symbol (lib_id "Device:C") (at 37.465 218.313 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 51f3c5a5-2643-48dc-8c58-97cc75c05d06)
+    (property "Reference" "C2" (at 38.227 216.662 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "100nf" (at 36.195 220.345 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 38.4302 222.123 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 37.465 218.313 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C1525" (at 34.036 218.313 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (pin "1" (uuid 8fe123d8-8b40-4229-8c9a-17151f9b03b9))
+    (pin "2" (uuid 2f9d6f74-a7c8-4a7d-be2e-ae58a7efe807))
+    (instances
+      (project "CANBUSALL"
+        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
+          (reference "C2") (unit 1)
+        )
+      )
+      (project "canbusv1"
+        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
+          (reference "C1") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "C19") (unit 1)
+        )
+      )
+      (project "GPS_Module"
+        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
+          (reference "C25") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:GND") (at 413.893 25.4 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 563769ae-1a89-47a3-bd42-bd1aa3d8c42c)
@@ -5892,6 +5972,50 @@
     )
   )
 
+  (symbol (lib_id "Device:C") (at 49.276 36.068 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 624f56f8-0054-43aa-a8f9-a3c5a358f365)
+    (property "Reference" "C2" (at 50.038 34.417 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "100nf" (at 48.006 38.1 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 50.2412 39.878 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 49.276 36.068 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C1525" (at 45.847 36.068 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (pin "1" (uuid 0b63c2a9-9ae6-4e3e-944d-3400971f13d1))
+    (pin "2" (uuid 7b483fe0-5b60-4265-b987-547843db9209))
+    (instances
+      (project "CANBUSALL"
+        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
+          (reference "C2") (unit 1)
+        )
+      )
+      (project "canbusv1"
+        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
+          (reference "C1") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "C19") (unit 1)
+        )
+      )
+      (project "GPS_Module"
+        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
+          (reference "C4") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:GND") (at 33.02 102.235 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 63039944-b6bd-43ee-bb9b-836ba9d25541)
@@ -6017,50 +6141,6 @@
     )
   )
 
-  (symbol (lib_id "Device:C") (at 49.276 36.068 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 67e92d37-a512-4775-a40b-1d52fb57b775)
-    (property "Reference" "C2" (at 49.53 34.163 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "100nf" (at 48.006 37.973 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 50.2412 39.878 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 49.276 36.068 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C14663" (at 46.228 36.068 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (pin "1" (uuid 605a60ee-e08c-45e5-a351-99dc607301cd))
-    (pin "2" (uuid c5620997-4e52-4592-b014-f802e74115ef))
-    (instances
-      (project "CANBUSALL"
-        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
-          (reference "C2") (unit 1)
-        )
-      )
-      (project "canbusv1"
-        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
-          (reference "C1") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "C19") (unit 1)
-        )
-      )
-      (project "GPS_Module"
-        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
-          (reference "C4") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Device:R") (at 203.835 242.443 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 690c1de2-47d0-4907-a4ea-74447dac8908)
@@ -6179,6 +6259,50 @@
     )
   )
 
+  (symbol (lib_id "Device:C") (at 28.956 36.068 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 6d133e1b-ba7d-4733-910c-dd6f03243e75)
+    (property "Reference" "C2" (at 29.718 34.417 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "100nf" (at 27.686 38.1 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 29.9212 39.878 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 28.956 36.068 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C1525" (at 25.527 36.068 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (pin "1" (uuid 85e76493-f23b-47a9-96e1-ca3e5efc0b8f))
+    (pin "2" (uuid a647c14c-d400-4ff1-b83c-62e710081643))
+    (instances
+      (project "CANBUSALL"
+        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
+          (reference "C2") (unit 1)
+        )
+      )
+      (project "canbusv1"
+        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
+          (reference "C1") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "C19") (unit 1)
+        )
+      )
+      (project "GPS_Module"
+        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
+          (reference "C2") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:+3.3V") (at 70.231 26.543 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6e77462b-1953-42ea-89ed-4b6394994a6d)
@@ -6229,6 +6353,50 @@
       (project "GPS_Module"
         (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
           (reference "#PWR015") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:C") (at 413.893 21.59 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 72dbace5-615b-46a7-a397-dbbc40ca83f1)
+    (property "Reference" "C2" (at 414.655 19.939 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "100nf" (at 412.623 23.622 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 414.8582 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 413.893 21.59 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C1525" (at 410.464 21.59 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (pin "1" (uuid a877de0d-0a6f-4103-99cc-f02ec98ca302))
+    (pin "2" (uuid 4b9738f8-0b2d-428f-a559-5d4b7acf97cf))
+    (instances
+      (project "CANBUSALL"
+        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
+          (reference "C2") (unit 1)
+        )
+      )
+      (project "canbusv1"
+        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
+          (reference "C1") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "C19") (unit 1)
+        )
+      )
+      (project "GPS_Module"
+        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
+          (reference "C13") (unit 1)
         )
       )
     )
@@ -6368,6 +6536,50 @@
       (project "GPS_Module"
         (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
           (reference "C20") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:C") (at 218.694 250.063 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 7f1a7df0-e33c-4aff-a4d8-0a092bccddaa)
+    (property "Reference" "C2" (at 219.456 248.412 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "100nf" (at 217.424 252.095 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 219.6592 253.873 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 218.694 250.063 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C1525" (at 215.265 250.063 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (pin "1" (uuid 7dc2c3d9-599b-44b9-8e73-58dbf883235e))
+    (pin "2" (uuid 88d7c98e-c760-4957-a292-103b086a8de2))
+    (instances
+      (project "CANBUSALL"
+        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
+          (reference "C2") (unit 1)
+        )
+      )
+      (project "canbusv1"
+        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
+          (reference "C1") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "C19") (unit 1)
+        )
+      )
+      (project "GPS_Module"
+        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
+          (reference "C12") (unit 1)
         )
       )
     )
@@ -6706,7 +6918,7 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "LCSC" "C4190" (at 58.674 230.251 90)
-      (effects (font (size 1.27 1.27)) hide)
+      (effects (font (size 1.27 1.27)))
     )
     (pin "1" (uuid ec69e6c7-e599-405b-99b7-39cf441c5b9b))
     (pin "2" (uuid c908150a-ae6b-4983-9311-aa9bfcb2467b))
@@ -6904,6 +7116,50 @@
     )
   )
 
+  (symbol (lib_id "Device:C") (at 60.071 36.068 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid ae53cbf5-2daa-46b5-ba0e-928ccd4063ac)
+    (property "Reference" "C2" (at 60.833 34.417 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "100nf" (at 58.801 38.1 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 61.0362 39.878 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 60.071 36.068 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C1525" (at 56.642 36.068 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (pin "1" (uuid 21de713c-6ed9-4c5d-be57-27f8fb3326b1))
+    (pin "2" (uuid dea88e0b-f5d3-4271-bcbe-f2a754a59ac4))
+    (instances
+      (project "CANBUSALL"
+        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
+          (reference "C2") (unit 1)
+        )
+      )
+      (project "canbusv1"
+        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
+          (reference "C1") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "C19") (unit 1)
+        )
+      )
+      (project "GPS_Module"
+        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
+          (reference "C6") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:R") (at 25.273 251.333 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b322a5c0-b9f9-4f54-894a-ab179a9e8f18)
@@ -6972,10 +7228,10 @@
   (symbol (lib_id "Device:C") (at 376.174 177.673 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b78b3c28-2734-4cc5-8c26-cf4c687019cb)
-    (property "Reference" "C2" (at 379.984 176.403 0)
+    (property "Reference" "C2" (at 378.46 176.276 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 379.984 178.943 0)
+    (property "Value" "10u" (at 379.095 178.943 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 377.1392 181.483 0)
@@ -7123,50 +7379,6 @@
       (project "GPS_Module"
         (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
           (reference "D3") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Device:C") (at 60.071 36.068 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid c4fdba00-ca34-44fd-9a79-3461005fa6a4)
-    (property "Reference" "C2" (at 60.325 34.163 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "100nf" (at 58.801 37.973 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 61.0362 39.878 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 60.071 36.068 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C14663" (at 57.023 36.068 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (pin "1" (uuid f8c86735-bf4b-4b78-bc66-a04ea79aad60))
-    (pin "2" (uuid 86d9dc09-1e40-4b27-be3b-a616d3c390a8))
-    (instances
-      (project "CANBUSALL"
-        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
-          (reference "C2") (unit 1)
-        )
-      )
-      (project "canbusv1"
-        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
-          (reference "C1") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "C19") (unit 1)
-        )
-      )
-      (project "GPS_Module"
-        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
-          (reference "C6") (unit 1)
         )
       )
     )
@@ -7358,50 +7570,6 @@
     )
   )
 
-  (symbol (lib_id "Device:C") (at 413.893 21.59 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid da257025-0eb0-4f15-aaa5-6b452f12876c)
-    (property "Reference" "C2" (at 414.02 19.685 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "100nf" (at 412.623 23.495 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 414.8582 25.4 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 413.893 21.59 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C1525" (at 410.464 21.59 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (pin "1" (uuid aaccfa69-6ec3-4fa5-9259-9f8779682327))
-    (pin "2" (uuid 8ed75f2a-a069-4f6e-8b79-38e4bafd84ba))
-    (instances
-      (project "CANBUSALL"
-        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
-          (reference "C2") (unit 1)
-        )
-      )
-      (project "canbusv1"
-        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
-          (reference "C1") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "C19") (unit 1)
-        )
-      )
-      (project "GPS_Module"
-        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
-          (reference "C13") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Device:C") (at 282.829 36.703 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid dbeeab8c-9851-414c-b993-aa485ae55d95)
@@ -7525,50 +7693,6 @@
       (project "GPS_Module"
         (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
           (reference "U6") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Device:C") (at 28.956 36.068 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid e3adc2a3-ecc1-4fd6-a00a-8a74532513cf)
-    (property "Reference" "C2" (at 29.21 34.163 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "100nf" (at 27.686 37.973 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 29.9212 39.878 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 28.956 36.068 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C14663" (at 25.908 36.068 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (pin "1" (uuid 933f5419-706c-433c-aa93-87f23a8ac2d3))
-    (pin "2" (uuid fb4b8610-04f1-42ed-ba01-53e145a8ff2f))
-    (instances
-      (project "CANBUSALL"
-        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
-          (reference "C2") (unit 1)
-        )
-      )
-      (project "canbusv1"
-        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
-          (reference "C1") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "C19") (unit 1)
-        )
-      )
-      (project "GPS_Module"
-        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
-          (reference "C2") (unit 1)
         )
       )
     )
@@ -7791,6 +7915,50 @@
     )
   )
 
+  (symbol (lib_id "Device:C") (at 155.829 33.655 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid eef1b28f-8b36-401b-aaf4-74a07921dcda)
+    (property "Reference" "C2" (at 156.591 32.004 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "100nf" (at 154.559 35.687 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 156.7942 37.465 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 155.829 33.655 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C14663" (at 152.4 33.655 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (pin "1" (uuid 54657b91-614e-4ee5-933f-2ff7f1d83772))
+    (pin "2" (uuid 9b11f217-cea5-40d0-a662-2991cac025f3))
+    (instances
+      (project "CANBUSALL"
+        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
+          (reference "C2") (unit 1)
+        )
+      )
+      (project "canbusv1"
+        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
+          (reference "C1") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "C19") (unit 1)
+        )
+      )
+      (project "GPS_Module"
+        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
+          (reference "C5") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:GND") (at 308.61 37.465 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f28c9503-d93b-4e70-9a98-14690deab531)
@@ -7936,50 +8104,6 @@
       (project "processor"
         (path "/ccfbe2af-01d0-4f8a-8e0b-98df5d6602a9"
           (reference "#PWR08") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Device:C") (at 218.694 250.063 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid fc65b1e1-6e9b-40e2-95bc-2fdd0008baea)
-    (property "Reference" "C2" (at 218.821 248.285 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "100nf" (at 217.551 251.841 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 219.6592 253.873 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 218.694 250.063 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C1525" (at 215.265 250.063 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (pin "1" (uuid 5d9a16a7-8b9b-4d3b-9366-378a6341e08d))
-    (pin "2" (uuid ceb6cf92-b0d7-476b-b1a7-40418b263a5b))
-    (instances
-      (project "CANBUSALL"
-        (path "/93bab7a2-0f5f-4ce1-a774-248550723259"
-          (reference "C2") (unit 1)
-        )
-      )
-      (project "canbusv1"
-        (path "/acb9ae9d-257e-47aa-b94e-3fc0ebc9a75c"
-          (reference "C1") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "C19") (unit 1)
-        )
-      )
-      (project "GPS_Module"
-        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
-          (reference "C12") (unit 1)
         )
       )
     )

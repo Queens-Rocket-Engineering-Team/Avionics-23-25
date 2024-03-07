@@ -6,6 +6,10 @@
 
   (title_block
     (title "QRET 23-24 SRAD GPS Module")
+    (date "2024-03-07")
+    (company "Queen's Rocket Engineering Team")
+    (comment 1 "Contributors: Tristan Alderson, Kennan Bays")
+    (comment 4 "GRID = 0.635mm")
   )
 
   (lib_symbols

@@ -2,4 +2,5 @@
   (version 7)
   (lib (name "EdgeConnector")(type "KiCad")(uri "${KIPRJMOD}/symbols/EdgeConnector.kicad_sym")(options "")(descr ""))
   (lib (name "ISO1042BQDWVQ1")(type "KiCad")(uri "${KIPRJMOD}/symbols/ISO1042BQDWVQ1.kicad_sym")(options "")(descr ""))
+  (lib (name "KX134-1211")(type "KiCad")(uri "${KIPRJMOD}/symbols/KX134-1211.kicad_sym")(options "")(descr ""))
 )

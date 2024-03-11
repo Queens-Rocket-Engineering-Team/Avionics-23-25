@@ -7,7 +7,7 @@
   (title_block
     (title "QRET 23-24 SRAD Communications Module")
     (date "2024-03-09")
-    (rev "V0.3.0")
+    (rev "V0.3.1")
     (company "Queen's Rocket Engineering Team")
     (comment 1 "Contributors: Oak Campbell, Kennan Bays")
     (comment 4 "GRID = 0.635mm")
@@ -9240,7 +9240,7 @@
   (symbol (lib_id "power:GND") (at 403.225 66.04 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1990f809-9339-434b-bd02-333e74ccfdc5)
-    (property "Reference" "#PWR051" (at 409.575 66.04 0)
+    (property "Reference" "#PWR052" (at 409.575 66.04 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 406.4 66.04 90)
@@ -9256,7 +9256,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR051") (unit 1)
+          (reference "#PWR052") (unit 1)
         )
       )
     )
@@ -9779,7 +9779,7 @@
   (symbol (lib_id "power:GND") (at 403.86 46.99 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4eba113c-cd35-42e6-ab29-090866ce3aba)
-    (property "Reference" "#PWR053" (at 403.86 53.34 0)
+    (property "Reference" "#PWR054" (at 403.86 53.34 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 403.86 50.8 0)
@@ -9795,7 +9795,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR053") (unit 1)
+          (reference "#PWR054") (unit 1)
         )
       )
     )
@@ -9912,7 +9912,7 @@
   (symbol (lib_id "power:+3.3V") (at 403.86 31.75 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 594b5849-d4b4-44a8-abd0-1d61c4db3179)
-    (property "Reference" "#PWR052" (at 403.86 35.56 0)
+    (property "Reference" "#PWR053" (at 403.86 35.56 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3.3V" (at 403.86 27.94 0)
@@ -9928,7 +9928,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR052") (unit 1)
+          (reference "#PWR053") (unit 1)
         )
       )
       (project "processor"
@@ -10046,7 +10046,7 @@
   (symbol (lib_id "power:GND") (at 400.05 198.12 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 61635196-41ed-4a2a-8f6f-968b49e59583)
-    (property "Reference" "#PWR050" (at 400.05 191.77 0)
+    (property "Reference" "#PWR051" (at 400.05 191.77 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 400.05 193.9869 0)
@@ -10062,7 +10062,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR050") (unit 1)
+          (reference "#PWR051") (unit 1)
         )
       )
     )
@@ -10071,7 +10071,7 @@
   (symbol (lib_id "Device:C") (at 92.71 253.365 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6be93469-9f91-409c-9d92-6e90962d06b5)
-    (property "Reference" "C5" (at 86.36 252.095 0)
+    (property "Reference" "C6" (at 86.36 252.095 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1uF" (at 86.36 254.635 0)
@@ -10091,7 +10091,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "C5") (unit 1)
+          (reference "C6") (unit 1)
         )
       )
     )
@@ -10266,7 +10266,7 @@
   (symbol (lib_id "power:GND") (at 395.605 173.99 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 748d2406-c121-425b-96bc-67ac9fbcad87)
-    (property "Reference" "#PWR056" (at 395.605 180.34 0)
+    (property "Reference" "#PWR049" (at 395.605 180.34 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 395.605 178.1231 0)
@@ -10282,7 +10282,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR056") (unit 1)
+          (reference "#PWR049") (unit 1)
         )
       )
     )
@@ -10748,7 +10748,7 @@
   (symbol (lib_id "Device:C_Polarized") (at 175.26 235.585 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 94d38e1f-7576-4f26-a30a-ee503d85dc2d)
-    (property "Reference" "C2" (at 168.275 236.22 0)
+    (property "Reference" "C7" (at 168.275 236.22 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100uF" (at 166.37 238.6442 0)
@@ -10768,7 +10768,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "C2") (unit 1)
+          (reference "C7") (unit 1)
         )
       )
     )
@@ -10915,7 +10915,7 @@
   (symbol (lib_id "power:+5V") (at 388.62 149.86 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a0129a68-9142-44db-a45b-c45bc21cb4d2)
-    (property "Reference" "#PWR049" (at 384.81 149.86 0)
+    (property "Reference" "#PWR047" (at 384.81 149.86 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 391.668 149.86 90)
@@ -10931,7 +10931,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR049") (unit 1)
+          (reference "#PWR047") (unit 1)
         )
       )
     )
@@ -11062,7 +11062,7 @@
   (symbol (lib_id "power:GND") (at 397.51 220.98 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a8d22c3b-293f-45a8-93db-d9ac693c7c86)
-    (property "Reference" "#PWR047" (at 397.51 227.33 0)
+    (property "Reference" "#PWR050" (at 397.51 227.33 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 397.51 226.06 0)
@@ -11078,7 +11078,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR047") (unit 1)
+          (reference "#PWR050") (unit 1)
         )
       )
     )
@@ -11551,7 +11551,7 @@
   (symbol (lib_id "power:GND") (at 92.71 257.175 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid ca6d8fb8-8b15-43ae-b522-cadc30d34536)
-    (property "Reference" "#PWR015" (at 92.71 263.525 0)
+    (property "Reference" "#PWR016" (at 92.71 263.525 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 92.71 262.255 0)
@@ -11567,7 +11567,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR015") (unit 1)
+          (reference "#PWR016") (unit 1)
         )
       )
     )
@@ -11631,7 +11631,7 @@
   (symbol (lib_id "power:GND") (at 92.71 238.125 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid cc3bec33-99a5-4e5e-a528-7e89d1c89f0b)
-    (property "Reference" "#PWR016" (at 92.71 244.475 0)
+    (property "Reference" "#PWR015" (at 92.71 244.475 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 92.71 243.205 0)
@@ -11647,7 +11647,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR016") (unit 1)
+          (reference "#PWR015") (unit 1)
         )
       )
     )
@@ -12182,7 +12182,7 @@
   (symbol (lib_id "power:+5V") (at 408.94 205.74 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f21f3437-313a-4ffb-a7e4-e5075286b636)
-    (property "Reference" "#PWR054" (at 405.13 205.74 0)
+    (property "Reference" "#PWR055" (at 405.13 205.74 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 412.115 205.74 90)
@@ -12198,7 +12198,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR054") (unit 1)
+          (reference "#PWR055") (unit 1)
         )
       )
     )
@@ -12267,7 +12267,7 @@
   (symbol (lib_id "Device:C") (at 92.71 234.315 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f72bd813-1531-4107-a166-9d8129af26fe)
-    (property "Reference" "C6" (at 86.36 233.045 0)
+    (property "Reference" "C5" (at 86.36 233.045 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1uF" (at 86.36 235.585 0)
@@ -12287,7 +12287,7 @@
     (instances
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "C6") (unit 1)
+          (reference "C5") (unit 1)
         )
       )
     )

@@ -37,3 +37,6 @@ fp-info-cache
 # It is usually deleted when you close the schematic/pcb, but it you stage and commit while the file is still open then you end up commiting the file
 # p.s. I tested this on a new local branch first and everything was fine
 *.lck
+
+# this file that gets generated but is only needed locally for crash recovery type things
+\#auto_saved_files\#

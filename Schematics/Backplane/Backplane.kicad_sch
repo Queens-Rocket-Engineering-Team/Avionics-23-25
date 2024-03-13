@@ -1,0 +1,23 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid d6cecfea-6157-498d-8796-49576704a9cc)
+
+  (paper "A4")
+
+  (title_block
+    (title "QRET 23-24 SRAD Backplane PCB")
+    (date "2024-03-13")
+    (rev "1.0")
+    (company "Queen's Rocket Engineering Team")
+    (comment 1 "Contributors: Kennan Bays, Owen Price")
+    (comment 4 "GRID = 1.27mm")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

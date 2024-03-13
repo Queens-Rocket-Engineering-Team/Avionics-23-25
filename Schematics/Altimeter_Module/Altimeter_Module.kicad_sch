@@ -7020,17 +7020,17 @@
     (property "Value" "Main E-Match" (at 112.395 34.29 90)
       (effects (font (size 1.524 1.524)) (justify left))
     )
-    (property "Footprint" "CONN_2-1445057-2_TYCO" (at 97.79 17.145 0)
+    (property "Footprint" "footprints:CONN_2-1445057-2_TYCO" (at 97.79 17.145 0)
       (effects (font (size 1.27 1.27) italic) hide)
     )
-    (property "Datasheet" "2-1445057-2" (at 97.79 17.145 0)
+    (property "Datasheet" "https://www.te.com/usa-en/product-2-1445057-2.datasheet.pdf" (at 97.79 17.145 0)
       (effects (font (size 1.27 1.27) italic) hide)
     )
     (property "Digikey" "2-1445057-2" (at 97.79 20.955 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid f9c45b26-8c1f-480c-b7db-558aaac2a497))
-    (pin "2" (uuid dd708c80-7b3b-4c4a-b53e-13d101ef68ec))
+    (pin "1" (uuid 96d8774b-36cb-4a2b-b201-6958e25a631a))
+    (pin "2" (uuid 35759b6d-4b29-4d62-bb7e-2e2e3baba00f))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -7730,17 +7730,17 @@
     (property "Value" "Drogue E-Match" (at 163.195 36.83 90)
       (effects (font (size 1.524 1.524)) (justify left))
     )
-    (property "Footprint" "CONN_2-1445057-2_TYCO" (at 148.59 17.145 0)
+    (property "Footprint" "footprints:CONN_2-1445057-2_TYCO" (at 148.59 17.145 0)
       (effects (font (size 1.27 1.27) italic) hide)
     )
-    (property "Datasheet" "2-1445057-2" (at 148.59 17.145 0)
+    (property "Datasheet" "https://www.te.com/usa-en/product-2-1445057-2.datasheet.pdf" (at 148.59 17.145 0)
       (effects (font (size 1.27 1.27) italic) hide)
     )
     (property "Digikey" "2-1445057-2" (at 148.59 20.955 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid fcd53bbf-cf41-4208-9123-dd4e269d3f11))
-    (pin "2" (uuid 1de21c4b-ba28-4d37-b9fc-73ae3bf8ef54))
+    (pin "1" (uuid b4a05411-2e46-4058-9eac-9167053861c6))
+    (pin "2" (uuid 941b1f8a-08bb-466c-83e2-6656267eb1c8))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"

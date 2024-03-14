@@ -5394,40 +5394,6 @@
     )
   )
 
-  (symbol (lib_id "Switch:SW_Push") (at 384.81 142.875 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 477563c6-ecb6-4bc0-a934-70851c4146ac)
-    (property "Reference" "SW2" (at 384.81 135.8097 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "SW_STM_RESET" (at 384.81 138.2339 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "PTS636:PTS636_SK43_SMTR_LFS" (at 384.81 137.795 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "https://www.ckswitches.com/media/2779/pts636.pdf" (at 384.81 137.795 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Digikey" "PTS636 SK43 SMTR LFS" (at 384.81 142.875 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid fc696b12-9d08-4c9c-946f-5e8106f21d07))
-    (pin "2" (uuid 9d3b7f5b-8d90-4ffb-a586-a0d8b139d183))
-    (instances
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "SW2") (unit 1)
-        )
-      )
-      (project "GPS_Module"
-        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
-          (reference "SW1") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Device:FerriteBead") (at 311.15 29.21 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 49566122-3a90-4bde-a238-5ebef1801bdf)
@@ -6613,6 +6579,45 @@
     )
   )
 
+  (symbol (lib_id "Switch:SW_Push") (at 384.81 142.875 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 85542e7e-b902-43d8-ac80-f547c505c94b)
+    (property "Reference" "SW1" (at 384.81 135.8097 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "SW_STM_RESET" (at 384.81 138.2339 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_XKB_TS-1187A" (at 384.81 137.795 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "https://datasheet.lcsc.com/lcsc/2304140030_XKB-Connection-TS-1187A-B-A-B_C318884.pdf" (at 384.81 137.795 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C318884" (at 384.81 142.875 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 29195457-94b8-4c72-963b-1b6567278427))
+    (pin "2" (uuid e26d9cbb-ac73-4f43-9a7d-b2ab39c446cf))
+    (instances
+      (project "Altimeter_Module"
+        (path "/29db4100-776d-46b8-a17b-170206e82f23"
+          (reference "SW1") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "SW1") (unit 1)
+        )
+      )
+      (project "GPS_Module"
+        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
+          (reference "SW1") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:C") (at 354.33 161.29 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 85a1876f-62a5-47aa-938f-cf42572f09e6)
@@ -6906,40 +6911,6 @@
       (project "GPS_Module"
         (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
           (reference "C13") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Switch:SW_Push") (at 320.675 127.635 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 9761c474-a2c2-47fe-9519-fa6814e82efa)
-    (property "Reference" "SW1" (at 320.675 120.5697 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "SW_STM_BOOT_MODE" (at 320.675 122.9939 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "PTS636:PTS636_SK43_SMTR_LFS" (at 320.675 122.555 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "https://www.ckswitches.com/media/2779/pts636.pdf" (at 320.675 122.555 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Digikey" "PTS636 SK43 SMTR LFS" (at 320.675 127.635 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 5e0b7346-63d5-4115-9909-31630c25758d))
-    (pin "2" (uuid cbbeaef3-421c-4ec9-a051-3344772d87c7))
-    (instances
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "SW1") (unit 1)
-        )
-      )
-      (project "GPS_Module"
-        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
-          (reference "SW2") (unit 1)
         )
       )
     )
@@ -8185,6 +8156,45 @@
       (project "processor"
         (path "/ccfbe2af-01d0-4f8a-8e0b-98df5d6602a9"
           (reference "#PWR?") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Switch:SW_Push") (at 320.675 127.635 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid eabfd4db-e325-47bc-9a13-ee4be1ae6698)
+    (property "Reference" "SW2" (at 320.675 120.5697 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "SW_STM_BOOT_MODE" (at 320.675 122.9939 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_XKB_TS-1187A" (at 320.675 122.555 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "https://datasheet.lcsc.com/lcsc/2304140030_XKB-Connection-TS-1187A-B-A-B_C318884.pdf" (at 320.675 122.555 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C318884" (at 320.675 127.635 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid c2cf16c7-12e5-4683-b167-8bc95374aebf))
+    (pin "2" (uuid 5bca78c4-6834-4cbe-8c59-48fb0c27bbb6))
+    (instances
+      (project "Altimeter_Module"
+        (path "/29db4100-776d-46b8-a17b-170206e82f23"
+          (reference "SW2") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "SW1") (unit 1)
+        )
+      )
+      (project "GPS_Module"
+        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
+          (reference "SW2") (unit 1)
         )
       )
     )

@@ -8778,8 +8778,8 @@
     (property "LCSC" "C14663" (at 81.915 255.27 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid acfb3ddd-4fe5-49ca-8f90-d438c9027d54))
-    (pin "2" (uuid 344c1ff5-f0a8-4bed-95bc-3f23a5c2a471))
+    (pin "1" (uuid 61840f8a-b185-47b8-90e7-3070eb33de61))
+    (pin "2" (uuid d96803a3-677a-492f-bfae-663e7e95cdd8))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -8812,30 +8812,30 @@
     (property "LCSC" "C24112" (at 40.64 205.105 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid cba377ec-b061-42a4-9f39-766430319fbd))
-    (pin "10" (uuid 89af19ae-4f0e-42f6-b38d-a4ad55bc0385))
-    (pin "11" (uuid 471ca352-d25b-414a-842a-4d23a2f71c9c))
-    (pin "12" (uuid 17e870db-c858-415b-bb30-17f6c9e5c0db))
-    (pin "13" (uuid 6802e5bb-2ba0-49d3-9adc-3199bfd0512d))
-    (pin "14" (uuid 7b492e07-f752-4532-b283-ea946100fbfb))
-    (pin "15" (uuid d85ebd40-6c0d-4576-833d-8506a6908027))
-    (pin "16" (uuid 5ca342c0-9435-4538-b650-4d5bc3dd5e96))
-    (pin "17" (uuid fc4e45e0-65ce-4d91-8214-93b8783fd255))
-    (pin "18" (uuid c2b8dbf7-92ab-447b-a1c0-08513d743ef6))
-    (pin "19" (uuid 46e33d7d-af67-47ad-ab96-0244af050138))
-    (pin "2" (uuid bbf042dc-0986-452d-be1f-09ff2227ac68))
-    (pin "20" (uuid a910e7e6-fc98-457a-b2f2-e024f6308dfc))
-    (pin "21" (uuid 56a9d8e0-8235-4590-998a-c99ebcd587e6))
-    (pin "22" (uuid 46e47726-95a8-46ed-b9bf-3dfa01d30256))
-    (pin "23" (uuid 52bb33e8-b5df-4d2f-850d-6fa87fb6ce2c))
-    (pin "24" (uuid 642c44c7-7204-4c5a-ae96-79d2fecae887))
-    (pin "3" (uuid cce2e1eb-3af6-4a7e-9d1f-a7b433e013c3))
-    (pin "4" (uuid 772c2c95-1a44-40cf-99ea-9ca15ab9b2f2))
-    (pin "5" (uuid 869c5d5c-2bc7-43ad-9836-159ee8170eb2))
-    (pin "6" (uuid 976e0d33-4659-4ebd-944b-901f1bbca274))
-    (pin "7" (uuid daa225b0-0658-486e-b3e1-ccd57eb4be74))
-    (pin "8" (uuid 7f3be6fb-7cc5-4c03-8059-be486452ebf9))
-    (pin "9" (uuid 1bdd353b-8024-49a0-9543-4a0e1175bcec))
+    (pin "1" (uuid 753b2fd1-2478-422a-a579-e40a733c57a1))
+    (pin "10" (uuid e1a62c73-4988-46e9-9078-b9dd105a50c0))
+    (pin "11" (uuid 62026672-c53d-4303-80d3-d0e7fc7ce6e9))
+    (pin "12" (uuid 35b43469-ca90-49ff-8bef-3a9512b23389))
+    (pin "13" (uuid ca628733-71f8-4a1f-89f4-0d3167d0cee4))
+    (pin "14" (uuid e1bb2bfc-ce3f-496d-92d0-e55f8adb5996))
+    (pin "15" (uuid c8bad822-9eba-4ae6-a23c-42ae38fb9262))
+    (pin "16" (uuid 9145a6fc-1856-4832-b1e0-9f9def49263c))
+    (pin "17" (uuid 2afa162b-1321-4bbd-87c7-6b1798b52466))
+    (pin "18" (uuid 8f56afe0-ef38-48df-b290-086fe4fd2fb1))
+    (pin "19" (uuid 0433257b-1188-4df4-b7d1-ea21da90c09e))
+    (pin "2" (uuid fb60a4b4-8c47-49d6-b9a0-c5b47585a1fb))
+    (pin "20" (uuid dfafcc9c-c5fa-4fdd-9fec-2d566bc7bfe2))
+    (pin "21" (uuid c416b425-726c-4df5-b168-f489f5648e04))
+    (pin "22" (uuid ee0f936f-45bb-4da5-8e99-edbeb8f62bfc))
+    (pin "23" (uuid 1776bd62-6877-4946-a4b5-7d5eba682582))
+    (pin "24" (uuid e5255d7c-4ccf-41b5-823a-caf3998210fc))
+    (pin "3" (uuid b16d7d47-68b7-43b8-96e8-3be2f7810cb9))
+    (pin "4" (uuid a1910214-baf2-4b6a-92bf-500cc7a3b4b4))
+    (pin "5" (uuid 80f4e9ea-2d7f-4a06-adf9-93058974b70b))
+    (pin "6" (uuid db4b48dc-7328-4777-884f-24caab084cee))
+    (pin "7" (uuid 10b01941-39b7-4d6b-ab0a-155db4b7efd3))
+    (pin "8" (uuid 4d7ea80e-f802-4232-bde8-01526563ec5a))
+    (pin "9" (uuid f12f6294-6703-4c79-9859-128830ddf509))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -9356,8 +9356,8 @@
     (property "LCSC" "C23162" (at 189.865 150.495 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid ae3a265b-8b96-417a-874b-e6cb6152e454))
-    (pin "2" (uuid d8890728-8b7e-49c5-853f-d7ece62b6482))
+    (pin "1" (uuid 6737a4de-5ef1-4227-9375-4e8a7fb13009))
+    (pin "2" (uuid 230dcfe1-0b66-4474-bff0-de9e7a3951e2))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -9753,8 +9753,8 @@
     (property "LCSC" "C1634" (at 277.495 171.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 96de6c91-592d-47be-993f-f65291788b76))
-    (pin "2" (uuid feef2dc9-4855-43d8-bc4e-a4992f892332))
+    (pin "1" (uuid 9c7c10c8-6531-459e-9a81-fdce9e22914d))
+    (pin "2" (uuid a8240da9-b83f-4767-a763-4d0e14932d6b))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -10204,7 +10204,7 @@
     (property "Datasheet" "~" (at 287.655 236.855 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid e84e40e8-d2ef-4b02-b69e-62a46e4c2852))
+    (pin "1" (uuid 2f6e2300-2c97-4727-b345-47051b2b702c))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -10521,7 +10521,7 @@
     (property "Datasheet" "~" (at 180.34 231.775 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 2e100c66-f34a-440e-8d3d-3e403a4762c2))
+    (pin "1" (uuid 684f209a-e9e4-42fc-9e55-cced523ede5d))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"

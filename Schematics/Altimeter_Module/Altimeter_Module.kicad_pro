@@ -445,7 +445,12 @@
     },
     "net_colors": null,
     "netclass_assignments": null,
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "Default",
+        "pattern": "OSC_IN"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {

@@ -2272,7 +2272,7 @@
 
   (footprint "Capacitor_SMD:C_0603_1608Metric" (layer "F.Cu")
     (tstamp 487f7098-67f8-4bce-bee3-b6c69f3506e6)
-    (at 53.1 39.4 -90)
+    (at 53.1 39.125 -90)
     (descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags "capacitor")
     (property "LCSC" "C14663")
@@ -4009,7 +4009,7 @@
 
   (footprint "Button_Switch_SMD:SW_Push_1P1T_XKB_TS-1187A" (layer "F.Cu")
     (tstamp 83fe4a3e-c91d-4a7b-903f-1cc16d1b752f)
-    (at 57.9 40.5 180)
+    (at 57.9 40.225 180)
     (descr "SMD Tactile Switch, http://www.helloxkb.com/public/images/pdf/TS-1187A-X-X-X.pdf")
     (tags "SPST Tactile Switch")
     (property "LCSC" "C318884")
@@ -6038,7 +6038,7 @@
 
   (footprint "Capacitor_SMD:C_0603_1608Metric" (layer "F.Cu")
     (tstamp d5561995-f4d2-4f72-a124-57b790ed7112)
-    (at 47.512 35.105 90)
+    (at 47.3 33.3 -90)
     (descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags "capacitor")
     (property "LCSC" "C14663")
@@ -6080,9 +6080,9 @@
       (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp 5b425d2f-6039-4588-9733-fb810d77012b))
     (fp_line (start 0.8 0.4) (end -0.8 0.4)
       (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp d47ae52b-127d-460a-a3e3-35e4ebce7474))
-    (pad "1" smd roundrect (at -0.775 0 90) (size 0.9 0.95) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
+    (pad "1" smd roundrect (at -0.775 0 270) (size 0.9 0.95) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
       (net 1 "GND") (pintype "passive") (tstamp 369edfbe-8b60-4af9-941f-c8a8d4fb04c3))
-    (pad "2" smd roundrect (at 0.775 0 90) (size 0.9 0.95) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
+    (pad "2" smd roundrect (at 0.775 0 270) (size 0.9 0.95) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
       (net 3 "+5V") (pintype "passive") (tstamp 430dd62e-744d-4ff0-b258-c72156725a1c))
     (model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.wrl"
       (offset (xyz 0 0 0))

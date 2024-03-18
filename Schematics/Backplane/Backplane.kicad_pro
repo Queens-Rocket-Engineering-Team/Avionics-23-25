@@ -174,6 +174,7 @@
       "track_widths": [
         0.0,
         0.3,
+        0.4,
         0.5,
         1.0,
         2.0,
@@ -450,8 +451,8 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "Backplane.step",
-      "vrml": ""
+      "step": "BackplaneWithHole.step",
+      "vrml": "Backplane.wrl"
     },
     "page_layout_descr_file": ""
   },

@@ -11255,6 +11255,9 @@
     (property "Datasheet" "~" (at 76.2 17.78 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Digikey" "2057-RF2-03E-T-00-50-G-ND" (at 76.2 20.32 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid b7d0f4ce-b087-4758-8063-ab4d79448064))
     (pin "2" (uuid 226ccd22-d43d-470d-b9fa-8c82c78e28d9))
     (instances

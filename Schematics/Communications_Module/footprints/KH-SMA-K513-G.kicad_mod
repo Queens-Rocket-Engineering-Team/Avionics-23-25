@@ -22,4 +22,9 @@
   (pad "2" thru_hole circle (at -2.54 2.54) (size 3.2258 3.2258) (drill 1.7018) (layers "*.Cu" "*.Mask") (tstamp 4e14a16b-c256-49d0-8a39-8dcc838972fc))
   (pad "2" thru_hole circle (at 2.54 -2.54) (size 3.2258 3.2258) (drill 1.7018) (layers "*.Cu" "*.Mask") (tstamp 22391893-72cd-4761-8d12-723d9113fb24))
   (pad "2" thru_hole circle (at 2.54 2.54) (size 3.2258 3.2258) (drill 1.7018) (layers "*.Cu" "*.Mask") (tstamp d503e3f7-b677-48ae-a436-b097c9d5e0fc))
+  (model "${KIPRJMOD}/models/RF2-03E-T-00-50-G_SMA.STEP"
+    (offset (xyz 0 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz -90 0 180))
+  )
 )

@@ -6,7 +6,7 @@
 
   (title_block
     (title "QRET 23-24 SRAD Altimeter Module")
-    (date "2024-03-24")
+    (date "2024-03-27")
     (company "Queen's Rocket Engineering Team")
     (comment 1 "Contributors: Joshua Xiang, Kennan Bays")
     (comment 4 "GRID = 0.635mm")
@@ -6414,7 +6414,7 @@
   (symbol (lib_id "Device:Buzzer") (at 321.945 28.575 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3528fd94-2b36-4089-abab-7c2ff2a3a15d)
-    (property "Reference" "BZ2" (at 325.12 30.48 0)
+    (property "Reference" "BZ1" (at 325.12 30.48 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "PKM13EPYH4000" (at 323.215 33.02 0)
@@ -6434,7 +6434,7 @@
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
-          (reference "BZ2") (unit 1)
+          (reference "BZ1") (unit 1)
         )
       )
       (project "Communications_Module"

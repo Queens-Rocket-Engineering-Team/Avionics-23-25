@@ -3,7 +3,6 @@
   (lib (name "QRET_Buck_PSU")(type "KiCad")(uri "${KIPRJMOD}/footprints/QRET_Buck_PSU")(options "")(descr ""))
   (lib (name "QRET_CANBUS")(type "KiCad")(uri "${KIPRJMOD}/footprints/QRET_CANBUS")(options "")(descr ""))
   (lib (name "footprints")(type "KiCad")(uri "${KIPRJMOD}/footprints")(options "")(descr ""))
-  (lib (name "PTS636")(type "KiCad")(uri "${KIPRJMOD}/footprints/PTS636.pretty")(options "")(descr ""))
   (lib (name "ISO1042")(type "KiCad")(uri "${KIPRJMOD}/footprints/ISO1042.pretty")(options "")(descr ""))
   (lib (name "SWD_Header")(type "KiCad")(uri "${KIPRJMOD}/footprints/SWD_Header.pretty")(options "")(descr ""))
   (lib (name "LMR66100")(type "KiCad")(uri "${KIPRJMOD}/footprints/LMR66100.pretty")(options "")(descr ""))

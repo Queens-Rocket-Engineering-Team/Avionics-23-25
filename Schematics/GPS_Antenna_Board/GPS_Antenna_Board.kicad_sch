@@ -1691,6 +1691,41 @@
     )
   )
 
+  (symbol (lib_id "Connector:TestPoint") (at 158.75 73.66 0) (unit 1)
+    (in_bom no) (on_board yes) (dnp no)
+    (uuid 39313e72-4589-4d1e-b372-c8c548b555cc)
+    (property "Reference" "TP7" (at 160.02 72.39 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "TP_3.3V" (at 160.02 69.85 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "TestPoint:TestPoint_Pad_1.5x1.5mm" (at 163.83 73.66 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 163.83 73.66 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid ade2640c-a60b-4660-97bc-d69b13a4b6f4))
+    (instances
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "TP7") (unit 1)
+        )
+      )
+      (project "GPS_Module"
+        (path "/c9a01778-8bed-4fe7-bd5a-975b80c0ed6a"
+          (reference "TP11") (unit 1)
+        )
+      )
+      (project "GPS_Antenna_Board"
+        (path "/f34e830a-ca26-47f3-b516-e4270044d2c1"
+          (reference "TP8") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "QRET_Buck_PSU-symbols:LM66100DCKR") (at 185.42 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 48b5cbfe-9c3d-4e38-9f85-fbd787fcc967)

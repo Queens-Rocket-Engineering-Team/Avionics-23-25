@@ -4481,10 +4481,6 @@
     (effects (font (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
     (uuid 0b5f1481-736c-4afd-9e66-aedfc681e0c9)
   )
-  (text "Vf=2.3V, I=1.8mA, R=560" (at 28.575 70.485 0)
-    (effects (font (size 1.27 1.27) italic) (justify left bottom))
-    (uuid 146bca1b-01aa-4249-aefe-57e18cd7e443)
-  )
   (text "The WS2812B needs at least\n3.5V input, but we're only\nusing 3.3V This may cause\nproblems"
     (at 66.04 22.86 0)
     (effects (font (size 1.27 1.27) italic) (justify right bottom))
@@ -4522,6 +4518,10 @@
     (effects (font (size 0.9 0.9) italic) (justify left bottom))
     (uuid 45e96b92-a8bd-43c6-894c-9dc0fcf23c3e)
   )
+  (text "Vf=2.1V, I=1.8mA, R=680" (at 28.575 70.485 0)
+    (effects (font (size 1.27 1.27) italic) (justify left bottom))
+    (uuid 47ae57de-02de-4eb5-bb72-93e65872aeb1)
+  )
   (text "STM32" (at 175.895 80.01 0)
     (effects (font (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
     (uuid 4b0453c1-10d1-44d1-b937-6bdd14feef84)
@@ -4553,10 +4553,6 @@
   (text "\nX322516MMB4SI Crystal " (at 259.715 186.055 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 7698d2eb-7ee6-48f4-9e4d-8f749a900de2)
-  )
-  (text "Vf=2.9V, I=0.5mA, R=820" (at 263.525 264.16 0)
-    (effects (font (size 1.27 1.27) italic) (justify left bottom))
-    (uuid 7902c827-11d1-4b24-b63b-326ff2385771)
   )
   (text "CANBUS Interface" (at 343.535 17.145 0)
     (effects (font (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
@@ -4625,6 +4621,10 @@
   (text "USB Connection" (at 93.345 226.06 0)
     (effects (font (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
     (uuid e12406f7-19d1-41f5-80ba-3e430f400fef)
+  )
+  (text "Vf=2.8V, I=0.4mA, R=1.2k" (at 263.525 264.16 0)
+    (effects (font (size 1.27 1.27) italic) (justify left bottom))
+    (uuid f7775717-7c52-4985-8c61-5261aa969b82)
   )
 
   (label "USB_5V" (at 124.46 231.14 0) (fields_autoplaced)
@@ -5524,40 +5524,6 @@
     )
   )
 
-  (symbol (lib_id "Device:LED") (at 280.035 259.715 180) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 1238a569-7015-4afc-9f85-5c5ba5a2a1b2)
-    (property "Reference" "D1" (at 280.035 253.365 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "PWR_LED (GRN)" (at 280.035 255.905 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "LED_SMD:LED_0805_2012Metric" (at 280.035 259.715 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 280.035 259.715 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C2297" (at 280.035 259.715 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid d0722aee-a6e2-4812-89a4-2debd02b82a9))
-    (pin "2" (uuid 8f8c03dc-f79c-4223-91f1-3f386687cfe6))
-    (instances
-      (project "Altimeter_Module"
-        (path "/29db4100-776d-46b8-a17b-170206e82f23"
-          (reference "D1") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "D1") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Device:C") (at 280.035 130.175 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 13136d3a-e630-470c-9db4-c25c5a7158c8)
@@ -5598,7 +5564,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 185.42 161.925 90) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 184a445c-0db4-4906-a715-40b81df0f9e5)
     (property "Reference" "TP9" (at 180.975 161.925 90)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -5760,7 +5726,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 185.42 154.305 90) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 1fb3245f-357e-4986-bc75-4a383af030d8)
     (property "Reference" "TP10" (at 180.975 154.305 90)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -5829,7 +5795,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 295.91 249.555 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 21508f51-c964-415f-b348-09bf032b005f)
     (property "Reference" "TP4" (at 297.307 245.0409 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -6376,6 +6342,40 @@
     )
   )
 
+  (symbol (lib_id "Device:LED") (at 46.99 64.77 180) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 3445476c-9561-4129-9326-a646a024c10b)
+    (property "Reference" "D3" (at 46.99 58.42 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "DB_LED (YLW)" (at 46.99 60.96 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "LED_SMD:LED_0603_1608Metric" (at 46.99 64.77 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 46.99 64.77 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C72038" (at 46.99 64.77 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 5288f430-069b-4a7a-aa5f-4283b461b671))
+    (pin "2" (uuid 0890adfd-34ff-4641-9037-50d34327efb1))
+    (instances
+      (project "Altimeter_Module"
+        (path "/29db4100-776d-46b8-a17b-170206e82f23"
+          (reference "D3") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "D5") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Regulator_Linear:AMS1117-3.3") (at 142.24 231.14 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 34ed1c74-db60-4b84-aea2-73b3042e39ae)
@@ -6504,7 +6504,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 237.49 113.665 270) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 3a930181-50e9-4b79-b279-37812d24cb6e)
     (property "Reference" "TP14" (at 241.935 113.665 90)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -6563,6 +6563,40 @@
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
           (reference "Q1") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:R") (at 268.605 259.715 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 3c4b5438-511b-4bcb-b42e-fa1cdda8ec96)
+    (property "Reference" "R5" (at 268.605 257.175 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "1.2k" (at 268.605 259.715 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 268.605 257.937 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 268.605 259.715 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C22765" (at 268.605 259.715 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 93751543-cda1-46e3-a1f9-555738aa455a))
+    (pin "2" (uuid 4aa15915-cbcf-414e-9c7f-56efd69bff37))
+    (instances
+      (project "Altimeter_Module"
+        (path "/29db4100-776d-46b8-a17b-170206e82f23"
+          (reference "R5") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "R5") (unit 1)
         )
       )
     )
@@ -6869,7 +6903,7 @@
     (property "Datasheet" "" (at 292.735 248.285 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 82cbf07d-96c7-43b8-a9d1-b2d23713cf9e))
+    (pin "1" (uuid ba80afb0-ab4f-44c9-bfb8-62450be5a9d8))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -7013,42 +7047,8 @@
     )
   )
 
-  (symbol (lib_id "Device:R") (at 268.605 259.715 270) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 4d40f169-2b5a-4586-9857-25cd4cb2326a)
-    (property "Reference" "R5" (at 268.605 254.5547 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "820R" (at 268.605 256.9789 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 268.605 257.937 90)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 268.605 259.715 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C23253" (at 268.605 259.715 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid a26de9db-95f0-46ce-9468-c61c058f965e))
-    (pin "2" (uuid 2ceda37e-685c-4749-9e8d-4ad0aa158044))
-    (instances
-      (project "Altimeter_Module"
-        (path "/29db4100-776d-46b8-a17b-170206e82f23"
-          (reference "R5") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "R5") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Connector:TestPoint") (at 408.305 99.695 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 4e020fb5-604b-4f15-9c06-1d14502678de)
     (property "Reference" "TP1" (at 413.2692 97.79 90)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -7271,7 +7271,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 133.985 31.115 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 57fd3665-203a-44bd-bbc0-e239fbc28a6d)
     (property "Reference" "TP12" (at 138.43 31.115 90)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -7466,7 +7466,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 237.49 111.125 270) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 5d69b36d-665c-435d-bd6e-ccdd137de3f0)
     (property "Reference" "TP13" (at 241.935 111.125 90)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -8114,7 +8114,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 237.49 116.205 270) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 79a838e7-7c52-494c-8ce9-8cd98fa09472)
     (property "Reference" "TP15" (at 241.935 116.205 90)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -8307,7 +8307,7 @@
   )
 
   (symbol (lib_id "EdgeConnector:Stack Male Edge Connector") (at 374.015 89.535 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (in_bom no) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 81d93d43-ac6d-4761-aae6-d334e28e361e)
     (property "Reference" "J1" (at 374.015 63.8007 0)
       (effects (font (size 1.27 1.27)))
@@ -8863,6 +8863,40 @@
     )
   )
 
+  (symbol (lib_id "Device:R") (at 35.56 64.77 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 94af99c7-4640-4fa8-a935-174ee606e183)
+    (property "Reference" "R7" (at 35.56 62.23 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "680R" (at 35.56 64.77 90)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 35.56 62.992 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 35.56 64.77 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C23228" (at 35.56 64.77 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 4df485eb-ad09-428f-89ca-d1dbf4cda42f))
+    (pin "2" (uuid 27972d5a-d97e-4b1d-a676-a4ba62ae58fa))
+    (instances
+      (project "Altimeter_Module"
+        (path "/29db4100-776d-46b8-a17b-170206e82f23"
+          (reference "R7") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "R11") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Sensor_Motion:MPU-6050") (at 40.64 205.105 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9716884c-9d16-4b9e-b795-8785b2a834b8)
@@ -9053,7 +9087,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 175.26 212.725 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 9f57e87a-2f8b-4247-a58c-5d4bdaf189e4)
     (property "Reference" "TP5" (at 176.657 208.2109 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -9273,40 +9307,6 @@
     )
   )
 
-  (symbol (lib_id "Device:LED") (at 46.99 64.77 180) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid aeb8ff26-c77b-4f5b-abcc-9b0f793f92cf)
-    (property "Reference" "D3" (at 46.99 58.42 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "DB_LED (YLW)" (at 46.99 60.96 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "LED_SMD:LED_0603_1608Metric" (at 46.99 64.77 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 46.99 64.77 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C72038" (at 46.99 64.77 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 9b8c0e47-0314-4422-a48a-a3a286f3ac3e))
-    (pin "2" (uuid de651d25-50da-4621-8511-048a6766a6a7))
-    (instances
-      (project "Altimeter_Module"
-        (path "/29db4100-776d-46b8-a17b-170206e82f23"
-          (reference "D3") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "D5") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "EdgeConnector:SWD_01x04_Pin") (at 132.08 213.36 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid afb1987e-f540-4f55-8f9a-89161e585bfb)
@@ -9339,7 +9339,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 83.185 31.115 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid b06e0453-9fe5-4d17-954d-5a00ff7b62f0)
     (property "Reference" "TP11" (at 87.63 31.115 90)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -9533,40 +9533,6 @@
     )
   )
 
-  (symbol (lib_id "Device:R") (at 35.56 64.77 270) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid bae495a7-bb89-4c4d-897b-647bad3d6919)
-    (property "Reference" "R7" (at 35.56 59.6097 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "560R" (at 35.56 62.0339 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 35.56 62.992 90)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 35.56 64.77 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C23204" (at 35.56 64.77 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 8436aa1a-c121-43eb-9989-f694a8fa7612))
-    (pin "2" (uuid bbda4fda-cd8d-48ce-8809-d98dbb47a805))
-    (instances
-      (project "Altimeter_Module"
-        (path "/29db4100-776d-46b8-a17b-170206e82f23"
-          (reference "R7") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "R11") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Device:R") (at 121.92 237.49 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bce7ece3-8aae-419c-89c7-e8954c3c4287)
@@ -9755,6 +9721,40 @@
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
           (reference "#PWR030") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:LED") (at 280.035 259.715 180) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid c76ebc8d-23ef-4dde-acf5-541af7857ae8)
+    (property "Reference" "D1" (at 280.035 253.365 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "PWR_LED (GRN)" (at 280.035 255.905 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "LED_SMD:LED_0805_2012Metric" (at 280.035 259.715 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 280.035 259.715 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C2297" (at 280.035 259.715 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid e37248d4-cc67-4938-84b6-bcbef6c8549a))
+    (pin "2" (uuid e8036a63-ec6f-4092-bb7b-a4bc6a476918))
+    (instances
+      (project "Altimeter_Module"
+        (path "/29db4100-776d-46b8-a17b-170206e82f23"
+          (reference "D1") (unit 1)
+        )
+      )
+      (project "Communications_Module"
+        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
+          (reference "D1") (unit 1)
         )
       )
     )
@@ -10400,7 +10400,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 282.575 236.855 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid e592e987-7f94-4bad-b65f-48a074e91e64)
     (property "Reference" "TP2" (at 283.972 232.3409 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -10761,7 +10761,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 175.26 231.775 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid f2999acb-0615-48fa-b665-e9bfa1863d1d)
     (property "Reference" "TP6" (at 176.657 227.2609 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -10791,7 +10791,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 289.56 258.445 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid f2e73e8f-e276-4f85-8f80-99d8fb0024b9)
     (property "Reference" "TP3" (at 290.957 253.9309 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -10821,7 +10821,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 229.235 212.725 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid f3b5a490-3f63-42c9-834b-70cc74527898)
     (property "Reference" "TP8" (at 230.632 208.2109 0)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -10876,7 +10876,7 @@
   )
 
   (symbol (lib_id "Connector:TestPoint") (at 175.26 250.825 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid f95914ba-20ed-43be-83e4-f71dd919644f)
     (property "Reference" "TP7" (at 176.657 246.3109 0)
       (effects (font (size 1.27 1.27)) (justify left))

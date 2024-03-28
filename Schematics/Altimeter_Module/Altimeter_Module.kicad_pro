@@ -60,7 +60,27 @@
           "width": 0.3
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "clearance|145349999|83125000|d24cd011-6931-42d7-97ca-5eb3712b4fd7|cc146a49-a627-4706-a384-1cdd420e8ae1",
+        "clearance|145349999|84125000|171b9be4-962d-449f-ab7c-be1414d36050|d25e161a-94bb-438f-a2cc-6cdad7486166",
+        "clearance|145724999|84625000|d25e161a-94bb-438f-a2cc-6cdad7486166|f7e6cd08-28b3-4e18-b658-f0f0f57be487",
+        "clearance|145874999|83125000|6251862f-1776-4fe7-ae54-21c504ad5dae|d24cd011-6931-42d7-97ca-5eb3712b4fd7",
+        "clearance|146224999|84650000|f7e6cd08-28b3-4e18-b658-f0f0f57be487|e94f425a-9b4c-45de-895a-31d4dc39dc1a",
+        "clearance|146374999|83125000|118af313-0176-42d0-baad-fbdeca4413cd|6251862f-1776-4fe7-ae54-21c504ad5dae",
+        "clearance|146874999|83125000|aa471945-033e-41eb-8fda-0e06249c90d7|118af313-0176-42d0-baad-fbdeca4413cd",
+        "clearance|146874999|83275000|fbe93f77-238a-4651-a464-e9d67bb922ac|aa471945-033e-41eb-8fda-0e06249c90d7",
+        "clearance|146874999|83775000|f733964a-9d9a-4163-ab01-46560ca74b06|fbe93f77-238a-4651-a464-e9d67bb922ac",
+        "clearance|146874999|84275000|2061672b-a2ee-4368-8cf3-b5f87797ae88|e94f425a-9b4c-45de-895a-31d4dc39dc1a",
+        "clearance|146874999|84275000|2061672b-a2ee-4368-8cf3-b5f87797ae88|f733964a-9d9a-4163-ab01-46560ca74b06",
+        "hole_clearance|143700000|111170000|bae133be-27ce-463a-a7cf-3466d2aad679|987efc71-5d4f-48f4-aeed-fa1508629871",
+        "hole_clearance|143700000|111170000|bae133be-27ce-463a-a7cf-3466d2aad679|cf4df5bb-ebb9-4ec9-bfd2-152ce298cf59",
+        "hole_clearance|143900000|111170000|bae133be-27ce-463a-a7cf-3466d2aad679|90a6bdc5-3198-489b-adb0-79ab9c999dff",
+        "hole_clearance|143900000|111170000|bae133be-27ce-463a-a7cf-3466d2aad679|a56948bb-03e3-4255-9265-28288c236648",
+        "hole_clearance|149300000|111170000|062c180b-dfcf-41bc-8af7-2e7d5d1c680b|58f5d1d4-cadd-4c54-968c-e5ed9ef2416a",
+        "hole_clearance|149300000|111170000|062c180b-dfcf-41bc-8af7-2e7d5d1c680b|d4f77d4c-921a-4366-a18b-722d836be1af",
+        "hole_clearance|149500000|111170000|062c180b-dfcf-41bc-8af7-2e7d5d1c680b|86b83953-c062-4e8a-af5f-58cd3304648d",
+        "hole_clearance|149500000|111170000|062c180b-dfcf-41bc-8af7-2e7d5d1c680b|c99787ba-7387-49e1-b568-3cc1298cf93a"
+      ],
       "meta": {
         "version": 2
       },

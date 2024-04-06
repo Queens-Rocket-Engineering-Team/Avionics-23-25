@@ -1,0 +1,17 @@
+myGNSS.begin()
+
+setI2COutput(COM_TYPE_UBX);
+
+getMeasurementRate();
+
+getNavigationRate();
+
+myGNSS.setMeasurementRate(5000, VAL_LAYER_RAM)
+
+setI2CpollingWait(25);
+
+setNavigationRate(12, VAL_LAYER_RAM)
+
+getLatitude();
+
+getLongitude();

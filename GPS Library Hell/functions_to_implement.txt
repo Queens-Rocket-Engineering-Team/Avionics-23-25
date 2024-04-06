@@ -1,17 +1,19 @@
-myGNSS.begin()
+begin()  //Tristan
 
-setI2COutput(COM_TYPE_UBX);
+setI2COutput(COM_TYPE_UBX);  //Tristan
 
-getMeasurementRate();
+setI2CpollingWait(25);	//Tristan
 
-getNavigationRate();
+getLatitude();	//Tristan
 
-myGNSS.setMeasurementRate(5000, VAL_LAYER_RAM)
+getLongitude(); //Tristan
 
-setI2CpollingWait(25);
 
-setNavigationRate(12, VAL_LAYER_RAM)
+getMeasurementRate(); 	// Oak
 
-getLatitude();
+getNavigationRate();	// Oak
 
-getLongitude();
+setMeasurementRate(5000, VAL_LAYER_RAM) // Oak
+
+setNavigationRate(12, VAL_LAYER_RAM) // Oak
+

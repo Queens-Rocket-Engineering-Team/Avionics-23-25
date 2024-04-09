@@ -69,6 +69,7 @@ protected:
   // These are pointed at from within the ubxPacket
   uint8_t *payloadCfg = nullptr;
 
+
  enum commTypes
   {
     COMM_TYPE_I2C = 0,

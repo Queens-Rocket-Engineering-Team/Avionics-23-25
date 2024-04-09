@@ -103,14 +103,7 @@ sfe_ublox_status_e DevUBLOXGNSS::sendCommand(ubxPacket *outgoingUBX, uint16_t ma
       return retVal;
     }
   }
-  // else if (_commType == COMM_TYPE_SERIAL)
-  // {
-  //   sendSerialCommand(outgoingUBX);
-  // }
-  // else if (_commType == COMM_TYPE_SPI)
-  // {
-  //   sendSpiCommand(outgoingUBX);
-  // }
+
 
   unlock();
 

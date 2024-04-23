@@ -10,13 +10,7 @@ DevUBLOXGNSS::DevUBLOXGNSS(void)
     digitalWrite((uint8_t)debugPin, HIGH);
   }
 
-  // _logNMEA.all = 0;                             // Default to passing no NMEA messages to the file buffer
-  // _processNMEA.all = SFE_UBLOX_FILTER_NMEA_ALL; // Default to passing all NMEA messages to processNMEA
-  // _logRTCM.all = 0;                             // Default to passing no RTCM messages to the file buffer
 
-// #ifndef SFE_UBLOX_DISABLE_RTCM_LOGGING
-//   rtcmInputStorage.init();
-// #endif
 }
 
 DevUBLOXGNSS::~DevUBLOXGNSS(void)
@@ -37,11 +31,6 @@ DevUBLOXGNSS::~DevUBLOXGNSS(void)
     payloadAuto = nullptr;
   }
 
-  if (spiBuffer != nullptr)
-  {
-    delete[] spiBuffer; // Created with new[]
-    spiBuffer = nullptr;
-  }
 }
 
 // Given a message, calc and store the two byte "8-Bit Fletcher" checksum over the entirety of the message
@@ -80,25 +69,19 @@ sfe_ublox_status_e DevUBLOXGNSS::sendCommand(ubxPacket *outgoingUBX, uint16_t ma
 
   calcChecksum(outgoingUBX); // Sets checksum A and B bytes of the packet
 
-// #ifndef SFE_UBLOX_REDUCED_PROG_MEM
-//   if (_printDebug == true)
-//   {
-//     _debugSerial.print(F("\nSending: "));
-//     printPacket(outgoingUBX, true); // Always print payload
-//   }
-// #endif
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+    Serial.print(F("\nSending: "));
+    // printPacket(outgoingUBX, true); // Always print payload
+#endif
 
   if (_commType == COMM_TYPE_I2C)
   {
     retVal = sendI2cCommand(outgoingUBX); //// NEED TO GET sendI2cCommand FUNCTION STILL
     if (retVal != SFE_UBLOX_STATUS_SUCCESS)
     {
-// #ifndef SFE_UBLOX_REDUCED_PROG_MEM
-//       if (_printDebug == true)
-//       {
-//         _debugSerial.println(F("Send I2C Command failed"));
-//       }
-// #endif
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+    Serial.println(F("Send I2C Command failed"));
+#endif
       unlock();
       return retVal;
     }
@@ -112,32 +95,382 @@ sfe_ublox_status_e DevUBLOXGNSS::sendCommand(ubxPacket *outgoingUBX, uint16_t ma
     // Depending on what we just sent, either we need to look for an ACK or not
     if ((outgoingUBX->cls == UBX_CLASS_CFG) || (expectACKonly == true))
     {
-// #ifndef SFE_UBLOX_REDUCED_PROG_MEM
-//       if (_printDebug == true)
-//       {
-//         _debugSerial.println(F("sendCommand: Waiting for ACK response"));
-//       }
-// #endif
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+      Serial.println(F("sendCommand: Waiting for ACK response"));
+#endif
       retVal = waitForACKResponse(outgoingUBX, outgoingUBX->cls, outgoingUBX->id, maxWait); // Wait for Ack response
     }
     else
     {
-// #ifndef SFE_UBLOX_REDUCED_PROG_MEM
-//       if (_printDebug == true)
-//       {
-//         _debugSerial.println(F("sendCommand: Waiting for No ACK response"));
-//       }
-// #endif
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+      Serial.println(F("sendCommand: Waiting for No ACK response"));
+#endif
       retVal = waitForNoACKResponse(outgoingUBX, outgoingUBX->cls, outgoingUBX->id, maxWait); // Wait for Ack response
     }
-  }
-  else
-  {
-    processSpiBuffer(&packetCfg, 0, 0); // Process any SPI data received during the sendSpiCommand - but only if not checking for a response
   }
 
   return retVal;
 }
+
+// When messages from the class CFG are sent to the receiver, the receiver will send an "acknowledge"(UBX - ACK - ACK) or a
+//"not acknowledge"(UBX-ACK-NAK) message back to the sender, depending on whether or not the message was processed correctly.
+// Some messages from other classes also use the same acknowledgement mechanism.
+
+// When we poll or get a setting, we will receive _both_ a config packet and an ACK
+// If the poll or get request is not valid, we will receive _only_ a NACK
+
+// If we are trying to get or poll a setting, then packetCfg.len will be 0 or 1 when the packetCfg is _sent_.
+// If we poll the setting for a particular port using UBX-CFG-PRT then .len will be 1 initially
+// For all other gets or polls, .len will be 0 initially
+//(It would be possible for .len to be 2 _if_ we were using UBX-CFG-MSG to poll the settings for a particular message - but we don't use that (currently))
+
+// If the get or poll _fails_, i.e. is NACK'd, then packetCfg.len could still be 0 or 1 after the NACK is received
+// But if the get or poll is ACK'd, then packetCfg.len will have been updated by the incoming data and will always be at least 2
+
+// If we are going to set the value for a setting, then packetCfg.len will be at least 3 when the packetCfg is _sent_.
+//(UBX-CFG-MSG appears to have the shortest set length of 3 bytes)
+
+// We need to think carefully about how interleaved PVT packets affect things.
+// It is entirely possible that our packetCfg and packetAck were received successfully
+// but while we are still in the "if (checkUblox() == true)" loop a PVT packet is processed
+// or _starts_ to arrive (remember that Serial data can arrive very slowly).
+
+// Returns SFE_UBLOX_STATUS_DATA_RECEIVED if we got an ACK and a valid packetCfg (module is responding with register content)
+// Returns SFE_UBLOX_STATUS_DATA_SENT if we got an ACK and no packetCfg (no valid packetCfg needed, module absorbs new register data)
+// Returns SFE_UBLOX_STATUS_FAIL if something very bad happens (e.g. a double checksum failure)
+// Returns SFE_UBLOX_STATUS_COMMAND_NACK if the packet was not-acknowledged (NACK)
+// Returns SFE_UBLOX_STATUS_CRC_FAIL if we had a checksum failure
+// Returns SFE_UBLOX_STATUS_TIMEOUT if we timed out
+// Returns SFE_UBLOX_STATUS_DATA_OVERWRITTEN if we got an ACK and a valid packetCfg but that the packetCfg has been
+//  or is currently being overwritten (remember that Serial data can arrive very slowly)
+sfe_ublox_status_e DevUBLOXGNSS::waitForACKResponse(ubxPacket *outgoingUBX, uint8_t requestedClass, uint8_t requestedID, uint16_t maxTime)
+{
+  outgoingUBX->valid = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED; // This will go VALID (or NOT_VALID) when we receive a response to the packet we sent
+  packetAck.valid = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+  packetBuf.valid = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+  packetAuto.valid = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+  outgoingUBX->classAndIDmatch = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED; // This will go VALID (or NOT_VALID) when we receive a packet that matches the requested class and ID
+  packetAck.classAndIDmatch = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+  packetBuf.classAndIDmatch = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+  packetAuto.classAndIDmatch = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+
+  unsigned long startTime = millis();
+  while (millis() < (startTime + (unsigned long)maxTime))
+  {
+    if (checkUbloxInternal(outgoingUBX, requestedClass, requestedID) == true) // See if new data is available. Process bytes as they come in.
+    {
+      // If both the outgoingUBX->classAndIDmatch and packetAck.classAndIDmatch are VALID
+      // and outgoingUBX->valid is _still_ VALID and the class and ID _still_ match
+      // then we can be confident that the data in outgoingUBX is valid
+      if ((outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_VALID) && (packetAck.classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_VALID) && (outgoingUBX->valid == SFE_UBLOX_PACKET_VALIDITY_VALID) && (outgoingUBX->cls == requestedClass) && (outgoingUBX->id == requestedID))
+      {
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+        Serial.print(F("waitForACKResponse: valid data and valid ACK received after "));
+        Serial.print(millis() - startTime);
+        Serial.println(F(" msec"));
+#endif
+        return (SFE_UBLOX_STATUS_DATA_RECEIVED); // We received valid data and a correct ACK!
+      }
+
+      // We can be confident that the data packet (if we are going to get one) will always arrive
+      // before the matching ACK. So if we sent a config packet which only produces an ACK
+      // then outgoingUBX->classAndIDmatch will be NOT_DEFINED and the packetAck.classAndIDmatch will VALID.
+      // We should not check outgoingUBX->valid, outgoingUBX->cls or outgoingUBX->id
+      // as these may have been changed by an automatic packet.
+      else if ((outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED) && (packetAck.classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_VALID))
+      {
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+        Serial.print(F("waitForACKResponse: no data and valid ACK after "));
+        Serial.print(millis() - startTime);
+        Serial.println(F(" msec"));
+#endif
+        return (SFE_UBLOX_STATUS_DATA_SENT); // We got an ACK but no data...
+      }
+
+      // If both the outgoingUBX->classAndIDmatch and packetAck.classAndIDmatch are VALID
+      // but the outgoingUBX->cls or ID no longer match then we can be confident that we had
+      // valid data but it has been or is currently being overwritten by an automatic packet (e.g. PVT).
+      // If (e.g.) a PVT packet is _being_ received: outgoingUBX->valid will be NOT_DEFINED
+      // If (e.g.) a PVT packet _has been_ received: outgoingUBX->valid will be VALID (or just possibly NOT_VALID)
+      // So we cannot use outgoingUBX->valid as part of this check.
+      // Note: the addition of packetBuf should make this check redundant!
+      else if ((outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_VALID) && (packetAck.classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_VALID) && ((outgoingUBX->cls != requestedClass) || (outgoingUBX->id != requestedID)))
+      {
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+        Serial.print(F("waitForACKResponse: data being OVERWRITTEN after "));
+        Serial.print(millis() - startTime);
+        Serial.println(F(" msec"));
+#endif
+        return (SFE_UBLOX_STATUS_DATA_OVERWRITTEN); // Data was valid but has been or is being overwritten
+      }
+
+      // If packetAck.classAndIDmatch is VALID but both outgoingUBX->valid and outgoingUBX->classAndIDmatch
+      // are NOT_VALID then we can be confident we have had a checksum failure on the data packet
+      else if ((packetAck.classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_VALID) && (outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_NOT_VALID) && (outgoingUBX->valid == SFE_UBLOX_PACKET_VALIDITY_NOT_VALID))
+      {
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+        Serial.print(F("waitForACKResponse: CRC failed after "));
+        Serial.print(millis() - startTime);
+        Serial.println(F(" msec"));
+#endif
+        return (SFE_UBLOX_STATUS_CRC_FAIL); // Checksum fail
+      }
+
+      // If our packet was not-acknowledged (NACK) we do not receive a data packet - we only get the NACK.
+      // So you would expect outgoingUBX->valid and outgoingUBX->classAndIDmatch to still be NOT_DEFINED
+      // But if a full PVT packet arrives afterwards outgoingUBX->valid could be VALID (or just possibly NOT_VALID)
+      // but outgoingUBX->cls and outgoingUBX->id would not match...
+      // So I think this is telling us we need a special state for packetAck.classAndIDmatch to tell us
+      // the packet was definitely NACK'd otherwise we are possibly just guessing...
+      // Note: the addition of packetBuf changes the logic of this, but we'll leave the code as is for now.
+      else if (packetAck.classAndIDmatch == SFE_UBLOX_PACKET_NOTACKNOWLEDGED)
+      {
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+        Serial.print(F("waitForACKResponse: data was NOTACKNOWLEDGED (NACK) after "));
+        Serial.print(millis() - startTime);
+        Serial.println(F(" msec"));
+#endif
+        return (SFE_UBLOX_STATUS_COMMAND_NACK); // We received a NACK!
+      }
+
+      // If the outgoingUBX->classAndIDmatch is VALID but the packetAck.classAndIDmatch is NOT_VALID
+      // then the ack probably had a checksum error. We will take a gamble and return DATA_RECEIVED.
+      // If we were playing safe, we should return FAIL instead
+      else if ((outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_VALID) && (packetAck.classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_NOT_VALID) && (outgoingUBX->valid == SFE_UBLOX_PACKET_VALIDITY_VALID) && (outgoingUBX->cls == requestedClass) && (outgoingUBX->id == requestedID))
+      {
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+        Serial.print(F("waitForACKResponse: VALID data and INVALID ACK received after "));
+        Serial.print(millis() - startTime);
+        Serial.println(F(" msec"));
+#endif
+        return (SFE_UBLOX_STATUS_DATA_RECEIVED); // We received valid data and an invalid ACK!
+      }
+
+      // If the outgoingUBX->classAndIDmatch is NOT_VALID and the packetAck.classAndIDmatch is NOT_VALID
+      // then we return a FAIL. This must be a double checksum failure?
+      else if ((outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_NOT_VALID) && (packetAck.classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_NOT_VALID))
+      {
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+        Serial.print(F("waitForACKResponse: INVALID data and INVALID ACK received after "));
+        Serial.print(millis() - startTime);
+        Serial.println(F(" msec"));
+#endif
+        return (SFE_UBLOX_STATUS_FAIL); // We received invalid data and an invalid ACK!
+      }
+
+      // If the outgoingUBX->classAndIDmatch is VALID and the packetAck.classAndIDmatch is NOT_DEFINED
+      // then the ACK has not yet been received and we should keep waiting for it
+      else if ((outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_VALID) && (packetAck.classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED))
+      {
+        //   Serial.print(F("waitForACKResponse: valid data after "));
+        //   Serial.print(millis() - startTime);
+        //   Serial.println(F(" msec. Waiting for ACK."));
+      }
+
+    } // checkUbloxInternal == true
+
+    delay(1); // Allow an RTOS to get an elbow in (#11)
+  }           // while (millis() < (startTime + (unsigned long)maxTime))
+
+  // We have timed out...
+  // If the outgoingUBX->classAndIDmatch is VALID then we can take a gamble and return DATA_RECEIVED
+  // even though we did not get an ACK
+  if ((outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_VALID) && (packetAck.classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED) && (outgoingUBX->valid == SFE_UBLOX_PACKET_VALIDITY_VALID) && (outgoingUBX->cls == requestedClass) && (outgoingUBX->id == requestedID))
+  {
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+      Serial.print(F("waitForACKResponse: TIMEOUT with valid data after "));
+      Serial.print(millis() - startTime);
+      Serial.println(F(" msec. "));
+#endif
+    return (SFE_UBLOX_STATUS_DATA_RECEIVED); // We received valid data... But no ACK!
+  }
+
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+    Serial.print(F("waitForACKResponse: TIMEOUT after "));
+    Serial.print(millis() - startTime);
+    Serial.println(F(" msec."));
+#endif
+
+  return (SFE_UBLOX_STATUS_TIMEOUT);
+}
+
+// For non-CFG queries no ACK is sent so we use this function
+// Returns SFE_UBLOX_STATUS_DATA_RECEIVED if we got a config packet full of response data that has CLS/ID match to our query packet
+// Returns SFE_UBLOX_STATUS_CRC_FAIL if we got a corrupt config packet that has CLS/ID match to our query packet
+// Returns SFE_UBLOX_STATUS_TIMEOUT if we timed out
+// Returns SFE_UBLOX_STATUS_DATA_OVERWRITTEN if we got an a valid packetCfg but that the packetCfg has been
+//  or is currently being overwritten (remember that Serial data can arrive very slowly)
+sfe_ublox_status_e DevUBLOXGNSS::waitForNoACKResponse(ubxPacket *outgoingUBX, uint8_t requestedClass, uint8_t requestedID, uint16_t maxTime)
+{
+  outgoingUBX->valid = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED; // This will go VALID (or NOT_VALID) when we receive a response to the packet we sent
+  packetAck.valid = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+  packetBuf.valid = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+  packetAuto.valid = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+  outgoingUBX->classAndIDmatch = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED; // This will go VALID (or NOT_VALID) when we receive a packet that matches the requested class and ID
+  packetAck.classAndIDmatch = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+  packetBuf.classAndIDmatch = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+  packetAuto.classAndIDmatch = SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED;
+
+  unsigned long startTime = millis();
+  while (millis() - startTime < maxTime)
+  {
+    if (checkUbloxInternal(outgoingUBX, requestedClass, requestedID) == true) // See if new data is available. Process bytes as they come in.
+    {
+      // If outgoingUBX->classAndIDmatch is VALID
+      // and outgoingUBX->valid is _still_ VALID and the class and ID _still_ match
+      // then we can be confident that the data in outgoingUBX is valid
+      if ((outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_VALID) && (outgoingUBX->valid == SFE_UBLOX_PACKET_VALIDITY_VALID) && (outgoingUBX->cls == requestedClass) && (outgoingUBX->id == requestedID))
+      {
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+          Serial.print(F("waitForNoACKResponse: valid data with CLS/ID match after "));
+          Serial.print(millis() - startTime);
+          Serial.println(F(" msec"));
+#endif
+        return (SFE_UBLOX_STATUS_DATA_RECEIVED); // We received valid data!
+      }
+
+      // If the outgoingUBX->classAndIDmatch is VALID
+      // but the outgoingUBX->cls or ID no longer match then we can be confident that we had
+      // valid data but it has been or is currently being overwritten by another packet (e.g. PVT).
+      // If (e.g.) a PVT packet is _being_ received: outgoingUBX->valid will be NOT_DEFINED
+      // If (e.g.) a PVT packet _has been_ received: outgoingUBX->valid will be VALID (or just possibly NOT_VALID)
+      // So we cannot use outgoingUBX->valid as part of this check.
+      // Note: the addition of packetBuf should make this check redundant!
+      else if ((outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_VALID) && ((outgoingUBX->cls != requestedClass) || (outgoingUBX->id != requestedID)))
+      {
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+        Serial.print(F("waitForNoACKResponse: data being OVERWRITTEN after "));
+        Serial.print(millis() - startTime);
+        Serial.println(F(" msec"));
+#endif
+        return (SFE_UBLOX_STATUS_DATA_OVERWRITTEN); // Data was valid but has been or is being overwritten
+      }
+
+      // If outgoingUBX->classAndIDmatch is NOT_DEFINED
+      // and outgoingUBX->valid is VALID then this must be (e.g.) a PVT packet
+      else if ((outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED) && (outgoingUBX->valid == SFE_UBLOX_PACKET_VALIDITY_VALID))
+      {
+        // if (_printDebug == true)
+        // {
+        //   Serial.print(F("waitForNoACKResponse: valid but UNWANTED data after "));
+        //   Serial.print(millis() - startTime);
+        //   Serial.print(F(" msec. Class: 0x"));
+        //   Serial.print(outgoingUBX->cls, HEX);
+        //   Serial.print(F(" ID: 0x"));
+        //   Serial.print(outgoingUBX->id, HEX);
+        // }
+      }
+
+      // If the outgoingUBX->classAndIDmatch is NOT_VALID then we return CRC failure
+      else if (outgoingUBX->classAndIDmatch == SFE_UBLOX_PACKET_VALIDITY_NOT_VALID)
+      {
+        return (SFE_UBLOX_STATUS_CRC_FAIL); // We received invalid data
+      }
+    }
+
+    delay(1); // Allow an RTOS to get an elbow in (#11)
+  }
+
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+    Serial.print(F("waitForNoACKResponse: TIMEOUT after "));
+    Serial.print(millis() - startTime);
+    Serial.println(F(" msec. No packet received."));
+#endif
+
+  return (SFE_UBLOX_STATUS_TIMEOUT);
+}
+
+// PRIVATE: Called regularly to check for available bytes on the user' specified port
+bool DevUBLOXGNSS::checkUbloxInternal(ubxPacket *incomingUBX, uint8_t requestedClass, uint8_t requestedID)
+{
+  if (!lock())
+    return false;
+
+  bool ok = false;
+  if (_commType == COMM_TYPE_I2C)
+    ok = (checkUbloxI2C(incomingUBX, requestedClass, requestedID));
+  unlock();
+
+  return ok;
+}
+
+// Polls I2C for data, passing any new bytes to process()
+// Returns true if new bytes are available
+bool DevUBLOXGNSS::checkUbloxI2C(ubxPacket *incomingUBX, uint8_t requestedClass, uint8_t requestedID)
+{
+  if (millis() - lastCheck >= i2cPollingWait)
+  {
+    // Get the number of bytes available from the module
+    // From the u-blox integration manual:
+    // "There are two forms of DDC read transfer. The "random access" form includes a peripheral register
+    //  address and thus allows any register to be read. The second "current address" form omits the
+    //  register address. If this second form is used, then an address pointer in the receiver is used to
+    //  determine which register to read. This address pointer will increment after each read unless it
+    //  is already pointing at register 0xFF, the highest addressable register, in which case it remains
+    //  unaltered."
+    uint16_t bytesAvailable = available();
+
+    if (bytesAvailable == 0)
+    {
+  // #ifndef SFE_UBLOX_REDUCED_PROG_MEM
+  //     Serial.println(F("checkUbloxI2C: OK, zero bytes available"));
+  // #endif
+      lastCheck = millis(); // Put off checking to avoid I2C bus traffic
+      return (false);
+    }
+
+    // Check for undocumented bit error. We found this doing logic scans.
+    // This error is rare but if we incorrectly interpret the first bit of the two 'data available' bytes as 1
+    // then we have far too many bytes to check. May be related to I2C setup time violations: https://github.com/sparkfun/SparkFun_Ublox_Arduino_Library/issues/40
+    if (bytesAvailable & ((uint16_t)1 << 15))
+    {
+      // Clear the MSbit
+      bytesAvailable &= ~((uint16_t)1 << 15);
+    }
+
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+      Serial.print(F("checkUbloxI2C: "));
+      Serial.print(bytesAvailable);
+      Serial.println(F(" bytes available"));
+#endif
+
+    while (bytesAvailable)
+    {
+      // Limit to 32 bytes or whatever the buffer limit is for given platform
+      uint16_t bytesToRead = bytesAvailable; // 16-bit
+      if (bytesToRead > i2cTransactionSize)  // Limit for i2cTransactionSize is 8-bit
+        bytesToRead = i2cTransactionSize;
+
+      // Here it would be desireable to use a restart where possible / supported, but only if there will be multiple reads.
+      // However, if an individual requestFrom fails, we could end up leaving the bus hanging.
+      // On balance, it is probably safest to not use restarts here.
+      uint8_t buf[i2cTransactionSize];
+      uint8_t bytesReturned = readBytes(buf, (uint8_t)bytesToRead);
+      if ((uint16_t)bytesReturned == bytesToRead)
+      {
+        for (uint16_t x = 0; x < bytesToRead; x++)
+        {
+          process(buf[x], incomingUBX, requestedClass, requestedID); // Process this valid character
+        }
+      }
+      else
+      {
+        // Something has gone very wrong. Sensor did not respond - or a bus error happened...
+        if (_resetCurrentSentenceOnBusError)
+          currentSentence = SFE_UBLOX_SENTENCE_TYPE_NONE; // Reset the sentence to being looking for a new start char
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+        Serial.println(F("checkUbloxI2C: bus error? bytesReturned != bytesToRead"));
+#endif
+        return (false);
+      }
+
+      bytesAvailable -= bytesToRead;
+    }
+  }
+
+  return (true);
+
+} // end checkUbloxI2C()
 
 bool DevUBLOXGNSS::setMeasurementRate(uint16_t rate, uint8_t layer, uint16_t maxWait){
   if(rate < 25){
@@ -220,8 +553,7 @@ bool DevUBLOXGNSS::initPacketUBXNAVPVT()
   if (packetUBXNAVPVT == nullptr)
   {
 #ifndef SFE_UBLOX_REDUCED_PROG_MEM
-    if ((_printDebug == true) || (_printLimitedDebug == true)) // This is important. Print this if doing limited debugging
-      _debugSerial.println(F("initPacketUBXNAVPVT: RAM alloc failed!"));
+    Serial.println(F("initPacketUBXNAVPVT: RAM alloc failed!"));
 #endif
     return (false);
   }
@@ -275,4 +607,3 @@ bool DevUBLOXGNSS::getPVT(uint16_t maxWait)
     return (false);
   }
 }
-

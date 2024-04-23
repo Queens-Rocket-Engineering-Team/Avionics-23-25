@@ -24,7 +24,7 @@
 
 #include <Wire.h> //Needed for I2C to GNSS
 
-#include "C:\Users\trist\OneDrive\Documents\GitHub\Avionics-23-24\GPS_Library_Hell\src_barebones\u-blox_GNSS.h" //http://librarymanager/All#SparkFun_u-blox_GNSS_v3
+#include "C:\Users\trist\OneDrive\Documents\GitHub\Avionics-23-24\GPS Library Hell\src_barebones\SparkFun_u-blox_GNSS_v3.h" //http://librarymanager/All#SparkFun_u-blox_GNSS_v3
 SFE_UBLOX_GNSS myGNSS;
 
 unsigned long lastTime = 0; //Simple local timer. Used to calc the message interval.

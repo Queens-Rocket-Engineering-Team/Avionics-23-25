@@ -7,6 +7,8 @@
 #include "u-blox_Class_and_ID.h"
 #include "sfe_bus.h"
 
+#define SFE_UBLOX_REDUCED_PROG_MEM
+
 // Define a digital pin to aid debugging
 // Leave set to -1 if not needed
 const int debugPin = -1;
@@ -16,8 +18,6 @@ class DevUBLOXGNSS
 public:
   DevUBLOXGNSS(void);   //constructor
   ~DevUBLOXGNSS(void);  //destructor
-
-
 
   /// Variables
 
@@ -44,12 +44,6 @@ public:
 
   bool getPVT(uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);                                                                                                     // Query module for latest group of datums and load global vars: lat, long, alt, speed, SIV, accuracies, etc. If autoPVT is disabled, performs an explicit poll and waits, if enabled does not block. Returns true if new PVT is available.
 
-  // These lock / unlock functions can be used if you have multiple tasks writing to the bus.
-  // The idea is that in a RTOS you override this class and the functions in which you take and give a mutex.
-  virtual bool createLock(void) { return true; }
-  virtual bool lock(void) { return true; }
-  virtual void unlock(void) {}
-  virtual void deleteLock(void) {}
 
 protected:
 
@@ -67,20 +61,14 @@ protected:
 
   // The packet buffers
   // These are pointed at from within the ubxPacket
+  uint8_t payloadAck[2];           // Holds the requested ACK/NACK
+  uint8_t payloadBuf[2];           // Temporary buffer used to screen incoming packets or dump unrequested packets
+  size_t packetCfgPayloadSize = 0; // Size for the packetCfg payload. .begin will set this to MAX_PAYLOAD_SIZE if necessary. User can change with setPacketCfgPayloadSize
   uint8_t *payloadCfg = nullptr;
+  uint8_t *payloadAuto = nullptr;
 
-
- enum commTypes
-  {
-    COMM_TYPE_I2C = 0,
-    COMM_TYPE_SERIAL,
-    COMM_TYPE_SPI
-  } _commType = COMM_TYPE_I2C; // Controls which port we look to for incoming bytes
-
-  bool _printDebug = false;                      // Flag to print the serial commands we are sending to the Serial port for debug
-  bool _printLimitedDebug = false;               // Flag to print limited debug messages. Useful for I2C debugging or high navigation rates
-
- 
+  int COMM_TYPE_I2C = 0;
+  int _commType = COMM_TYPE_I2C; // Controls which port we look to for incoming bytes
 
   /// Functions
 
@@ -89,5 +77,22 @@ protected:
   bool initPacketUBXNAVPVT();           // Allocate RAM for packetUBXNAVPVT and initialize it
 
   bool init(uint16_t maxWait, bool assumeSuccess);
+  void setCommunicationBus(SparkFun_UBLOX_GNSS::GNSSDeviceBus &theBus);
+  // For I2C, ping the _address
+  bool ping();
+  // For I2C, read registers 0xFD and 0xFE. Return bytes available as uint16_t
+  uint16_t available();
+  // For Serial, do Serial.write
+  // For I2C, push data to register 0xFF. Chunkify if necessary. Prevent single byte writes as these are illegal
+  uint8_t writeBytes(uint8_t *data, uint8_t length);
+  // For I2C, read from register 0xFF
+  uint8_t readBytes(uint8_t *data, uint8_t length);
+
+  // These lock / unlock functions can be used if you have multiple tasks writing to the bus.
+  // The idea is that in a RTOS you override this class and the functions in which you take and give a mutex.
+  virtual bool createLock(void) { return true; }
+  virtual bool lock(void) { return true; }
+  virtual void unlock(void) {}
+  virtual void deleteLock(void) {}
 
 };

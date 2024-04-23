@@ -26,6 +26,7 @@ typedef struct
     } bits;
   } moduleQueried;
 } UBX_NAV_POSECEF_moduleQueried_t;
+
 typedef struct
 {
   union
@@ -92,6 +93,7 @@ typedef struct
     } bits;
   } moduleQueried2;
 } UBX_NAV_PVT_moduleQueried_t;
+
 typedef struct
 {
   uint32_t iTOW; // GPS time of week of the HNR epoch: ms
@@ -148,6 +150,7 @@ typedef struct
   uint8_t reserved2[4];
 } UBX_HNR_PVT_data_t;
   // Additional flags and pointers that need to be stored with each message type
+  
 struct ubxAutomaticFlags
 {
   union

@@ -1,6 +1,10 @@
-
 #pragma once
 
+#define kUBLOXGNSSDefaultAddress 0x42 // Default 7-bit unshifted address of the ublox 6/7/8/M8/F9 series
+
+// A default of 250ms for maxWait seems fine for I2C but is not enough for SerialUSB.
+// If you know you are only going to be using I2C / Qwiic communication, you can
+// safely reduce kUBLOXGNSSDefaultMaxWait to 250.
 #ifndef kUBLOXGNSSDefaultMaxWait // Let's allow the user to define their own value if they want to
 #define kUBLOXGNSSDefaultMaxWait 1100
 #endif
@@ -33,7 +37,6 @@ typedef enum
   SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED,
   SFE_UBLOX_PACKET_NOTACKNOWLEDGED // This indicates that we received a NACK
 } sfe_ublox_packet_validity_e;
-
 
 //-=-=-=-=- UBX binary specific variables
 struct ubxPacket

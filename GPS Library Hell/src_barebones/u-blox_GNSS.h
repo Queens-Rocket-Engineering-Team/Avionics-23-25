@@ -41,13 +41,13 @@ public:
 
   int32_t getLongitude(uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);   // Returns the current longitude in degrees * 10-7. Auto selects between HighPrecision and Regular depending on ability of module.
   int32_t getLatitude(uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);    // Returns the current latitude in degrees * 10^-7. Auto selects between HighPrecision and Regular depending on ability of module.
+  int32_t getAltitude(uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);    // Returns the current altitude in mm above ellipsoid
 
-  bool getPVT(uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);                                                                                                     // Query module for latest group of datums and load global vars: lat, long, alt, speed, SIV, accuracies, etc. If autoPVT is disabled, performs an explicit poll and waits, if enabled does not block. Returns true if new PVT is available.
-
+  bool getPVT(uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);            // Query module for latest group of datums and load global vars: lat, long, alt, speed, SIV, accuracies, etc. If autoPVT is disabled, performs an explicit poll and waits, if enabled does not block. Returns true if new PVT is available.                                                                                            
 
 protected:
 
-  /// Varaibles
+  /// Varaibles \\\/
 
   // Limit checking of new data to every X ms
   // If we are expecting an update every X Hz then we should check every quarter that amount of time
@@ -55,6 +55,8 @@ protected:
   uint8_t i2cPollingWait = 100;    // Default to 100ms. Adjusted when user calls setNavigationFrequency() or setHNRNavigationRate() or setMeasurementRate()
   uint8_t i2cPollingWaitNAV = 100; // We need to record the desired polling rate for standard nav messages
   uint8_t i2cPollingWaitHNR = 100; // and for HNR too so we can set i2cPollingWait to the lower of the two
+
+  unsigned long lastCheck = 0;
 
   // Init the packet structures and init them with pointers to the payloadAck, payloadCfg, payloadBuf and payloadAuto arrays  
   ubxPacket packetCfg = {0, 0, 0, 0, 0, payloadCfg, 0, 0, SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED, SFE_UBLOX_PACKET_VALIDITY_NOT_DEFINED};
@@ -70,7 +72,7 @@ protected:
   int COMM_TYPE_I2C = 0;
   int _commType = COMM_TYPE_I2C; // Controls which port we look to for incoming bytes
 
-  /// Functions
+  /// Functions \\\/
 
   // The initPacket functions need to be private as they don't check if memory has already been allocated.
   // Functions like setAutoNAVPOSECEF will check that memory has not been allocated before calling initPacket.

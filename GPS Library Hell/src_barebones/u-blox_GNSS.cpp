@@ -530,6 +530,22 @@ bool DevUBLOXGNSS::setVal16(uint32_t key, uint16_t value, uint8_t layer, uint16_
   return (setValN(key, val, 2, layer, maxWait));
 }
 
+// Get the current longitude in degrees
+// Returns a long representing the number of degrees *10^-7
+int32_t DevUBLOXGNSS::getLongitude(uint16_t maxWait)
+{
+  if (packetUBXNAVPVT == nullptr)
+    initPacketUBXNAVPVT();        // Check that RAM has been allocated for the PVT data
+  if (packetUBXNAVPVT == nullptr) // Bail if the RAM allocation failed
+    return 0;
+
+  if (packetUBXNAVPVT->moduleQueried.moduleQueried1.bits.lon == false)
+    getPVT(maxWait);
+  packetUBXNAVPVT->moduleQueried.moduleQueried1.bits.lon = false; // Since we are about to give this to user, mark this data as stale
+  packetUBXNAVPVT->moduleQueried.moduleQueried1.bits.all = false;
+  return (packetUBXNAVPVT->data.lon);
+}
+
 // Get the current latitude in degrees
 // Returns a long representing the number of degrees *10^7
 int32_t DevUBLOXGNSS::getLatitude(uin16_t maxWait) {
@@ -544,6 +560,21 @@ int32_t DevUBLOXGNSS::getLatitude(uin16_t maxWait) {
   packetUBXNAVPVT->moduleQueried.moduleQueried1.bits.all = false;
   return (packetUBXNAVPVT->data.numSV);
 
+}
+
+// Get the current altitude in mm according to ellipsoid model
+int32_t DevUBLOXGNSS::getAltitude(uint16_t maxWait)
+{
+  if (packetUBXNAVPVT == nullptr)
+    initPacketUBXNAVPVT();        // Check that RAM has been allocated for the PVT data
+  if (packetUBXNAVPVT == nullptr) // Bail if the RAM allocation failed
+    return 0;
+
+  if (packetUBXNAVPVT->moduleQueried.moduleQueried1.bits.height == false)
+    getPVT(maxWait);
+  packetUBXNAVPVT->moduleQueried.moduleQueried1.bits.height = false; // Since we are about to give this to user, mark this data as stale
+  packetUBXNAVPVT->moduleQueried.moduleQueried1.bits.all = false;
+  return (packetUBXNAVPVT->data.height);
 }
 
 // PRIVATE: Allocate RAM for packetUBXNAVPVT and initialize it

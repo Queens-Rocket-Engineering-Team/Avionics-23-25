@@ -1,0 +1,4 @@
+{
+    "configuration": "pnum=GENERIC_F103CBTX,upload_method=swdMethod,xserial=disabled,usb=none,xusb=FS,opt=oslto,dbg=none,rtlib=nano",
+    "board": "STMicroelectronics:stm32:GenF1"
+}

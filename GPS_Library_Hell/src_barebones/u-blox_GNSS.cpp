@@ -33,6 +33,586 @@ DevUBLOXGNSS::~DevUBLOXGNSS(void)
 
 }
 
+// Stop all automatic message processing. Free all used RAM
+void DevUBLOXGNSS::end(void)
+{
+  // Note: payloadCfg is not deleted
+
+  // Note: payloadAuto is not deleted
+
+  // Note: spiBuffer is not deleted
+
+  if (ubxFileBuffer != nullptr) // Check if RAM has been allocated for the file buffer
+  {
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+    if (_printDebug == true)
+    {
+      _debugSerial.println(F("end: the file buffer has been deleted. You will need to call setFileBufferSize before .begin to create a new one."));
+    }
+#endif
+    delete[] ubxFileBuffer; // Created with new[]
+    ubxFileBuffer = nullptr;
+    fileBufferSize = 0; // Reset file buffer size. User will have to call setFileBufferSize again
+    fileBufferMaxAvail = 0;
+  }
+
+  if (rtcmBuffer != nullptr) // Check if RAM has been allocated for the RTCM buffer
+  {
+    delete[] rtcmBuffer; // Created with new[]
+    rtcmBuffer = nullptr;
+    rtcmBufferSize = 0; // Reset file buffer size. User will have to call setFileBufferSize again
+  }
+
+  if (cfgValgetValueSizes != nullptr)
+  {
+    delete[] cfgValgetValueSizes;
+    cfgValgetValueSizes = nullptr;
+  }
+
+  if (moduleSWVersion != nullptr)
+  {
+    delete moduleSWVersion; // Created with new moduleSWVersion_t
+    moduleSWVersion = nullptr;
+  }
+
+  if (currentGeofenceParams != nullptr)
+  {
+    delete currentGeofenceParams; // Created with new geofenceParams_t
+    currentGeofenceParams = nullptr;
+  }
+
+  if (packetUBXNAVTIMELS != nullptr)
+  {
+    delete packetUBXNAVTIMELS; // Created with new UBX_NAV_TIMELS_t
+    packetUBXNAVTIMELS = nullptr;
+  }
+
+  if (packetUBXNAVPOSECEF != nullptr)
+  {
+    if (packetUBXNAVPOSECEF->callbackData != nullptr)
+    {
+      delete packetUBXNAVPOSECEF->callbackData; // Created with new UBX_NAV_POSECEF_data_t
+    }
+    delete packetUBXNAVPOSECEF; // Created with new UBX_NAV_POSECEF_t
+    packetUBXNAVPOSECEF = nullptr;
+  }
+
+  if (packetUBXNAVSTATUS != nullptr)
+  {
+    if (packetUBXNAVSTATUS->callbackData != nullptr)
+    {
+      delete packetUBXNAVSTATUS->callbackData;
+    }
+    delete packetUBXNAVSTATUS;
+    packetUBXNAVSTATUS = nullptr;
+  }
+
+  if (packetUBXNAVDOP != nullptr)
+  {
+    if (packetUBXNAVDOP->callbackData != nullptr)
+    {
+      delete packetUBXNAVDOP->callbackData;
+    }
+    delete packetUBXNAVDOP;
+    packetUBXNAVDOP = nullptr;
+  }
+
+  if (packetUBXNAVPVT != nullptr)
+  {
+    if (packetUBXNAVPVT->callbackData != nullptr)
+    {
+      delete packetUBXNAVPVT->callbackData;
+    }
+    delete packetUBXNAVPVT;
+    packetUBXNAVPVT = nullptr;
+  }
+
+  if (packetUBXNAVATT != nullptr)
+  {
+    if (packetUBXNAVATT->callbackData != nullptr)
+    {
+      delete packetUBXNAVATT->callbackData;
+    }
+    delete packetUBXNAVATT;
+    packetUBXNAVATT = nullptr;
+  }
+
+  if (packetUBXNAVODO != nullptr)
+  {
+    if (packetUBXNAVODO->callbackData != nullptr)
+    {
+      delete packetUBXNAVODO->callbackData;
+    }
+    delete packetUBXNAVODO;
+    packetUBXNAVODO = nullptr;
+  }
+
+  if (packetUBXNAVVELECEF != nullptr)
+  {
+    if (packetUBXNAVVELECEF->callbackData != nullptr)
+    {
+      delete packetUBXNAVVELECEF->callbackData;
+    }
+    delete packetUBXNAVVELECEF;
+    packetUBXNAVVELECEF = nullptr;
+  }
+
+  if (packetUBXNAVVELNED != nullptr)
+  {
+    if (packetUBXNAVVELNED->callbackData != nullptr)
+    {
+      delete packetUBXNAVVELNED->callbackData;
+    }
+    delete packetUBXNAVVELNED;
+    packetUBXNAVVELNED = nullptr;
+  }
+
+  if (packetUBXNAVHPPOSECEF != nullptr)
+  {
+    if (packetUBXNAVHPPOSECEF->callbackData != nullptr)
+    {
+      delete packetUBXNAVHPPOSECEF->callbackData;
+    }
+    delete packetUBXNAVHPPOSECEF;
+    packetUBXNAVHPPOSECEF = nullptr;
+  }
+
+  if (packetUBXNAVHPPOSLLH != nullptr)
+  {
+    if (packetUBXNAVHPPOSLLH->callbackData != nullptr)
+    {
+      delete packetUBXNAVHPPOSLLH->callbackData;
+    }
+    delete packetUBXNAVHPPOSLLH;
+    packetUBXNAVHPPOSLLH = nullptr;
+  }
+
+  if (packetUBXNAVPVAT != nullptr)
+  {
+    if (packetUBXNAVPVAT->callbackData != nullptr)
+    {
+      delete packetUBXNAVPVAT->callbackData;
+    }
+    delete packetUBXNAVPVAT;
+    packetUBXNAVPVAT = nullptr;
+  }
+
+  if (packetUBXNAVTIMEUTC != nullptr)
+  {
+    if (packetUBXNAVTIMEUTC->callbackData != nullptr)
+    {
+      delete packetUBXNAVTIMEUTC->callbackData;
+    }
+    delete packetUBXNAVTIMEUTC;
+    packetUBXNAVTIMEUTC = nullptr;
+  }
+
+  if (packetUBXNAVCLOCK != nullptr)
+  {
+    if (packetUBXNAVCLOCK->callbackData != nullptr)
+    {
+      delete packetUBXNAVCLOCK->callbackData;
+    }
+    delete packetUBXNAVCLOCK;
+    packetUBXNAVCLOCK = nullptr;
+  }
+
+  if (packetUBXNAVSVIN != nullptr)
+  {
+    if (packetUBXNAVSVIN->callbackData != nullptr)
+    {
+      delete packetUBXNAVSVIN->callbackData;
+    }
+    delete packetUBXNAVSVIN;
+    packetUBXNAVSVIN = nullptr;
+  }
+
+  if (packetUBXNAVRELPOSNED != nullptr)
+  {
+    if (packetUBXNAVRELPOSNED->callbackData != nullptr)
+    {
+      delete packetUBXNAVRELPOSNED->callbackData;
+    }
+    delete packetUBXNAVRELPOSNED;
+    packetUBXNAVRELPOSNED = nullptr;
+  }
+
+  if (packetUBXNAVAOPSTATUS != nullptr)
+  {
+    if (packetUBXNAVAOPSTATUS->callbackData != nullptr)
+    {
+      delete packetUBXNAVAOPSTATUS->callbackData;
+    }
+    delete packetUBXNAVAOPSTATUS;
+    packetUBXNAVAOPSTATUS = nullptr;
+  }
+
+  if (packetUBXNAVEOE != nullptr)
+  {
+    if (packetUBXNAVEOE->callbackData != nullptr)
+    {
+      delete packetUBXNAVEOE->callbackData;
+    }
+    delete packetUBXNAVEOE;
+    packetUBXNAVEOE = nullptr;
+  }
+
+#ifndef SFE_UBLOX_DISABLE_RAWX_SFRBX_PMP_QZSS_SAT
+  if (packetUBXNAVSAT != nullptr)
+  {
+    if (packetUBXNAVSAT->callbackData != nullptr)
+    {
+      delete packetUBXNAVSAT->callbackData;
+    }
+    delete packetUBXNAVSAT;
+    packetUBXNAVSAT = nullptr;
+  }
+
+  if (packetUBXNAVSIG != nullptr)
+  {
+    if (packetUBXNAVSIG->callbackData != nullptr)
+    {
+      delete packetUBXNAVSIG->callbackData;
+    }
+    delete packetUBXNAVSIG;
+    packetUBXNAVSIG = nullptr;
+  }
+
+  if (packetUBXRXMPMP != nullptr)
+  {
+    if (packetUBXRXMPMP->callbackData != nullptr)
+    {
+      delete packetUBXRXMPMP->callbackData;
+    }
+    delete packetUBXRXMPMP;
+    packetUBXRXMPMP = nullptr;
+  }
+
+  if (packetUBXRXMPMPmessage != nullptr)
+  {
+    if (packetUBXRXMPMPmessage->callbackData != nullptr)
+    {
+      delete packetUBXRXMPMPmessage->callbackData;
+    }
+    delete packetUBXRXMPMPmessage;
+    packetUBXRXMPMPmessage = nullptr;
+  }
+
+  if (packetUBXRXMQZSSL6message != nullptr)
+  {
+    if (packetUBXRXMQZSSL6message->callbackData != nullptr)
+    {
+      delete[] packetUBXRXMQZSSL6message->callbackData;
+    }
+    delete packetUBXRXMQZSSL6message;
+    packetUBXRXMQZSSL6message = nullptr;
+  }
+
+  if (packetUBXRXMCOR != nullptr)
+  {
+    if (packetUBXRXMCOR->callbackData != nullptr)
+    {
+      delete packetUBXRXMCOR->callbackData;
+    }
+    delete packetUBXRXMCOR;
+    packetUBXRXMCOR = nullptr;
+  }
+
+  if (packetUBXRXMSFRBX != nullptr)
+  {
+    if (packetUBXRXMSFRBX->callbackData != nullptr)
+    {
+      delete packetUBXRXMSFRBX->callbackData;
+    }
+    if (packetUBXRXMSFRBX->callbackMessageData != nullptr)
+    {
+      delete[] packetUBXRXMSFRBX->callbackMessageData;
+    }
+    delete packetUBXRXMSFRBX;
+    packetUBXRXMSFRBX = nullptr;
+  }
+
+  if (packetUBXRXMRAWX != nullptr)
+  {
+    if (packetUBXRXMRAWX->callbackData != nullptr)
+    {
+      delete packetUBXRXMRAWX->callbackData;
+    }
+    delete packetUBXRXMRAWX;
+    packetUBXRXMRAWX = nullptr;
+  }
+
+  if (packetUBXRXMMEASX != nullptr)
+  {
+    if (packetUBXRXMMEASX->callbackData != nullptr)
+    {
+      delete packetUBXRXMMEASX->callbackData;
+    }
+    delete packetUBXRXMMEASX;
+    packetUBXRXMMEASX = nullptr;
+  }
+#endif
+
+  if (packetUBXTIMTM2 != nullptr)
+  {
+    if (packetUBXTIMTM2->callbackData != nullptr)
+    {
+      delete packetUBXTIMTM2->callbackData;
+    }
+    delete packetUBXTIMTM2;
+    packetUBXTIMTM2 = nullptr;
+  }
+
+  if (packetUBXTIMTP != nullptr)
+  {
+    if (packetUBXTIMTP->callbackData != nullptr)
+    {
+      delete packetUBXTIMTP->callbackData;
+    }
+    delete packetUBXTIMTP;
+    packetUBXTIMTP = nullptr;
+  }
+
+  if (packetUBXMONHW != nullptr)
+  {
+    if (packetUBXMONHW->callbackData != nullptr)
+    {
+      delete packetUBXMONHW->callbackData;
+    }
+    delete packetUBXMONHW;
+    packetUBXMONHW = nullptr;
+  }
+
+#ifndef SFE_UBLOX_DISABLE_ESF
+  if (packetUBXESFALG != nullptr)
+  {
+    if (packetUBXESFALG->callbackData != nullptr)
+    {
+      delete packetUBXESFALG->callbackData;
+    }
+    delete packetUBXESFALG;
+    packetUBXESFALG = nullptr;
+  }
+
+  if (packetUBXESFSTATUS != nullptr)
+  {
+    if (packetUBXESFSTATUS->callbackData != nullptr)
+    {
+      delete packetUBXESFSTATUS->callbackData;
+    }
+    delete packetUBXESFSTATUS;
+    packetUBXESFSTATUS = nullptr;
+  }
+
+  if (packetUBXESFINS != nullptr)
+  {
+    if (packetUBXESFINS->callbackData != nullptr)
+    {
+      delete packetUBXESFINS->callbackData;
+    }
+    delete packetUBXESFINS;
+    packetUBXESFINS = nullptr;
+  }
+
+  if (packetUBXESFMEAS != nullptr)
+  {
+    if (packetUBXESFMEAS->callbackData != nullptr)
+    {
+      delete[] packetUBXESFMEAS->callbackData;
+    }
+    delete packetUBXESFMEAS;
+    packetUBXESFMEAS = nullptr;
+  }
+
+  if (packetUBXESFRAW != nullptr)
+  {
+    if (packetUBXESFRAW->callbackData != nullptr)
+    {
+      delete packetUBXESFRAW->callbackData;
+    }
+    delete packetUBXESFRAW;
+    packetUBXESFRAW = nullptr;
+  }
+#endif
+
+  if (packetUBXMGAACK != nullptr)
+  {
+    delete packetUBXMGAACK;
+    packetUBXMGAACK = nullptr;
+  }
+
+  if (packetUBXMGADBD != nullptr)
+  {
+    delete packetUBXMGADBD;
+    packetUBXMGADBD = nullptr;
+  }
+
+#ifndef SFE_UBLOX_DISABLE_HNR
+  if (packetUBXHNRATT != nullptr)
+  {
+    if (packetUBXHNRATT->callbackData != nullptr)
+    {
+      delete packetUBXHNRATT->callbackData;
+    }
+    delete packetUBXHNRATT;
+    packetUBXHNRATT = nullptr;
+  }
+
+  if (packetUBXHNRINS != nullptr)
+  {
+    if (packetUBXHNRINS->callbackData != nullptr)
+    {
+      delete packetUBXHNRINS->callbackData;
+    }
+    delete packetUBXHNRINS;
+    packetUBXHNRINS = nullptr;
+  }
+
+  if (packetUBXHNRPVT != nullptr)
+  {
+    if (packetUBXHNRPVT->callbackData != nullptr)
+    {
+      delete packetUBXHNRPVT->callbackData;
+    }
+    delete packetUBXHNRPVT;
+    packetUBXHNRPVT = nullptr;
+  }
+#endif
+
+#ifndef SFE_UBLOX_DISABLE_AUTO_NMEA
+  if (storageNMEAGPGGA != nullptr)
+  {
+    if (storageNMEAGPGGA->callbackCopy != nullptr)
+    {
+      delete storageNMEAGPGGA->callbackCopy;
+    }
+    delete storageNMEAGPGGA;
+    storageNMEAGPGGA = nullptr;
+  }
+
+  if (storageNMEAGNGGA != nullptr)
+  {
+    if (storageNMEAGNGGA->callbackCopy != nullptr)
+    {
+      delete storageNMEAGNGGA->callbackCopy;
+    }
+    delete storageNMEAGNGGA;
+    storageNMEAGNGGA = nullptr;
+  }
+
+  if (storageNMEAGPVTG != nullptr)
+  {
+    if (storageNMEAGPVTG->callbackCopy != nullptr)
+    {
+      delete storageNMEAGPVTG->callbackCopy;
+    }
+    delete storageNMEAGPVTG;
+    storageNMEAGPVTG = nullptr;
+  }
+
+  if (storageNMEAGNVTG != nullptr)
+  {
+    if (storageNMEAGNVTG->callbackCopy != nullptr)
+    {
+      delete storageNMEAGNVTG->callbackCopy;
+    }
+    delete storageNMEAGNVTG;
+    storageNMEAGNVTG = nullptr;
+  }
+
+  if (storageNMEAGPRMC != nullptr)
+  {
+    if (storageNMEAGPRMC->callbackCopy != nullptr)
+    {
+      delete storageNMEAGPRMC->callbackCopy;
+    }
+    delete storageNMEAGPRMC;
+    storageNMEAGPRMC = nullptr;
+  }
+
+  if (storageNMEAGNRMC != nullptr)
+  {
+    if (storageNMEAGNRMC->callbackCopy != nullptr)
+    {
+      delete storageNMEAGNRMC->callbackCopy;
+    }
+    delete storageNMEAGNRMC;
+    storageNMEAGNRMC = nullptr;
+  }
+
+  if (storageNMEAGPZDA != nullptr)
+  {
+    if (storageNMEAGPZDA->callbackCopy != nullptr)
+    {
+      delete storageNMEAGPZDA->callbackCopy;
+    }
+    delete storageNMEAGPZDA;
+    storageNMEAGPZDA = nullptr;
+  }
+
+  if (storageNMEAGNZDA != nullptr)
+  {
+    if (storageNMEAGNZDA->callbackCopy != nullptr)
+    {
+      delete storageNMEAGNZDA->callbackCopy;
+    }
+    delete storageNMEAGNZDA;
+    storageNMEAGNZDA = nullptr;
+  }
+#endif
+
+  if (_storageNMEA != nullptr)
+  {
+    if (_storageNMEA->data != nullptr)
+    {
+      delete[] _storageNMEA->data;
+    }
+    delete _storageNMEA;
+    _storageNMEA = nullptr;
+  }
+
+#ifndef SFE_UBLOX_DISABLE_RTCM_LOGGING
+  if (_storageRTCM != nullptr)
+  {
+    delete _storageRTCM;
+    _storageRTCM = nullptr;
+  }
+#endif
+
+  if (storageRTCM1005 != nullptr)
+  {
+    if (storageRTCM1005->callbackData != nullptr)
+    {
+      delete storageRTCM1005->callbackData;
+    }
+    delete storageRTCM1005;
+    storageRTCM1005 = nullptr;
+  }
+
+  if (sfe_ublox_ubx_logging_list_head != nullptr)
+  {
+    while (sfe_ublox_ubx_logging_list_head->next != nullptr)
+    {
+      // Step through the list, find the tail
+      sfe_ublox_ubx_logging_list_t *sfe_ublox_ubx_logging_list_ptr_previous = sfe_ublox_ubx_logging_list_head;
+      sfe_ublox_ubx_logging_list_t *sfe_ublox_ubx_logging_list_ptr = sfe_ublox_ubx_logging_list_head->next;
+      while (sfe_ublox_ubx_logging_list_ptr->next != nullptr)
+      {
+        sfe_ublox_ubx_logging_list_ptr_previous = sfe_ublox_ubx_logging_list_ptr;
+        sfe_ublox_ubx_logging_list_ptr = sfe_ublox_ubx_logging_list_ptr->next;
+      }
+      // Delete the tail
+      delete sfe_ublox_ubx_logging_list_ptr;
+      sfe_ublox_ubx_logging_list_ptr_previous->next = nullptr;
+    }
+    // Finally, delete the head
+    delete sfe_ublox_ubx_logging_list_head;
+    sfe_ublox_ubx_logging_list_head = nullptr;
+  }
+
+  deleteLock(); // Delete the lock semaphore - if required
+}
+
 // Given a message, calc and store the two byte "8-Bit Fletcher" checksum over the entirety of the message
 // This is called before we send a command message
 void DevUBLOXGNSS::calcChecksum(ubxPacket *msg)
@@ -398,8 +978,7 @@ bool DevUBLOXGNSS::checkUbloxInternal(ubxPacket *incomingUBX, uint8_t requestedC
     return false;
 
   bool ok = false;
-  if (_commType == COMM_TYPE_I2C)
-    ok = (checkUbloxI2C(incomingUBX, requestedClass, requestedID));
+  ok = checkUbloxI2C(incomingUBX, requestedClass, requestedID);
   unlock();
 
   return ok;

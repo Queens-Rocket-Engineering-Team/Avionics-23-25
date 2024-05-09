@@ -23,8 +23,9 @@
 */
 
 #include <Wire.h> //Needed for I2C to GNSS
+#include <arduino.h>
 
-#include "C:\Users\trist\OneDrive\Documents\GitHub\Avionics-23-24\GPS_Library_Hell\src_barebones\SparkFun_u-blox_GNSS_v3.h" //http://librarymanager/All#SparkFun_u-blox_GNSS_v3
+#include "C:\Users\trist\OneDrive\Documents\Repos\Avionics-23-24\GPS_Library_Hell\src_barebones\SparkFun_u-blox_GNSS_v3.h" //http://librarymanager/All#SparkFun_u-blox_GNSS_v3
 SFE_UBLOX_GNSS myGNSS;
 
 unsigned long lastTime = 0; //Simple local timer. Used to calc the message interval.
@@ -33,8 +34,8 @@ void setup()
 {
   delay(1000);
   
-  Serial.begin(115200);
-  Serial.println("SparkFun u-blox Example");
+  Serial3.begin(115200);
+  Serial3.println("SparkFun u-blox Example");
 
   Wire.begin();
 
@@ -42,7 +43,7 @@ void setup()
 
   if (myGNSS.begin() == false) //Connect to the u-blox module using Wire port
   {
-    Serial.println(F("u-blox GNSS not detected at default I2C address. Please check wiring. Freezing."));
+    Serial3.println(F("u-blox GNSS not detected at default I2C address. Please check wiring. Freezing."));
     while (1);
   }
 
@@ -54,19 +55,19 @@ void setup()
   // Begin by printing the current measurement rate and navigation rate
 
   uint16_t measRate = myGNSS.getMeasurementRate(); //Get the measurement rate of this module
-  Serial.print("Current measurement interval (ms): ");
-  Serial.println(measRate);
+  Serial3.print("Current measurement interval (ms): ");
+  Serial3.println(measRate);
 
   uint16_t navRate = myGNSS.getNavigationRate(); //Get the navigation rate of this module
-  Serial.print("Current navigation ratio (cycles): ");
-  Serial.println(navRate);
+  Serial3.print("Current navigation ratio (cycles): ");
+  Serial3.println(navRate);
 
   // The measurement rate is the elapsed time between GNSS measurements, which defines the rate
   // e.g. 100 ms => 10 Hz, 1000 ms => 1 Hz, 10000 ms => 0.1 Hz.
   // Let's set the measurement rate (interval) to 5 seconds = 5000 milliseconds
   if (myGNSS.setMeasurementRate(5000, VAL_LAYER_RAM) == false) // Change the rate in RAM only - don't save to BBR
   {
-    Serial.println(F("Could not set the measurement rate. Freezing."));
+    Serial3.println(F("Could not set the measurement rate. Freezing."));
     while (1);
   }
 
@@ -79,28 +80,28 @@ void setup()
   // Let's set the navigation rate (ratio) to 12 to produce a solution every minute
   if (myGNSS.setNavigationRate(12, VAL_LAYER_RAM) == false) // Change the rate in RAM only - don't save to BBR
   {
-    Serial.println(F("Could not set the navigation rate. Freezing."));
+    Serial3.println(F("Could not set the navigation rate. Freezing."));
     while (1);
   }
 
   // Read and print the updated measurement rate and navigation rate
 
   measRate = myGNSS.getMeasurementRate(); //Get the measurement rate of this module
-  Serial.print("New measurement interval (ms): ");
-  Serial.println(measRate);
+  Serial3.print("New measurement interval (ms): ");
+  Serial3.println(measRate);
 
   navRate = myGNSS.getNavigationRate(); //Get the navigation rate of this module
-  Serial.print("New navigation ratio (cycles): ");
-  Serial.println(navRate);
+  Serial3.print("New navigation ratio (cycles): ");
+  Serial3.println(navRate);
 
-  Serial.print("PVT data will be sent every ");
-  Serial.print(measRate * navRate / 1000);
-  Serial.println(" seconds");
+  Serial3.print("PVT data will be sent every ");
+  Serial3.print(measRate * navRate / 1000);
+  Serial3.println(" seconds");
 
   if ((measRate * navRate / 1000) == 60)
   {
-    Serial.println(F("Fun fact: GPS time does not include the 18 leap seconds since 1980."));
-    Serial.println(F("PVT data will be sent at the 42 second mark."));
+    Serial3.println(F("Fun fact: GPS time does not include the 18 leap seconds since 1980."));
+    Serial3.println(F("PVT data will be sent at the 42 second mark."));
   }
 
   lastTime = millis();
@@ -113,19 +114,19 @@ void loop()
   if (myGNSS.getPVT()) //Check for new Position, Velocity, Time data. getPVT returns true if new data is available.
   {    
       long latitude = myGNSS.getLatitude();
-      Serial.print(F("Lat: "));
-      Serial.print(latitude);
+      Serial3.print(F("Lat: "));
+      Serial3.print(latitude);
 
       long longitude = myGNSS.getLongitude();
-      Serial.print(F(" Long: "));
-      Serial.print(longitude);
+      Serial3.print(F(" Long: "));
+      Serial3.print(longitude);
 
       //Calculate the interval since the last message
-      Serial.print(F(" Interval: "));
-      Serial.print(((float)(millis() - lastTime)) / 1000.0, 2);
-      Serial.print(F("s"));
+      Serial3.print(F(" Interval: "));
+      Serial3.print(((float)(millis() - lastTime)) / 1000.0, 2);
+      Serial3.print(F("s"));
 
-      Serial.println();
+      Serial3.println();
 
       lastTime = millis(); //Update lastTime
   }

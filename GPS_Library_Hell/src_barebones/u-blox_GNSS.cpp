@@ -59,6 +59,17 @@ void DevUBLOXGNSS::calcChecksum(ubxPacket *msg)
   }
 }
 
+// Configure a port to output UBX, NMEA, RTCM3 or a combination thereof
+bool DevUBLOXGNSS::setI2COutput(uint8_t comSettings, uint8_t layer, uint16_t maxWait)
+{
+  bool result = newCfgValset(layer);
+  result &= addCfgValset8(UBLOX_CFG_I2COUTPROT_UBX, (comSettings & COM_TYPE_UBX) == 0 ? 0 : 1);
+  result &= addCfgValset8(UBLOX_CFG_I2COUTPROT_NMEA, (comSettings & COM_TYPE_NMEA) == 0 ? 0 : 1);
+  result &= sendCfgValset(maxWait);
+  result |= setVal8(UBLOX_CFG_I2COUTPROT_RTCM3X, (comSettings & COM_TYPE_RTCM3) == 0 ? 0 : 1, layer, maxWait); // This will be NACK'd if the module does not support RTCM3
+  return result;
+}
+
 // Given a packet and payload, send everything including CRC bytes via I2C port
 sfe_ublox_status_e DevUBLOXGNSS::sendCommand(ubxPacket *outgoingUBX, uint16_t maxWait, bool expectACKonly)
 {
@@ -471,6 +482,16 @@ bool DevUBLOXGNSS::checkUbloxI2C(ubxPacket *incomingUBX, uint8_t requestedClass,
   return (true);
 
 } // end checkUbloxI2C()
+
+// Return the ratio between the number of measurements and the number of navigation solutions. Unit is cycles
+uint16_t DevUBLOXGNSS::getNavigationRate(uint8_t layer, uint16_t maxWait)
+{
+  uint16_t navigationRate;
+
+  getNavigationRate(&navigationRate, layer, maxWait);
+
+  return navigationRate;
+}
 
 bool DevUBLOXGNSS::setMeasurementRate(uint16_t rate, uint8_t layer, uint16_t maxWait){
   if(rate < 25){

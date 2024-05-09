@@ -27,6 +27,9 @@ public:
 
   /// Functions
 
+  bool setI2COutput(uint8_t comSettings, uint8_t layer = VAL_LAYER_RAM_BBR, uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);   // Configure I2C port to output UBX, NMEA, RTCM3, SPARTN or a combination thereof
+  void setI2CpollingWait(uint8_t newPollingWait_ms); // Allow the user to change the I2C polling wait if required
+
   bool isConnected(uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);
   
   // Send I2C/Serial/SPI commands to the module
@@ -38,6 +41,9 @@ public:
 
   // Setting measurement / NAV rates
   bool setMeasurementRate(uint16_t rate, uint8_t layer = VAL_LAYER_RAM_BBR, uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);       // Set the elapsed time between GNSS measurements in milliseconds, which defines the rate
+  bool setNavigationRate(uint16_t rate, uint8_t layer = VAL_LAYER_RAM_BBR, uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);        // Set the ratio between the number of measurements and the number of navigation solutions. Unit is cycles. Max is 127
+  uint16_t getMeasurementRate(uint8_t layer = VAL_LAYER_RAM, uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);                      // Return the elapsed time between GNSS measurements in milliseconds
+  uint16_t getNavigationRate(uint8_t layer = VAL_LAYER_RAM, uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);                       // Return the ratio between the number of measurements and the number of navigation solutions. Unit is cycles
 
   int32_t getLongitude(uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);   // Returns the current longitude in degrees * 10-7. Auto selects between HighPrecision and Regular depending on ability of module.
   int32_t getLatitude(uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);    // Returns the current latitude in degrees * 10^-7. Auto selects between HighPrecision and Regular depending on ability of module.
@@ -79,7 +85,7 @@ protected:
   bool initPacketUBXNAVPVT();           // Allocate RAM for packetUBXNAVPVT and initialize it
 
   bool init(uint16_t maxWait, bool assumeSuccess);
-  void setCommunicationBus(SparkFun_UBLOX_GNSS::GNSSDeviceBus &theBus);
+  void setCommunicationBus(SfeI2C &theBus);
   // For I2C, ping the _address
   bool ping();
   // For I2C, read registers 0xFD and 0xFE. Return bytes available as uint16_t

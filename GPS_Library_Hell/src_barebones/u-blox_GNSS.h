@@ -27,13 +27,17 @@ public:
 
   /// Functions
 
+  void end(void); // Stop all automatic message processing. Free all used RAM
+
   bool setI2COutput(uint8_t comSettings, uint8_t layer = VAL_LAYER_RAM_BBR, uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);   // Configure I2C port to output UBX, NMEA, RTCM3, SPARTN or a combination thereof
   void setI2CpollingWait(uint8_t newPollingWait_ms); // Allow the user to change the I2C polling wait if required
 
   bool isConnected(uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);
   
-  // Send I2C/Serial/SPI commands to the module
+  // Send I2C commands to the module
+  void calcChecksum(ubxPacket *msg);                                                                                               // Sets the checksumA and checksumB of a given messages
   sfe_ublox_status_e sendCommand(ubxPacket *outgoingUBX, uint16_t maxWait = kUBLOXGNSSDefaultMaxWait, bool expectACKonly = false); // Given a packet and payload, send everything including CRC bytes, return true if we got a response
+  sfe_ublox_status_e sendI2cCommand(ubxPacket *outgoingUBX);
 
   // Val Setting
   bool setVal16(uint32_t key, uint16_t value, uint8_t layer = VAL_LAYER_RAM_BBR, uint16_t maxWait = kUBLOXGNSSDefaultMaxWait);           // Sets the 16-bit value at a given group/id/size location

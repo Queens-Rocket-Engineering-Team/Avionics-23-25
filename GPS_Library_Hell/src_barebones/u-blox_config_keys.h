@@ -2,8 +2,10 @@
 #pragma once
 
 // These are the Bitfield layers definitions for the UBX-CFG-VALSET message (not to be confused with Bitfield deviceMask in UBX-CFG-CFG)
+const uint8_t VAL_LAYER_DEFAULT = 0x7; // ONLY valid with getVal()
 const uint8_t VAL_LAYER_RAM = (1 << 0);
 const uint8_t VAL_LAYER_BBR = (1 << 1);
+const uint8_t VAL_LAYER_FLASH = (1 << 2);
 
 // These are the Bitfield layers definitions for the UBX-CFG-VALSET message (not to be confused with Bitfield deviceMask in UBX-CFG-CFG)
 const uint8_t VAL_LAYER_RAM_BBR = VAL_LAYER_RAM | VAL_LAYER_BBR;               // Not valid with getVal()

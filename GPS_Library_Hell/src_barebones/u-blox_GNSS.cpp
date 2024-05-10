@@ -45,10 +45,7 @@ void DevUBLOXGNSS::end(void)
   if (ubxFileBuffer != nullptr) // Check if RAM has been allocated for the file buffer
   {
 #ifndef SFE_UBLOX_REDUCED_PROG_MEM
-    if (_printDebug == true)
-    {
-      _debugSerial.println(F("end: the file buffer has been deleted. You will need to call setFileBufferSize before .begin to create a new one."));
-    }
+      Serial.println(F("end: the file buffer has been deleted. You will need to call setFileBufferSize before .begin to create a new one."));
 #endif
     delete[] ubxFileBuffer; // Created with new[]
     ubxFileBuffer = nullptr;
@@ -1063,7 +1060,18 @@ bool DevUBLOXGNSS::checkUbloxI2C(ubxPacket *incomingUBX, uint8_t requestedClass,
 } // end checkUbloxI2C()
 
 // Return the ratio between the number of measurements and the number of navigation solutions. Unit is cycles
-uint16_t DevUBLOXGNSS::getNavigationRate(uint8_t layer, uint16_t maxWait)
+bool DevUBLOXGNSS::getNavigationRate(uint16_t *navRate, uint8_t layer, uint16_t maxWait)
+{
+  uint16_t navigationRate;
+
+  bool result = getVal16(UBLOX_CFG_RATE_NAV, &navigationRate, layer, maxWait);
+
+  if (result)
+    *navRate = navigationRate;
+
+  return result;
+}
+uint16_t DevUBLOXGNSS::getNavigationRate(uint8_t layer, uint16_t maxWait) // Unsafe overload...
 {
   uint16_t navigationRate;
 
@@ -1146,9 +1154,82 @@ int32_t DevUBLOXGNSS::getLongitude(uint16_t maxWait)
   return (packetUBXNAVPVT->data.lon);
 }
 
+bool DevUBLOXGNSS::getVal16(uint32_t key, uint16_t *val, uint8_t layer, uint16_t maxWait)
+{
+  bool result = getVal(key, layer, maxWait) == SFE_UBLOX_STATUS_DATA_RECEIVED;
+  if (result)
+    *val = extractInt(&packetCfg, 8);
+  return result;
+}
+
+// Given a key, load the payload with data that can then be extracted to 8, 16, or 32 bits
+// This function takes a full 32-bit key
+// Default layer is RAM
+// Configuration of modern u-blox modules is now done via getVal/setVal/delVal, ie protocol v27 and above found on ZED-F9P
+sfe_ublox_status_e DevUBLOXGNSS::getVal(uint32_t key, uint8_t layer, uint16_t maxWait)
+{
+  packetCfg.cls = UBX_CLASS_CFG;
+  packetCfg.id = UBX_CFG_VALGET;
+  packetCfg.len = 4 + 4 * 1; // While multiple keys are allowed, we will send only one key at a time
+  packetCfg.startingSpot = 0;
+
+  // Clear packet payload
+  memset(payloadCfg, 0, packetCfg.len);
+
+  // VALGET uses different memory layer definitions to VALSET
+  // because it can only return the value for one layer.
+  // So we need to fiddle the layer here.
+  // And just to complicate things further, the ZED-F9P only responds
+  // correctly to layer 0 (RAM) and layer 7 (Default)!
+  uint8_t getLayer = VAL_LAYER_DEFAULT; // 7 is the "Default Layer"
+  if (layer == VAL_LAYER_RAM)           // Did the user request the RAM layer?
+  {
+    getLayer = 0; // Layer 0 is RAM
+  }
+  else if (layer == VAL_LAYER_BBR) // Did the user request the BBR layer?
+  {
+    getLayer = 1; // Layer 1 is BBR
+  }
+  else if (layer == VAL_LAYER_FLASH) // Did the user request the Flash layer?
+  {
+    getLayer = 2; // Layer 2 is Flash
+  }
+
+  payloadCfg[0] = 0;        // Message Version - set to 0
+  payloadCfg[1] = getLayer; // Layer
+
+  // Load key into outgoing payload
+  key &= ~UBX_CFG_SIZE_MASK;    // Mask off the size identifer bits
+  payloadCfg[4] = key >> 8 * 0; // Key LSB
+  payloadCfg[5] = key >> 8 * 1;
+  payloadCfg[6] = key >> 8 * 2;
+  payloadCfg[7] = key >> 8 * 3;
+
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+  Serial.print(F("getVal key: 0x"));
+  Serial.print(key, HEX);
+  Serial.println();
+#endif
+
+  // Send VALGET command with this key
+
+  sfe_ublox_status_e retVal = sendCommand(&packetCfg, maxWait);
+#ifndef SFE_UBLOX_REDUCED_PROG_MEM
+  Serial.print(F("getVal: sendCommand returned: "));
+  Serial.println(statusString(retVal));
+#endif
+
+  // Verify the response is the correct length as compared to what the user called (did the module respond with 8-bits but the user called getVal32?)
+  // Response is 8 bytes plus cfg data
+  // if(packet->len > 8+1)
+
+  // The response is now sitting in payload, ready for extraction
+  return (retVal);
+}
+
 // Get the current latitude in degrees
 // Returns a long representing the number of degrees *10^7
-int32_t DevUBLOXGNSS::getLatitude(uin16_t maxWait) {
+int32_t DevUBLOXGNSS::getLatitude(uint16_t maxWait) {
   if(packetUBXNAVPVT == nullptr)
     initPacketUBXNAVPVT();        // Check that RAM has been allocated for the PVT data
   if (packetUBXNAVPVT == nullptr) // Bail if the RAM allocation failed

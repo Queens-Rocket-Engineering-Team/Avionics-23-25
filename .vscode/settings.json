@@ -1,5 +1,20 @@
 {
   "files.associations": {
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "array": "cpp",
+    "deque": "cpp",
+    "format": "cpp",
+    "initializer_list": "cpp",
+    "list": "cpp",
+    "ranges": "cpp",
+    "span": "cpp",
+    "vector": "cpp",
+    "xhash": "cpp",
+    "xstring": "cpp",
+    "xutility": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "string_view": "cpp",
+    "memory": "cpp"
   }
 }

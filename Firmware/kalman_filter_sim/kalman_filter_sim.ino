@@ -97,6 +97,8 @@ void simulateFlight() {
     float total_time = 10.0; // Total simulation time
     float gravity = -9.81; // Gravity acceleration
 
+    Serial.println("Time\tActual Altitude\tMeasured Altitude\tEstimated Altitude\tActual Velocity\tEstimated Velocity");
+
     while (time < total_time) {
         // Simulate rocket flight: a simple parabolic motion
         if (time < 2.0) {
@@ -117,18 +119,17 @@ void simulateFlight() {
         predict(measured_acceleration);
         update(measured_altitude);
 
-        // Print results
-        Serial.print("Time: ");
+        // Print results in a format suitable for the Serial Plotter
         Serial.print(time);
-        Serial.print(" Actual Altitude: ");
+        Serial.print("\t");
         Serial.print(actual_altitude);
-        Serial.print(" Measured Altitude: ");
+        Serial.print("\t");
         Serial.print(measured_altitude);
-        Serial.print(" Estimated Altitude: ");
+        Serial.print("\t");
         Serial.print(x[0]);
-        Serial.print(" Actual Velocity: ");
+        Serial.print("\t");
         Serial.print(actual_velocity);
-        Serial.print(" Estimated Velocity: ");
+        Serial.print("\t");
         Serial.println(x[1]);
 
         // Increment time

@@ -1,0 +1,3 @@
+[submodule "Firmware/QMA6100P_Arduino_Library"]
+	path = Firmware/QMA6100P_Arduino_Library
+	url = https://github.com/1TARS/QMA6100P_Arduino_Library.git

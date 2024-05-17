@@ -1,0 +1,6 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "footprints")(type "KiCad")(uri "${KIPRJMOD}/footprints")(options "")(descr ""))
+  (lib (name "LMR66100")(type "KiCad")(uri "${KIPRJMOD}/footprints/LMR66100.pretty")(options "")(descr ""))
+  (lib (name "CB5R5334HF-ZJP")(type "KiCad")(uri "${KIPRJMOD}/footprints/CB5R5334HF-ZJP.pretty")(options "")(descr ""))
+)

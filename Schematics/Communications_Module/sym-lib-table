@@ -1,0 +1,7 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "QRET_Buck_PSU")(type "KiCad")(uri "${KIPRJMOD}/symbols/QRET_Buck_PSU-symbols.kicad_sym")(options "")(descr ""))
+  (lib (name "QRET_CANBUS")(type "KiCad")(uri "${KIPRJMOD}/symbols/ISO1042BQDWVQ1.kicad_sym")(options "")(descr ""))
+  (lib (name "QRET_Edge_Connector")(type "KiCad")(uri "${KIPRJMOD}/symbols/EdgeConnector.kicad_sym")(options "")(descr ""))
+  (lib (name "USB_C")(type "KiCad")(uri "${KIPRJMOD}/symbols/USB_C.kicad_sym")(options "")(descr ""))
+)

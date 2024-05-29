@@ -7730,7 +7730,7 @@
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp a39ebd3b-2f57-4452-b438-862acef721b6))
   (gr_arc (start 171 74.2) (mid 172.202082 74.697918) (end 172.7 75.9)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp a7eabd2e-fbbd-4a0a-8c15-5d1b64d20dde))
-  (gr_text "Gouda Rev 1.0\nQRET Mar 2024\n\nTristan Alderson\nKennan Bays" (at 147.7 85.35) (layer "B.SilkS") (tstamp 07e9470b-5e9f-428d-bd42-73ec51b321f0)
+  (gr_text "Gouda Rev 1.1\nQRET May 2024\n\nTristan Alderson\nKennan Bays" (at 147.7 85.35) (layer "B.SilkS") (tstamp 07e9470b-5e9f-428d-bd42-73ec51b321f0)
     (effects (font (size 1.5 1.5) (thickness 0.25)) (justify top mirror))
   )
   (gr_text "GPS Antenna Board" (at 147.7 77.5) (layer "F.SilkS" knockout) (tstamp 728e5f47-1e4d-4377-8582-3b23c9b306a7)

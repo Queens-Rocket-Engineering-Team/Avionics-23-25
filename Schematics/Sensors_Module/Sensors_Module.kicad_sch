@@ -3175,7 +3175,6 @@
 
   (no_connect (at 164.465 153.035) (uuid 00a32231-15d5-4d76-8895-8b67a08db467))
   (no_connect (at 144.78 85.725) (uuid 0bb08a67-0854-421d-91a4-de2a66377a06))
-  (no_connect (at 225.425 173.99) (uuid 182b533e-72cc-4f3c-8020-0423aacdabfb))
   (no_connect (at 36.83 198.12) (uuid 27673d74-4d7f-4f6e-b634-20735fc26643))
   (no_connect (at 164.465 155.575) (uuid 31aa5125-99c6-4206-9002-8d991bc1cf97))
   (no_connect (at 412.75 84.455) (uuid 3ca1ca55-0173-492f-807f-3d8d28404f28))
@@ -5450,10 +5449,10 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "CAM_PWM" (shape input) (at 80.01 102.87 180) (fields_autoplaced)
+  (global_label "CAM_PWM" (shape input) (at 80.01 107.95 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 1ccf2036-497b-4914-bced-c8032d68d9a6)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 68.0744 102.87 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 68.0744 107.95 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -5468,6 +5467,13 @@
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 1fa193b9-ec34-4a83-b869-462bc160c34f)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 15.5508 84.455 0)
+      (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
+  (global_label "CAM_PWR" (shape input) (at 225.425 173.99 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 245f0217-e3d7-4d36-a2aa-87c32828274d)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 213.6708 173.99 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -5492,10 +5498,10 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "CAN_H" (shape bidirectional) (at 398.78 35.56 0) (fields_autoplaced)
+  (global_label "D+" (shape bidirectional) (at 398.78 35.56 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 3f8b9797-bc53-427f-8625-67c41b1a90bc)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 408.8637 35.56 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 405.7189 35.56 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
@@ -5569,10 +5575,10 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "CAN_L" (shape bidirectional) (at 398.78 40.64 0) (fields_autoplaced)
+  (global_label "D-" (shape bidirectional) (at 398.78 40.64 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 5ffe3515-249e-42b7-bf69-f32eda0feeee)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 408.5613 40.64 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 405.7189 40.64 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
@@ -5688,10 +5694,10 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "CAN_H" (shape input) (at 377.19 177.8 180) (fields_autoplaced)
+  (global_label "D+" (shape input) (at 377.19 177.8 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid a41b5c2f-3584-4803-afa0-0cb1cb6eaf78)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 368.2176 177.8 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 371.3624 177.8 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -5758,10 +5764,10 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "CAM_RX" (shape output) (at 80.01 107.95 180) (fields_autoplaced)
+  (global_label "CAM_RX" (shape output) (at 80.01 105.41 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid c871a1c3-fdec-4111-b940-b9c0064353c5)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 69.7677 107.95 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 69.7677 105.41 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -5807,10 +5813,10 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "CAM_TX" (shape input) (at 80.01 105.41 180) (fields_autoplaced)
+  (global_label "CAM_TX" (shape input) (at 80.01 102.87 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid d5dce99a-ff9a-4c27-8a7d-34da7433ab38)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 70.0701 105.41 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 70.0701 102.87 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -5877,11 +5883,18 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "CAN_L" (shape input) (at 377.19 173.99 180) (fields_autoplaced)
+  (global_label "D-" (shape input) (at 377.19 173.99 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid edad4f1a-a8e6-44a4-8be7-d70453b9187e)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 368.52 173.99 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 371.3624 173.99 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
+  (global_label "V_PSU" (shape output) (at 407.67 171.45 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid f3abe08d-4416-4883-8254-7e35bf3997fe)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 416.5214 171.45 0)
+      (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
   (global_label "BOOT1" (shape input) (at 225.425 179.07 180) (fields_autoplaced)
@@ -6641,7 +6654,7 @@
     (property "Datasheet" "~" (at 225.425 186.69 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 11c8c3cf-4fb2-4128-b1ca-834892ca8e19))
+    (pin "1" (uuid 3f3ad97a-d46b-4bbe-9152-e9d5568ef4a2))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -6679,8 +6692,8 @@
     (property "LCSC" "C318884" (at 302.895 179.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 08b0f1d0-74ca-4fb4-aa86-2eebd3d7154f))
-    (pin "2" (uuid 096ad5d6-5a95-4aaf-9978-36b0a8be5488))
+    (pin "1" (uuid d9aa63df-35a7-4048-a444-dbb90ab070bd))
+    (pin "2" (uuid 3e51899c-088e-4338-9ddd-2eb0d6a5dba4))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -7858,16 +7871,16 @@
     )
   )
 
-  (symbol (lib_id "Device:R") (at 295.275 182.88 180) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+  (symbol (lib_id "Device:R") (at 295.275 182.88 0) (mirror x) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
     (uuid 4f580bf4-062f-409e-97e0-b99b0766b99d)
-    (property "Reference" "R12" (at 297.053 181.6679 0)
+    (property "Reference" "R12" (at 293.497 181.6679 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Value" "100k" (at 297.053 184.0921 0)
+    (property "Value" "100k" (at 293.497 184.0921 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 297.053 182.88 90)
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 293.497 182.88 90)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 295.275 182.88 0)
@@ -7876,8 +7889,8 @@
     (property "LCSC" "C25803" (at 295.275 182.88 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid e5e532cd-720b-4163-ab20-e91380cacc56))
-    (pin "2" (uuid 2151fa74-3942-400d-85cc-8636bf554f76))
+    (pin "1" (uuid 4ff007d6-a715-4dc7-aa1c-902da48033d3))
+    (pin "2" (uuid d9cd46d3-7156-4c01-8348-1e596b43c34e))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -8052,7 +8065,7 @@
     (property "Datasheet" "~" (at 225.425 184.15 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid d91d8621-6282-4e41-b34b-f99eef85e98a))
+    (pin "1" (uuid 0a23108d-9822-48b9-87ed-b4d8e2e70ad0))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -8767,41 +8780,6 @@
       (project "Sensors_Module"
         (path "/e77d0584-110f-4b35-98c2-0ebac97a828e"
           (reference "#PWR09") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:+3.3V") (at 407.67 171.45 270) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 6dca0b42-60a1-416b-b90e-4aa06cd8f32f)
-    (property "Reference" "#PWR037" (at 403.86 171.45 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+3.3V" (at 410.845 171.45 90)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "" (at 407.67 171.45 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 407.67 171.45 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 375fa62f-916e-48ea-9a86-19c0d79242b7))
-    (instances
-      (project "Altimeter_Module"
-        (path "/29db4100-776d-46b8-a17b-170206e82f23"
-          (reference "#PWR037") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR05") (unit 1)
-        )
-      )
-      (project "Sensors_Module"
-        (path "/e77d0584-110f-4b35-98c2-0ebac97a828e"
-          (reference "#PWR035") (unit 1)
         )
       )
     )
@@ -11068,8 +11046,8 @@
     (property "LCSC" "C31850" (at 116.205 139.065 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid af44eb13-9981-4901-9df6-63f34dd93723))
-    (pin "2" (uuid 545f44ce-75c7-4993-8a0e-64875e891a0d))
+    (pin "1" (uuid 26a972b8-2558-4bce-88b2-af1a9681775c))
+    (pin "2" (uuid 38297ef0-58e2-4e01-9a6e-434811212cca))
     (instances
       (project "QRET_GroundStation_V2"
         (path "/c05415e4-e0f1-401f-8cdb-c17b99a31b41"
@@ -11405,8 +11383,8 @@
     (property "LCSC" "C14663" (at 302.895 157.48 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 1f838117-e30d-411f-9bbb-5addfc1720ca))
-    (pin "2" (uuid 2d51a65b-d673-4dd5-b42a-e7fd313b64b3))
+    (pin "1" (uuid e2e4b348-7e74-4387-8f34-696355f8fcad))
+    (pin "2" (uuid c1e99eae-c9f1-421a-84b2-ad5bc55025f2))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -11493,8 +11471,8 @@
     (property "LCSC" "C25803" (at 48.26 75.565 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid c93bd60e-aeaa-43b4-82f3-2d3ca357c4d4))
-    (pin "2" (uuid f93930b8-4362-43bc-9173-39fbfa4a1119))
+    (pin "1" (uuid 4bbaa06e-7ccd-402e-81be-a9e3044c602d))
+    (pin "2" (uuid 86c96fac-3d0e-4fb7-9c17-ac38092c9ab1))
     (instances
       (project "QRET_GroundStation_V2"
         (path "/c05415e4-e0f1-401f-8cdb-c17b99a31b41"
@@ -11889,7 +11867,7 @@
     (property "Datasheet" "~" (at 225.425 181.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid cdeb5ad8-a3a3-44b9-8015-691fee1fe029))
+    (pin "1" (uuid 555fcd2b-aa42-4155-aeab-021450842131))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"
@@ -12245,7 +12223,7 @@
     (property "Datasheet" "~" (at 225.425 179.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 3d79e661-8046-4f75-84a9-3d137e971563))
+    (pin "1" (uuid 941439df-d576-4531-8c75-dcfd5aabb92d))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"

@@ -1,0 +1,89 @@
+preLaunch = 1, accent = 2, drogueDecent = 3
+main = 4, landed = 5
+
+state = preLaunch
+
+-- get estimate of g_threshold from drogue to main use
+-- prec-aclced decent velocity between drogue and main
+drogue_to_main_G = (v_drogue - v_main)/t = a
+
+emergency_threshold = drogue_decent
+
+loop()
+  switch (state)
+    case preLaunch:
+      if(start_logging(accel, alt, time))
+        start_timer()
+        state = accent
+    case accent:
+      check_filtered_alt()
+      log(high rate)
+
+      if(apogee(alt, time) )
+        fire_drogue()
+        log() = charge fired
+        drogue_deploy_time = time
+        state = drogue_descent
+    case drogueDecent:
+      check_alt_filtered()
+      log(low rate)
+      -- if drogue fails release main
+      if vert_vel > emergency_threshold
+        fire_main()
+        state = mainDescent
+
+      if drogue_deploy_time - time > 15s AND vert_vel < emergency_threshold
+        log("drogue deployed")
+
+      if(main_alt(alt))
+        fire_main()
+        main_deploy_time = time
+    case mainDescent:
+      check_filtered_alt()
+      log(low rate)
+
+      if main_deploy_time - time > 5s
+        log(lower rate)
+      else
+        log (low rate)
+
+      if(detect_landing())
+        log("landed")
+        state = landed
+    case landed:
+      log(stop)
+      beep()
+      delay 3s
+
+main_alt(alt)
+  if alt <= deploy_alt
+    return true
+  else
+    return false
+
+detect_landing(alt)
+  if -1 < vert_vel < 1
+    return true
+  else 
+    return false
+
+potentialAppogee = false
+
+apogee(alt, time)
+    vert_vel = (alt - old_alt)/(time - old_time)
+    -- if the current vel is negataive while previous measured was possitve deploy
+    if(!potentialAppogee AND ((vert_vel < 0) AND (old_ver_vel > 0)))
+      potentialAppogee = true
+      appogee_time = time
+
+    if(potentialAppogee AND ((time - appogee_time) > 10ms))
+      if((ver_vel < 0) AND (old_vert_vel > 0)) 
+        return true
+      else 
+        potentialAppogee = false
+        return false
+    old_alt = alt
+    old_time = time
+    old_vert_vel = vert_vel
+      
+

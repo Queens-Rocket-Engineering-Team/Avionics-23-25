@@ -1,9 +1,6 @@
 // Basic demo for accelerometer readings from Adafruit MPU6050
 
-#include <Adafruit_MPU6050.h>
-#include <Adafruit_Sensor.h>
-#include <Wire.h>
-#include <SoftwareSerial.h>
+
 
 #define USB_TX_PIN PA12 // D- pin
 #define USB_RX_PIN PA11 // D+ pin
@@ -19,7 +16,6 @@ Adafruit_MPU6050 mpu;
 
 bool potentialLaunch = false;
 bool highGTime = 0;
-int G_THRESHOLD = -5;
 
 void setup(void) {
   softSerial.begin(38400);
@@ -51,7 +47,7 @@ void setup(void) {
 }
 
 void loop() {
-
+  time = millis();
 
   /* Get new sensor events with the readings */
   sensors_event_t a, g, temp;

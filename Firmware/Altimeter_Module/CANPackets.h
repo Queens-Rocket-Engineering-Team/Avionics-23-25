@@ -14,10 +14,10 @@
 
 
 // Origin Module IDs (4 MSB of a packet ID)
-#define COMM_MOD_CANID 0x00
-#define GPS_MOD_CANID 0x01
-#define ALTIMETER_MOD_CANID 0x02
-#define SENSOR_MOD_CANID 0x03
+#define COMM_MOD_CANID 0x10
+#define GPS_MOD_CANID 0x20
+#define ALTIMETER_MOD_CANID 0x30
+#define SENSOR_MOD_CANID 0x40
 
 
 // Packet Type IDs (7 LSB of a packet ID)

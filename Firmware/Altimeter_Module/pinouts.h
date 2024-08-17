@@ -22,7 +22,7 @@
 #define BUZZER_PIN PA9
 #define USB_DM_PIN PA11
 #define USB_DP_PIN PA12
-#define STATUS_LED PA15
+#define STATUS_LED_PIN PA15
 
 #define MS5607_ADDR 0x76
 #define MPU6050_ADDR 0x69

@@ -173,7 +173,13 @@ void logDataToFlash(){
   //Gathering data from GPS
   uint8_t numSatLog = gps.satellites.value();
   int32_t latIntLog = gps.location.rawLat().deg;
+  if(gps.location.rawLat().negative){
+    latIntLog = -latIntLog;
+    }//if
   int32_t lngIntLog = gps.location.rawLng().deg;
+  if(gps.location.rawLng().negative){
+    lngIntLog = -lngIntLog;
+    }//if
   int32_t latBilInt = gps.location.rawLat().billionths;
   int32_t lngBilInt = gps.location.rawLng().billionths;
   int32_t gpsAlt = gps.altitude.meters();

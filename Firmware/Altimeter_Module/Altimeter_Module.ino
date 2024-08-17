@@ -57,7 +57,10 @@ uint32_t lastFlash = 0; // Last millis() the debug LED was toggle at
 
 const uint8_t TABLE_NAME = 0;
 const uint8_t TABLE_COLS = 10;
-const uint32_t TABLE_SIZE = 16776960; //16776960‬
+const uint32_t TABLE_SIZE = 16646144;
+// IMPORTANT!!!; AT LEAST 2 BLOCK OF SPACE MUST BE RESERVED FOR FILE SYSTEM
+// 16MiB = 16777216B, 2x 64KiB blocks = 131072B
+// 16MiB - 128KiB = 16646144B
 
 //--- CANBUS DATA SETTINGS
 #define CANBUS_DATAINT 500 //[ms] interval bewteen each CANBUS message send.
@@ -398,16 +401,16 @@ void logDataToFlash( float pressure,float pressure_filter,float temp,sensors_eve
   // accelleration data (from mpu or qma)
   // dataArr[4] = static_cast<uint32_t>(a->acceleration.x*1e6);
   // dataArr[5] = static_cast<uint32_t>(a->acceleration.y*1e6);
-  dataArr[3] = flash.unsignify(uint32_t(a->acceleration.z*10000));
+  dataArr[3] = flash.unsignify(a->acceleration.z*10000);
 
-  dataArr[4] = flash.unsignify(uint32_t(qmaData->xData*10000));
-  dataArr[5] = flash.unsignify(uint32_t(qmaData->yData*10000));
-  dataArr[6] = flash.unsignify(uint32_t(qmaData->zData*10000));
+  dataArr[4] = flash.unsignify(qmaData->xData*10000);
+  dataArr[5] = flash.unsignify(qmaData->yData*10000);
+  dataArr[6] = flash.unsignify(qmaData->zData*10000);
   
   //gyro data
-  dataArr[7] = flash.unsignify(uint32_t(g->gyro.x*10000));
-  dataArr[8] = flash.unsignify(uint32_t(g->gyro.y*10000));
-  dataArr[9] = flash.unsignify(uint32_t(g->gyro.z*10000));
+  dataArr[7] = flash.unsignify(g->gyro.x*10000);
+  dataArr[8] = flash.unsignify(g->gyro.y*10000);
+  dataArr[9] = flash.unsignify(g->gyro.z*10000);
 
   //write to FLASH
   flash.writeRow(dataArr);

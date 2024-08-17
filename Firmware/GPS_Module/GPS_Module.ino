@@ -163,7 +163,30 @@ void setup() {
   
 }//setup()
 
+//Logging data at predefined intervals
+void logDataToFlash(){
 
+  //Gathering data from GPS
+  uint8_t numSatLog = gps.satellites.value();
+  int32_t latIntLog = gps.location.rawLat().deg;
+  int32_t lngIntLog = gps.location.rawLng().deg;
+  int32_t latBilInt = gps.location.rawLat().billionths;
+  int32_t lngBilInt = gps.location.rawLng().billionths;
+  int32_t gpsAlt = gps.altitude.meters();
+
+  //Create data array and input only positive values
+  uint32_t dataArray[7] = {0,0,0,0,0,0,0};
+  dataArray[0] = millis();
+  dataArray[1] = flash.unsignify((latIntLog));
+  dataArray[2] = flash.unsignify((latBilInt));
+  dataArray[3] = flash.unsignify((lngIntLog));
+  dataArray[4] = flash.unsignify((lngBillInt));
+  dataArray[5] = gpsAlt;
+  dataArray[6] = numSatLog;
+
+  //Log data array
+  flash.writeRow(dataArr);
+  } //logDataToFlash()
 
 void loop() {
   // put your main code here, to run repeatedly:
@@ -171,6 +194,7 @@ void loop() {
 
   if (millis() - lastGPSSend > GPS_SEND_INT) {
     checkGPS();
+    logDataToFlash();
     lastGPSSend = millis();
   }//if
 

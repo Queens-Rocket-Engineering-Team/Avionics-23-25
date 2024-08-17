@@ -23,10 +23,11 @@ void debugMode() {
 
     if (cmd == 'I') {
       // "Identify" command; return board name
-      softSerial.println(F("GPS"));
+      softSerial.println(F("[MDE] CHEDDAR GPS"));
     }//if
     if (cmd == 'F') {
       // "FlashInfo" command; return flash usage stats
+      softSerial.print("[MDE] ");
       softSerial.print(table.getMaxSize());
       softSerial.print(F(","));
       softSerial.println(table.getCurSize());   
@@ -38,14 +39,14 @@ void debugMode() {
     if (cmd == 'E') {
       // "EraseFlash" command; completely erase contents of flash.
       // Should be restarted afterwards
-      softSerial.println(F("Erasing Flash"));
+      softSerial.println(F("[MDE] Erasing Flash"));
       SerialFlash.eraseAll();
       while (SerialFlash.ready() == false) {}
-      softSerial.println(F("Complete"));
+      softSerial.println(F("[MDE] Complete"));
     }//if
     if (cmd == 'Q') {
       // QUERY SENSORS
-      softSerial.print(F("Null"));
+      softSerial.print(F("[MDE] Null"));
     }//if
 
   }//while

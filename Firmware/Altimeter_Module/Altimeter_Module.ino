@@ -13,7 +13,7 @@ Written by:
     Tristan Alderson
     Kennan Bays
 Flash capability proveded by: 
-    Kennen Bays
+    Kennan Bays
 
 */
 //Libraries to include
@@ -56,7 +56,7 @@ uint16_t flashDelay = 250; // How frequently the debug LED should be toggled
 uint32_t lastFlash = 0; // Last millis() the debug LED was toggle at
 
 const uint8_t TABLE_NAME = 0;
-const uint8_t TABLE_COLS = 10;
+const uint8_t TABLE_COLS = 11;
 const uint32_t TABLE_SIZE = 16646144;
 // IMPORTANT!!!; AT LEAST 2 BLOCK OF SPACE MUST BE RESERVED FOR FILE SYSTEM
 // 16MiB = 16777216B, 2x 64KiB blocks = 131072B
@@ -263,14 +263,14 @@ void setup(){
   softSerial.println("");
 
   // Startup delay - Check to enter debug mode
-  softSerial.println("SEND SERIAL TO ENTER DEBUG");
+  softSerial.println("[MDE] SEND SERIAL TO ENTER DEBUG");
   uint32_t startTime = millis();
   while (!softSerial.available() and millis()-startTime < 4000) {}
   
   if (softSerial.available()) {
     byte d = softSerial.read();
     emptySerialBuffer();
-    softSerial.println("Entered Debug Mode");
+    softSerial.println("[MDE] Entered Debug Mode");
     debugMode();
     while (true) {}
   }//if
@@ -393,7 +393,7 @@ void loop(){
 
 void logDataToFlash( float pressure,float pressure_filter,float temp,sensors_event_t *a,
                     sensors_event_t *g,outputData *qmaData){
-  uint32_t dataArr[10] = {0,0,0,0,0,0,0,0,0,0};
+  uint32_t dataArr[11] = {0,0,0,0,0,0,0,0,0,0,0};
 
   dataArr[0] = millis();
   dataArr[1] = uint32_t(pressure);
@@ -411,6 +411,9 @@ void logDataToFlash( float pressure,float pressure_filter,float temp,sensors_eve
   dataArr[7] = flash.unsignify(g->gyro.x*10000);
   dataArr[8] = flash.unsignify(g->gyro.y*10000);
   dataArr[9] = flash.unsignify(g->gyro.z*10000);
+
+  //state
+  dataArr[10] = STATE;
 
   //write to FLASH
   flash.writeRow(dataArr);
@@ -530,10 +533,11 @@ void debugMode() {
 
     if (cmd == 'I') {
       // "Identify" command; return board name
-      softSerial.println(F("OKA_ALT"));
+      softSerial.println(F("[MDE] OKA_ALT"));
     }//if
     if (cmd == 'F') {
       // "FlashInfo" command; return flash usage stats
+      softSerial.print(F("[MDE] "));
       softSerial.print(flash.getMaxSize());
       softSerial.print(F(","));
       softSerial.println(flash.getCurSize());   
@@ -545,32 +549,32 @@ void debugMode() {
     if (cmd == 'E') {
       // "EraseFlash" command; completely erase contents of flash.
       // Should be restarted afterwards
-      softSerial.println(F("Erasing Flash"));
+      softSerial.println(F("[MDE] Erasing Flash"));
       SerialFlash.eraseAll();
       while (SerialFlash.ready() == false) {}
       //flash.init(&SerialFlash);
-      softSerial.println(F("Complete"));
+      softSerial.println(F("[MDE] Complete"));
     }//if
     if (cmd == 'Q') {
         // QUERY SENSORS
         qma6100.enableAccel();
           //Read pressure/temperature
         ms5607.Readout();
-        softSerial.println("--MS5607--");
-        softSerial.print(F("Temperature (0.01C): "));
+        softSerial.println("[MDE] --MS5607--");
+        softSerial.print(F("[MDE] Temperature (0.01C): "));
         softSerial.println(ms5607.GetTemp()/100 + 273);
-        softSerial.print(F("Pressure (Pa): "));
+        softSerial.print(F("[MDE] Pressure (Pa): "));
         softSerial.println(ms5607.GetPres());
 
         //read gyro
       sensors_event_t a, g, temp;
       mpu6050.getEvent(&a, &g, &temp);
-      softSerial.println("--MPU6050--");
-      softSerial.print("X Rotation (rad/s): ");
+      softSerial.println("[MDE] --MPU6050--");
+      softSerial.print("[MDE] X Rotation (rad/s): ");
       softSerial.println(g.gyro.x);
-      softSerial.print("Y Rotation (rad/s): ");
+      softSerial.print("[MDE] Y Rotation (rad/s): ");
       softSerial.println(g.gyro.y);
-      softSerial.print("Z Rotation (rad/s): ");
+      softSerial.print("[MDE] Z Rotation (rad/s): ");
       softSerial.println(g.gyro.z);
       
         //read accelerometer
@@ -578,12 +582,12 @@ void debugMode() {
       qma6100.getAccelData(&qmaData);
       qma6100.offsetValues(qmaData.xData, qmaData.yData, qmaData.zData);
 
-      softSerial.println("--QMA6100--");
-      softSerial.print("X Acceleration (g): ");
+      softSerial.println("[MDE] --QMA6100--");
+      softSerial.print("[MDE] X Acceleration (g): ");
       softSerial.println(qmaData.xData);
-      softSerial.print("Y Acceleration (g): ");
+      softSerial.print("[MDE] Y Acceleration (g): ");
       softSerial.println(qmaData.yData);
-      softSerial.print("Z Acceleration (g): ");
+      softSerial.print("[MDE] Z Acceleration (g): ");
       softSerial.println(qmaData.zData);   
     }//if
 

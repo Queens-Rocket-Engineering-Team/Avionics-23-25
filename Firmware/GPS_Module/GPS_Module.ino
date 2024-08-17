@@ -42,7 +42,7 @@ const uint32_t TABLE_SIZE = 16646144;
 FlashTable table = FlashTable(TABLE_COLS, 16384, TABLE_SIZE, TABLE_NAME, 256);
 
 const uint32_t GPS_SEND_INT = 1000; //how often to send GPS data over CANBUS
-const uint32_t GPSLogFrequency = 500 //how often to log GPS data
+const uint32_t GPSLogFrequency = 500; //how often to log GPS data
 uint32_t lastGPSSend = 0;
 uint32_t lastGPSLog = 0;
 
@@ -141,7 +141,7 @@ void setup() {
   //delay(1000);
 
   // Initialize FlashTable object
-  table.init(&SerialFlash);
+  table.init(&SerialFlash, NULL);
 
   //digitalWrite(STATUS_LED_PIN, HIGH);
 
@@ -152,17 +152,16 @@ void setup() {
   tone(BUZZER_PIN, 0);
 
   // Startup delay - Check to enter debug mode
+  softSerial.println("[MDE] Send serial to enter debug");
   uint32_t startTime = millis();
   while (!softSerial.available() and millis()-startTime < 5000) {}
-  
+
   if (softSerial.available()) {
     byte d = softSerial.read();
     emptySerialBuffer();
-    if (d == 'D') {
-      softSerial.println(F("Entered Debug Mode"));
-      debugMode();
-      while (true) {}
-    }//if
+    softSerial.println(F("[MDE] Entered Debug Mode"));
+    debugMode();
+    while (true) {}
   }//if
   softSerial.println(F("Running Normally"));
   
@@ -202,9 +201,9 @@ void loop() {
     lastGPSSend = millis();
   }//if
 
-  if (millis() - lastGPSLog > GPSSendFrequency){
+  if (millis() - lastGPSLog > GPSLogFrequency){
     logDataToFlash();
     lastGPSLog = millis();
-    }//if
+  }//if
 
 }//loop()

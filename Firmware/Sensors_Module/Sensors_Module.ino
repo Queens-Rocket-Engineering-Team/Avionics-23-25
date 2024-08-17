@@ -9,22 +9,8 @@
 #include <flashTable.h>
 #include <SerialFlash.h>
 #include <SoftwareSerial.h>
+#include "pinouts.h"
 
-#define USB_TX_PIN PA12 // D- pin
-#define USB_RX_PIN PA11 // D+ pin
-#define I2C_SDA_PIN PB11
-#define I2C_SCL_PIN PB10
-#define DB_LED_PIN PA15
-#define BUZZER_PIN PA7
-#define CAMERA_PWM_PIN PA11
-#define STATUS_LED_PIN PA15
-
-//flash
-#define FLASH_CS_PIN PB12
-#define FLASH_SCK_PIN PB13
-#define FLASH_MISO_PIN PB14
-#define FLASH_MOSI_PIN PB15
-#define FLASH_RESET_PIN PA8
 
 //buzzer
 const uint32_t BEEP_DELAY = 6000;
@@ -56,11 +42,11 @@ Adafruit_BME680 bme; // I2C
 void setup() {
 
   pinMode(BUZZER_PIN, OUTPUT);
-  pinMode(DB_LED_PIN, OUTPUT);
-  pinMode(CAMERA_PWM_PIN, OUTPUT);
+  pinMode(STATUS_LED_PIN, OUTPUT);
+  pinMode(CAMERA_POWER_PIN, OUTPUT);
 
-  Wire.setSDA(I2C_SDA_PIN);
-  Wire.setSCL(I2C_SCL_PIN);
+  Wire.setSDA(SDA_PIN);
+  Wire.setSCL(SCL_PIN);
   Wire.begin();
 
   SPI.setSCLK(PB13);
@@ -71,16 +57,16 @@ void setup() {
 
   //LED FLASHES TO ALLOW FOR SERIAL OPEN
   for (int i=0 ; i <5 ; i++){
-    digitalWrite(DB_LED_PIN,HIGH);
+    digitalWrite(STATUS_LED_PIN,HIGH);
     delay(250);
-    digitalWrite(DB_LED_PIN,LOW);
+    digitalWrite(STATUS_LED_PIN,LOW);
     delay(250);
   }
 
   while (!bme.begin(0x77)) {
-    digitalWrite(DB_LED_PIN,HIGH);
+    digitalWrite(STATUS_LED_PIN,HIGH);
     delay(100);
-    digitalWrite(DB_LED_PIN,LOW);
+    digitalWrite(STATUS_LED_PIN,LOW);
     delay(100);
   }
 
@@ -120,7 +106,7 @@ Serial.print("Preparing BME680...");
   Serial.println("");
 
   Serial.println("ENTER D FOR DEBUG");
-  digitalWrite(DB_LED_PIN,HIGH);
+  digitalWrite(STATUS_LED_PIN,HIGH);
   
   uint32_t startTime = millis();
   while (!Serial.available() and millis()-startTime < 3000) {}
@@ -133,7 +119,7 @@ Serial.print("Preparing BME680...");
     while (true) {}
   }//if
 
-  digitalWrite(DB_LED_PIN,LOW);
+  digitalWrite(STATUS_LED_PIN,LOW);
 }//start
 
 
@@ -230,13 +216,12 @@ void loop() {
 
   if (millis() > 5400000) {
     //turn off camera after 1.5hrs
-    digitalWrite(CAMERA_PWM_PIN, LOW);
+    digitalWrite(CAMERA_POWER_PIN, LOW);
     Serial.println("CAM OFF");
-  }
-  else if (millis() > 15000) {
+  } else if (millis() > 15000) {
     //turn on camera after 15s
-    digitalWrite(CAMERA_PWM_PIN, HIGH);
+    digitalWrite(CAMERA_POWER_PIN, HIGH);
     Serial.println("CAM ON");
-  }
+  }//if
 
 }//loop()

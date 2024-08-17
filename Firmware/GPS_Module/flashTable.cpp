@@ -32,7 +32,7 @@ FlashTable::~FlashTable() {
 // Creates or opens the nessesary file on
 // the flash chip.
 // Must be run before running any other function.
-void FlashTable::init(SerialFlashChip *serialFlash) {
+void FlashTable::init(SerialFlashChip *serialFlash, Stream *stream) {
   // Generate filename
   char fName[8];
   itoa(_tableNum, fName, 8);
@@ -50,7 +50,7 @@ void FlashTable::init(SerialFlashChip *serialFlash) {
   // Find the next empty spot in the file if file
   // exists (to append data instead of overwriting)
   if (findEmptySpot) {
-    seekToEmpty();
+    seekToEmpty(stream);
   }//if
 }//init()
 
@@ -73,7 +73,9 @@ uint32_t FlashTable::getMaxSize() {
   return _file.size();
 }//getMaxSize()
 
-
+#define FIRE_DROGUE_PIN PA1
+#define FIRE_MAIN_PIN PA3
+#define STATUS_LED PA15
 
 /*
  * Reads through the current data file and 
@@ -87,7 +89,7 @@ uint32_t FlashTable::getMaxSize() {
  * Not ideal, and definitely wastes space, but
  * should be good enough to prevent corruption.
  */
-void FlashTable::seekToEmpty() {
+void FlashTable::seekToEmpty(Stream *stream) {
 
   // TODO: Make the course algorithm much more course, but then it slows down to check surroundings for a false complete. If bad, continue course. If good, move to fine. This will result in a much faster course algorithm overall.
   // Alternatively, make it seek 1000B forward each time, and then once it sees a 0xFF, then it scans NUM_EMPTY_TRIG forward for 0xFF bytes. If that fails, keep going 1000 forward. If it passes, it seeks BACKWARDS until it finds a non-0xFF byte, then it moves NUM_EMPTY_TRIG forward.
@@ -96,61 +98,83 @@ void FlashTable::seekToEmpty() {
 
   const uint8_t NUM_EMPTY_TRIG = 16; // Number of bytes required to trigger an "empty" flag.
   const uint8_t EMPTY_VAL = 0xFF; // Value of an empty byte in flash
-  const uint8_t COURSE_RES = 1000; // How many bytes the course seek algorithm should jump forward (higher = faster, lower = more reliable)
+  const uint32_t COURSE_RES = 512; // How many bytes the course seek algorithm should jump forward (higher = faster, lower = more reliable)
   uint8_t numEmpties = 0; // Current number of consecutive empty bytes (0xFF)
 
   bool courseDone = false;
+
+  //stream->println("START SEEK");
   
   // Ensure at start
   _file.seek(0);
 
+
   // Run course seek algorithm
   uint8_t serBuffer[1];
   while (_file.position() < _file.size() && !courseDone) {
+    //stream->println(_file.position());
     _file.read(serBuffer, 1);
     if (serBuffer[0] == EMPTY_VAL) {
       // Found potential empty, scan forward to meet thresh
-      //serial.println(F("Found potential empty"));
+      //stream->println(F("Found potential empty"));
       numEmpties++;
+      
       while (numEmpties < NUM_EMPTY_TRIG && _file.position() < _file.size()) {
+        //stream->println(_file.position());
         _file.read(serBuffer, 1);
         if (serBuffer[0] == EMPTY_VAL) {
           numEmpties++;
         } else {
           // Not empty area; continue course search
           numEmpties = 0;
-          //serial.println(F("Not empty; continue"));
+          //stream->println(F("Not empty; continue"));
           break;
         }//if
       }//while (numEmpty < thresh)
+
+      //stream->println(F("NumEmpty="));
+      //stream->print(numEmpties);
       
       // Scan forward done; meet thresh of empty bytes?
       if (numEmpties >= NUM_EMPTY_TRIG) {
+        
         // Thresh met, seek backwards until find non-EMPTY byte
-        //serial.println(F("Empty section found; seeking backwards"));
+        //stream->println(_file.position());
+        //stream->println(F("Empty section found; seeking backwards"));
         _file.seek(_file.position()-NUM_EMPTY_TRIG); // We know NUM_EMPTY_TRIG previous bytes are empty
+        if (_file.position() == 0) {
+          //stream->println(F("File empty - start from 0"));
+          return;
+        } //at start of file
         while (_file.position() > 0) {
-          //digitalWrite(PA15, !digitalRead(PA15));
-          //delay(25);
+          //stream->println(_file.position());
+          //digitalWrite(FIRE_DROGUE_PIN, HIGH);
           _file.read(serBuffer, 1);
           if (serBuffer[0] != EMPTY_VAL) {
             // Data found; move NUM_EMPTY_TRIG-1 forward and that's new start pos
-            //serial.println(F("Data found; ending seek"));
-            _file.seek(_file.position()+NUM_EMPTY_TRIG);
+            //stream->println(F("Data found; ending seek"));
+            _file.seek(_file.position()+NUM_EMPTY_TRIG-1);
             courseDone = true;
             break;
           }//if
           // Data not found yet; move one back from last read byte
+          if (_file.position() == 0) {
+            //If read back to start of file, just start there.
+            return;
+          }
           _file.seek(_file.position()-2);
           
         }//while (pos>0)
+        //digitalWrite(FIRE_DROGUE_PIN, LOW);
         
       }//if( numEmpty >= thresh)
       
     } else {
       // Not EMPTY; jump forward and keep searching
       numEmpties = 0;
-      _file.seek(_file.position()+COURSE_RES-1);
+      //stream->println(_file.position());
+      _file.seek(_file.position()+COURSE_RES);
+      
     }//if (buf = EMPTY_VAL)
 
   }//while
@@ -181,8 +205,8 @@ void FlashTable::seekToEmpty() {
     _file.seek(_file.size()-1);
   }//if
   
-  //serial.print(F("Found new position at p="));
-  //serial.println(_file.position());
+  //stream->print(F("Found new position at p="));
+  //stream->println(_file.position());
 }//seekToEmpty()
 
 
@@ -230,11 +254,13 @@ void FlashTable::beginDataDump(Stream *stream, uint32_t strtPos, uint32_t endPos
   stream->write((byte)0x00);             //9 Blank
 
   // Wait for ANY acknowledgement to send first block
-  while (not stream->available()) {}
-  while (stream->available()) {stream->read();}
+  while (stream->available() == 0) {}
+  while (stream->available() > 0) {stream->read();}
+  
 
   // Begin sending blocks
   while (curBlock < NUM_BLOCKS) {
+    
     // ACTION: Compose & Send Block
     uint8_t byteBuff[BLOCK_SIZE];
     uint8_t byteIndex = 0;
@@ -243,6 +269,7 @@ void FlashTable::beginDataDump(Stream *stream, uint32_t strtPos, uint32_t endPos
     uint32_t amnt = endPos - _file.position();
     if (amnt > BLOCK_SIZE) {amnt = BLOCK_SIZE;}    
     _file.read(byteBuff, amnt);
+
     
     // Send real data
     for (uint32_t i=0; i<amnt; i++) {
@@ -261,6 +288,7 @@ void FlashTable::beginDataDump(Stream *stream, uint32_t strtPos, uint32_t endPos
     }//if(need zero-pad)
 
     // ACTION: Wait for ACK of block
+    
     while (not stream->available()) {}
     uint8_t ack = stream->read();
     while (stream->available()) {stream->read();}
@@ -312,7 +340,7 @@ bool FlashTable::writeByte(uint8_t in) {
     // Buffer is full, flush
     _file.write(_bufferPntr, _buffSize);
     _bufPos = 0;
-    //Serial.println(F("DumpBuff"));
+    //////stream->println(F("DumpBuff"));
   }//if
   return true;
 }//writeByte

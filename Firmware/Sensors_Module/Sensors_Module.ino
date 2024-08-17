@@ -1,5 +1,5 @@
 /*COTIJA Firmware - AIM Sensors Module
- * Authors: Kennan Bays, Joachim Blohm, Brent Naumann
+ * Authors: Kennan Bays, Joachim Blohm, Brent Naumann, Ethan Toste
 */
 #include <Wire.h>
 #include <SPI.h>
@@ -19,8 +19,9 @@ const uint32_t BEEP_DELAY = 6000;
 const uint32_t BUZZER_TONE = 1000;
 const uint32_t BUZZER_TONE_Q = 500;
 
-const uint32_t CANBUS_DELAY = 1000;
-uint32_t canbusLastSend; = 0;
+//canbus
+const uint32_t STATUS_REPORT_DELAY = 1000; //How frequently the status report should be sent
+uint32_t lastStatusReport = 0; //When the last status report sent
 
 
 //--- FLASH SETTINGS
@@ -237,9 +238,10 @@ void loop() {
     Serial.println("CAM ON");
   }//if
 
-  if(millis() - canbusLastSend > CANBUS_DELAY){
-    canbusLastSend = millis();
-    sendCANstatus();
+  //Checking if it is time to report status to CANBUS
+  if(millis() - lastStatusReport > STATUS_REPORT_DELAY){
+    lastStatusReport = millis();
+    sendCANStatus(); //Reporting status
   }//if
 
 
@@ -247,7 +249,7 @@ void loop() {
 
 
 // ---CANBUS 
-void sendCANstatus(){
+void sendCANStatus(){
 
     //Build the CANBUS message
     CAN_TX_msg.id = (SENSOR_MOD_CANID+STATUS_CANID);
@@ -255,6 +257,5 @@ void sendCANstatus(){
 
     CAN_TX_msg.buf[0] = 1;
 
-    canb.write(CAN_TX_msg);     //send
-    return;
-}
+    canb.write(CAN_TX_msg); //send
+} //sendCANStatus()

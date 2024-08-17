@@ -10,7 +10,7 @@ class FlashTable {
   public:
     FlashTable(uint8_t numCols, uint16_t originRefreshInt, uint32_t maxSize, uint8_t tableNum, uint16_t buffSize);
     ~FlashTable(); // Destructor
-    void init(SerialFlashChip *serialFlash);
+    void init(SerialFlashChip *serialFlash, Stream *stream);
     bool writeRow(uint32_t rowData[]);
     uint32_t unsignify(int32_t value);
     uint32_t getCurSize();
@@ -25,7 +25,7 @@ class FlashTable {
 
     bool writeByte(uint8_t in);
     bool writeUint32(uint32_t in);
-    void seekToEmpty();
+    void seekToEmpty(Stream *stream);
 
     //SerialFlashChip *_flash;
     SerialFlashFile _file;
@@ -33,7 +33,6 @@ class FlashTable {
     uint32_t _maxSize;
     uint8_t _tableNum;
     uint16_t _buffSize;
-    
     
     uint8_t _numCols;
     uint16_t _originRefreshInt;

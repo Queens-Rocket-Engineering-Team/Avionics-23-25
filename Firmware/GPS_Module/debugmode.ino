@@ -27,13 +27,13 @@ void debugMode() {
     }//if
     if (cmd == 'F') {
       // "FlashInfo" command; return flash usage stats
-      //softSerial.print(table.getMaxSize());
-      //softSerial.print(F(","));
-      //softSerial.println(table.getCurSize());   
+      softSerial.print(table.getMaxSize());
+      softSerial.print(F(","));
+      softSerial.println(table.getCurSize());   
     }//if
     if (cmd == 'D') {
       // "DumpFlash" command; dump all flash contents via serial
-      //table.beginDataDump(&softSerial); //func overload; dump everything
+      table.beginDataDump(&softSerial); //func overload; dump everything
     }//if
     if (cmd == 'E') {
       // "EraseFlash" command; completely erase contents of flash.
@@ -44,8 +44,8 @@ void debugMode() {
       softSerial.println(F("Complete"));
     }//if
     if (cmd == 'Q') {
-        // QUERY SENSORS
-        softSerial.print(F("Null"));
+      // QUERY SENSORS
+      softSerial.print(F("Null"));
     }//if
 
   }//while

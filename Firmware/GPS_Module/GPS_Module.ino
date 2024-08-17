@@ -1,6 +1,6 @@
 /*
  * Quick SPAC SRAD firmare for GPS module
- * 
+ * Authors: Kennan Bays, Raquel Donovan
  * Jun.16.2024
  */
 
@@ -34,12 +34,17 @@ static CAN_message_t CAN_TX_msg;
 
 // Create FlashTable object
 const uint8_t TABLE_NAME = 0;
-const uint8_t TABLE_COLS = 3;
-const uint32_t TABLE_SIZE = 204800; //4096000
-//FlashTable table = FlashTable(TABLE_COLS, 16384, TABLE_SIZE, TABLE_NAME, 256);
+const uint8_t TABLE_COLS = 7;
+const uint32_t TABLE_SIZE = 16646144;
+// IMPORTANT!!!; AT LEAST 2 BLOCK OF SPACE MUST BE RESERVED FOR FILE SYSTEM
+// 16MiB = 16777216B, 2x 64KiB blocks = 131072B
+// 16MiB - 128KiB = 16646144B
+FlashTable table = FlashTable(TABLE_COLS, 16384, TABLE_SIZE, TABLE_NAME, 256);
 
 const uint32_t GPS_SEND_INT = 1000; //how often to send GPS data over CANBUS
+const uint32_t GPSLogFrequency = 500 //how often to log GPS data
 uint32_t lastGPSSend = 0;
+uint32_t lastGPSLog = 0;
 
 void checkGPS() {
   //Called once a second
@@ -136,7 +141,7 @@ void setup() {
   //delay(1000);
 
   // Initialize FlashTable object
-  //table.init(&SerialFlash);
+  table.init(&SerialFlash);
 
   //digitalWrite(STATUS_LED_PIN, HIGH);
 
@@ -177,15 +182,15 @@ void logDataToFlash(){
   //Create data array and input only positive values
   uint32_t dataArray[7] = {0,0,0,0,0,0,0};
   dataArray[0] = millis();
-  dataArray[1] = flash.unsignify((latIntLog));
-  dataArray[2] = flash.unsignify((latBilInt));
-  dataArray[3] = flash.unsignify((lngIntLog));
-  dataArray[4] = flash.unsignify((lngBillInt));
+  dataArray[1] = table.unsignify(latIntLog);
+  dataArray[2] = table.unsignify(latBilInt);
+  dataArray[3] = table.unsignify(lngIntLog);
+  dataArray[4] = table.unsignify(lngBilInt);
   dataArray[5] = gpsAlt;
   dataArray[6] = numSatLog;
 
   //Log data array
-  flash.writeRow(dataArr);
+  table.writeRow(dataArray);
   } //logDataToFlash()
 
 void loop() {
@@ -194,8 +199,12 @@ void loop() {
 
   if (millis() - lastGPSSend > GPS_SEND_INT) {
     checkGPS();
-    logDataToFlash();
     lastGPSSend = millis();
   }//if
+
+  if (millis() - lastGPSLog > GPSSendFrequency){
+    logDataToFlash();
+    lastGPSLog = millis();
+    }//if
 
 }//loop()

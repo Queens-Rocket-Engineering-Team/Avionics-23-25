@@ -1,6 +1,6 @@
 /*
  * Quick SPAC SRAD firmare for GPS module
- * 
+ * Authors: Kennan Bays, Raquel Donovan
  * Jun.16.2024
  */
 

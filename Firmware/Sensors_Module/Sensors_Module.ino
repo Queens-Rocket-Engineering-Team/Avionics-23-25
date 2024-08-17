@@ -1,5 +1,5 @@
 /*COTIJA Firmware - AIM Sensors Module
-
+ * Authors: Kennan Bays, Joachim Blohm, Brent Naumann
 */
 #include <Wire.h>
 #include <SPI.h>
@@ -13,6 +13,7 @@
 
 
 //buzzer
+// TODO: Update the buzzer settnigs for ALL modules
 const uint32_t BEEP_DELAY = 6000;
 const uint32_t BUZZER_TONE = 1000;
 const uint32_t BUZZER_TONE_Q = 500;
@@ -40,19 +41,20 @@ Adafruit_BME680 bme; // I2C
 
 
 void setup() {
-
+  // Configure pinmodes
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(STATUS_LED_PIN, OUTPUT);
   pinMode(CAMERA_POWER_PIN, OUTPUT);
 
+  // Configure I2C bus
   Wire.setSDA(SDA_PIN);
   Wire.setSCL(SCL_PIN);
   Wire.begin();
-
+  // Configure SPI
   SPI.setSCLK(PB13);
   SPI.setMISO(PB14);
   SPI.setMOSI(PB15);
-
+  // Start USB debugging
   Serial.begin(115200);
 
   //LED FLASHES TO ALLOW FOR SERIAL OPEN
@@ -61,56 +63,56 @@ void setup() {
     delay(250);
     digitalWrite(STATUS_LED_PIN,LOW);
     delay(250);
-  }
+  }//for
 
-  while (!bme.begin(0x77)) {
+
+  //Set up flash device
+  while (!SerialFlash.begin(FLASH_CS_PIN)) {
+      delay(250);
+      //toggleStatusLED();
+  }//while
+
+
+  // Initialize FlashTable object
+  delay(BUZZER_TONE);
+  Serial.println("STARTING FLASH");
+  for (int i=0; i<3; i++) {
+    tone(BUZZER_PIN, BUZZER_TONE_Q);
+    delay(100);
+    noTone(BUZZER_PIN);
+    delay(100);
+  }//for
+  flash.init(&SerialFlash, &Serial);
+
+  // STARTUP BEEP
+  tone(BUZZER_PIN, BUZZER_TONE);
+  delay(1000);
+  noTone(BUZZER_PIN);
+  Serial.println("STARTED");
+
+  //Connect to BME680
+  Serial.print("Preparing BME680...");
+  while (!bme.begin(BME680_ADDR)) {
     digitalWrite(STATUS_LED_PIN,HIGH);
     delay(100);
     digitalWrite(STATUS_LED_PIN,LOW);
     delay(100);
-  }
-
-//Set up flash device
-while (!SerialFlash.begin(FLASH_CS_PIN)) {
-    delay(250);
-    //toggleStatusLED();
-}//while
-
-
-delay(BUZZER_TONE);
-Serial.println("STARTING FLASH");
-for (int i=0; i<3; i++) {
-  tone(BUZZER_PIN, BUZZER_TONE_Q);
-  delay(100);
-  noTone(BUZZER_PIN);
-  delay(100);
- }
- // Initialize FlashTable object
-  flash.init(&SerialFlash, &Serial);
-
-// STARTUP BEEP
-tone(BUZZER_PIN, BUZZER_TONE);
-delay(1000);
-noTone(BUZZER_PIN);
-Serial.println("STARTED");
-
-
-Serial.print("Preparing BME680...");
+  }//while
   // Set up oversampling and filter initialization
   bme.setTemperatureOversampling(BME680_OS_8X);
   bme.setHumidityOversampling(BME680_OS_2X);
   bme.setPressureOversampling(BME680_OS_4X);
   bme.setIIRFilterSize(BME680_FILTER_SIZE_3);
   bme.setGasHeater(320, 150); // 320*C for 150 ms
-  Serial.println("DONE");
-  Serial.println("");
+  Serial.println("BME680 Ready");
 
   Serial.println("ENTER D FOR DEBUG");
   digitalWrite(STATUS_LED_PIN,HIGH);
   
   uint32_t startTime = millis();
   while (!Serial.available() and millis()-startTime < 3000) {}
-  
+
+  // Prompt for entering debug mode
   if (Serial.available()) {
     byte d = Serial.read();
     emptySerialBuffer();
@@ -120,7 +122,7 @@ Serial.print("Preparing BME680...");
   }//if
 
   digitalWrite(STATUS_LED_PIN,LOW);
-}//start
+}//setup()
 
 
 
@@ -193,15 +195,15 @@ void debugMode() {
     }//if
 
   }//while
-
 }//debugMode()
 
 void loop() {
-
+  // Check if should log BME & other data
   if (millis() - lastLog > LOG_INTERVAL) {
 
     lastLog = millis();
 
+    // TODO: Are all of these proper UINTs? Do we need to convert signed ints or floats?
     bme.performReading();
     uint32_t dataArr[5] = {0,0,0,0,0};
     dataArr[0] = millis();
@@ -214,6 +216,8 @@ void loop() {
     flash.writeRow(dataArr);
   }//if
 
+  // Check if camera power should be given
+  // TODO: Make this a bit more efficient? Only trigger at a certain time?
   if (millis() > 5400000) {
     //turn off camera after 1.5hrs
     digitalWrite(CAMERA_POWER_PIN, LOW);

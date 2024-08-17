@@ -10,13 +10,17 @@
 #include <SerialFlash.h>
 #include <SoftwareSerial.h>
 #include "pinouts.h"
-
+#include <CANpackets.h>
+#include "STM32_CAN.h"
 
 //buzzer
 // TODO: Update the buzzer settnigs for ALL modules
 const uint32_t BEEP_DELAY = 6000;
 const uint32_t BUZZER_TONE = 1000;
 const uint32_t BUZZER_TONE_Q = 500;
+
+const uint32_t CANBUS_DELAY = 1000;
+uint32_t canbusLastSend; = 0;
 
 
 //--- FLASH SETTINGS
@@ -38,7 +42,8 @@ Adafruit_BME680 bme; // I2C
 //Adafruit_BME680 bme(BME_CS, BME_MOSI, BME_MISO,  BME_SCK);
 
 //GLOBAL VARIABLES
-
+STM32_CAN canb( CAN1, ALT );    //CAN1 ALT is PB8+PB9
+static CAN_message_t CAN_TX_msg ;
 
 void setup() {
   // Configure pinmodes
@@ -122,8 +127,12 @@ void setup() {
   }//if
 
   digitalWrite(STATUS_LED_PIN,LOW);
-}//setup()
 
+  //Canbus Setup
+  //Start CANBUS
+  canb.begin(); //automatic retransmission can be done using arg "true"
+  canb.setBaudRate(500000); //500kbps
+}//setup()
 
 
 /*---\/---\/---\/---\/---*\
@@ -197,7 +206,7 @@ void debugMode() {
   }//while
 }//debugMode()
 
-void loop() {
+void loop() {  
   // Check if should log BME & other data
   if (millis() - lastLog > LOG_INTERVAL) {
 
@@ -228,4 +237,24 @@ void loop() {
     Serial.println("CAM ON");
   }//if
 
+  if(millis() - canbusLastSend > CANBUS_DELAY){
+    canbusLastSend = millis();
+    sendCANstatus();
+  }//if
+
+
 }//loop()
+
+
+// ---CANBUS 
+void sendCANstatus(){
+
+    //Build the CANBUS message
+    CAN_TX_msg.id = (SENSOR_MOD_CANID+STATUS_CANID);
+    CAN_TX_msg.len = 1;
+
+    CAN_TX_msg.buf[0] = 1;
+
+    canb.write(CAN_TX_msg);     //send
+    return;
+}

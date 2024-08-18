@@ -38,6 +38,10 @@ const uint32_t TABLE_SIZE = 16646144;
 // 16MiB = 16777216B, 2x 64KiB blocks = 131072B
 // 16MiB - 128KiB = 16646144B
 
+#define CAM_RECORD_DELAY 360000‬ //5min after power on
+#define CAM_POWER_TIME 10800000 //3hrs after record start
+‬
+
 //--- DATALOGGING SETTINGS
 
 FlashTable flash = FlashTable(TABLE_COLS, 16384, TABLE_SIZE, TABLE_NAME, 256); 
@@ -49,6 +53,8 @@ Adafruit_BME680 bme; // I2C
 STM32_CAN canb( CAN1, ALT );    //CAN1 ALT is PB8+PB9
 static CAN_message_t CAN_TX_msg ;
 
+
+
 void setup() {
   // Configure pinmodes
   pinMode(BUZZER_PIN, OUTPUT);
@@ -56,9 +62,9 @@ void setup() {
   pinMode(CAMERA_POWER_PIN, OUTPUT);
 
   // Start USB debugging
+  // Configure I2C bus
   Serial.begin(115200);
 
-  // Configure I2C bus
   Wire.setSDA(SDA_PIN);
   Wire.setSCL(SCL_PIN);
   Wire.begin();
@@ -234,12 +240,12 @@ void loop() {
 
   // Check if camera power should be given
   // TODO: Make this a bit more efficient? Only trigger at a certain time?
-  if (millis() > 5400000) {
-    //turn off camera after 1.5hrs
+  if (millis() > CAM_RECORD_DELAY+CAM_POWER_TIME) {
+    //turn off camera
     digitalWrite(CAMERA_POWER_PIN, LOW);
     Serial.println("CAM OFF");
-  } else if (millis() > 15000) {
-    //turn on camera after 15s
+  } else if (millis() > CAM_RECORD_DELAY) {
+    //turn on camera
     digitalWrite(CAMERA_POWER_PIN, HIGH);
     Serial.println("CAM ON");
   }//if

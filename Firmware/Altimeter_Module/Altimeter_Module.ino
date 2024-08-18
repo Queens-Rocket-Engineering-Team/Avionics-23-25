@@ -80,6 +80,7 @@ const uint32_t TABLE_SIZE = 16646144;
 #define DEC_DATAINT 20 //  [ms] interval bewteen each log to FLASH.
 #define LAND_THRESHOLD -0.3//[m/s] Velocity Threshold to declare land
 #define LAND_GRACE  2000 // [ms] Time for measurements to be above threshold before Landing is declared
+const uint8_t MAIN_DEPLOY_THRESHOLD = 1500/3.281
 
 //--- LAND SETTINGS
 #define LAND_DATAINT 100  //[ms] interval bewteen each log to FLASH.
@@ -350,8 +351,8 @@ void loop(){
       //Perform Apogee check
       if(detectApogee(alt)){
         STATE = 3;
-        digitalWrite(FIRE_MAIN_PIN,HIGH);
-        softSerial.println(F("FIRING"));
+        digitalWrite(FIRE_DROGUE_PIN,HIGH);
+        softSerial.println(F("FIRING DROGUE"));
       }//if
       
       //updating prevs
@@ -365,6 +366,12 @@ void loop(){
         logDataToFlash(P,P_filter,T,&a,&g,&qmaData);
         lastLog = millis();
       }//if
+
+      //fire main parachute if necessary
+      if(alt<= MAIN_DEPLOY_THRESHOLD && FIRE_MAIN_PIN == LOW){
+        digitalWrite(FIRE_MAIN_PIN,HIGH)
+        softSerial.println(F("FIRING MAIN"));
+        }//if
       
       //perform Landing check
       if(detectLand(alt)){
@@ -451,7 +458,7 @@ bool detectApogee(float alt){
 
   vel = 0.9*vel + 0.1*dh;
    
-  if (vel < -0.1) {    //check if velocity is nagative (with some error margin
+  if (vel < -0.1) {    //check if velocity is negative (with some error margin)
     if (!potentialApo) {
       //if first measurement, begin apogee countdown
       potentialApo = 1;

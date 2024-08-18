@@ -33,7 +33,10 @@ uint32_t lastLog = 0;
 
 const uint8_t TABLE_NAME = 0;
 const uint8_t TABLE_COLS = 5;
-const uint32_t TABLE_SIZE = 16776960; //16776960
+const uint32_t TABLE_SIZE = 16646144;
+// IMPORTANT!!!; AT LEAST 2 BLOCK OF SPACE MUST BE RESERVED FOR FILE SYSTEM
+// 16MiB = 16777216B, 2x 64KiB blocks = 131072B
+// 16MiB - 128KiB = 16646144B
 
 //--- DATALOGGING SETTINGS
 
@@ -52,16 +55,17 @@ void setup() {
   pinMode(STATUS_LED_PIN, OUTPUT);
   pinMode(CAMERA_POWER_PIN, OUTPUT);
 
+  // Start USB debugging
+  Serial.begin(115200);
+
   // Configure I2C bus
   Wire.setSDA(SDA_PIN);
   Wire.setSCL(SCL_PIN);
   Wire.begin();
   // Configure SPI
-  SPI.setSCLK(PB13);
-  SPI.setMISO(PB14);
-  SPI.setMOSI(PB15);
-  // Start USB debugging
-  Serial.begin(115200);
+  SPI.setSCLK(FLASH_SCK_PIN);
+  SPI.setMISO(FLASH_MISO_PIN);
+  SPI.setMOSI(FLASH_MOSI_PIN);
 
   //LED FLASHES TO ALLOW FOR SERIAL OPEN
   for (int i=0 ; i <5 ; i++){
@@ -112,17 +116,17 @@ void setup() {
   bme.setGasHeater(320, 150); // 320*C for 150 ms
   Serial.println("BME680 Ready");
 
-  Serial.println("ENTER D FOR DEBUG");
+  Serial.println("[MDE] ENTER D FOR DEBUG");
   digitalWrite(STATUS_LED_PIN,HIGH);
   
   uint32_t startTime = millis();
-  while (!Serial.available() and millis()-startTime < 3000) {}
+  while (!Serial.available() and millis()-startTime < 5000) {}
 
   // Prompt for entering debug mode
   if (Serial.available()) {
     byte d = Serial.read();
     emptySerialBuffer();
-    Serial.println("Entered Debug Mode");
+    Serial.println("[MDE] Entered Debug Mode");
     debugMode();
     while (true) {}
   }//if
@@ -166,10 +170,11 @@ void debugMode() {
 
     if (cmd == 'I') {
       // "Identify" command; return board name
-      Serial.println(F("CRAB"));
+      Serial.println(F("[MDE] SENSORS"));
     }//if
     if (cmd == 'F') {
       // "FlashInfo" command; return flash usage stats
+      Serial.print("[MDE] ");
       Serial.print(flash.getMaxSize());
       Serial.print(F(","));
       Serial.println(flash.getCurSize());   
@@ -181,11 +186,11 @@ void debugMode() {
     if (cmd == 'E') {
       // "EraseFlash" command; completely erase contents of flash.
       // Should be restarted afterwards
-      Serial.println(F("Erasing Flash"));
+      Serial.println(F("[MDE] Erasing Flash"));
       SerialFlash.eraseAll();
       while (SerialFlash.ready() == false) {}
       //flash.init(&SerialFlash);
-      Serial.println(F("Complete"));
+      Serial.println(F("[MDE] Complete"));
     }//if
     if (cmd == 'Q') {
         // QUERY SENSORS
@@ -193,14 +198,14 @@ void debugMode() {
           //Read bme 680
         bme.performReading();
         
-        Serial.println("--BME 680--");
-        Serial.print("PRESSURE [Pa]: ");
+        Serial.println("[MDE] --BME 680--");
+        Serial.print("[MDE] PRESSURE [Pa]: ");
         Serial.println(bme.pressure);
-        Serial.print("TEMPERATURE [K]: ");
+        Serial.print("[MDE] TEMPERATURE [K]: ");
         Serial.println(bme.temperature+273);
-        Serial.print("HUMIDITY [%]: ");
+        Serial.print("[MDE] HUMIDITY [%]: ");
         Serial.println(bme.humidity);
-        Serial.print("GAS RESISTANCE [Ohm]: ");
+        Serial.print("[MDE] GAS RESISTANCE [Ohm]: ");
         Serial.println(bme.gas_resistance);
     }//if
 

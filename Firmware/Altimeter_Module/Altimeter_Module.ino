@@ -360,7 +360,7 @@ void loop(){
       prev_alt = alt;
       break;
 
-    case 3:   //Descending
+    case 3:   //Descending with drogue
       //logging data
       if( millis() - lastLog >= DEC_DATAINT){
         logDataToFlash(P,P_filter,T,&a,&g,&qmaData);
@@ -368,10 +368,19 @@ void loop(){
       }//if
 
       //fire main parachute if necessary
-      if(alt<= MAIN_DEPLOY_THRESHOLD && FIRE_MAIN_PIN == LOW){
+      if(alt<= MAIN_DEPLOY_THRESHOLD){
         digitalWrite(FIRE_MAIN_PIN,HIGH)
         softSerial.println(F("FIRING MAIN"));
-        }//if
+        STATE = 4
+      }//if
+      break;
+      
+    case 4: //descending with main
+      //logging data
+      if( millis() - lastLog >= DEC_DATAINT){
+        logDataToFlash(P,P_filter,T,&a,&g,&qmaData);
+        lastLog = millis();
+      }//if
       
       //perform Landing check
       if(detectLand(alt)){

@@ -14,8 +14,8 @@
 #include "STM32_CAN.h"
 
 //buzzer
-// TODO: Update the buzzer settnigs for ALL modules
 const uint32_t BEEP_DELAY = 6000;
+const uint32_t BEEP_LENGTH = 1000;
 const uint32_t BUZZER_TONE = 1000;
 const uint32_t BUZZER_TONE_Q = 500;
 
@@ -95,8 +95,9 @@ void setup() {
   flash.init(&SerialFlash, &Serial);
 
   // STARTUP BEEP
+  delay(BEEP_DELAY);
   tone(BUZZER_PIN, BUZZER_TONE);
-  delay(1000);
+  delay(BEEP_LENGTH);
   noTone(BUZZER_PIN);
   Serial.println("STARTED");
 

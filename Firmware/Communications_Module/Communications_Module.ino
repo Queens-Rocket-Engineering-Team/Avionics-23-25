@@ -14,11 +14,16 @@
 #include <SPI.h>
 //#include "flashTable.h"
 
+
+//TODO: Replace Defines
 #define SERIAL_ENABLE true
 #define SERIAL_BAUD 38400
 #define CANBUS_BAUD 500000 //500kbps
-#define BEEP_DELAY 2000
-#define BEEP_FREQ 1000
+
+//Buzzer Settings
+const uint32_t BEEP_DELAY = 6000;
+const uint32_t BEEP_LENGTH = 1000;
+const uint32_t BEEP_FREQ = 1000;
 
 const double FREQUENCY = 905.4;
 const double BANDWIDTH = 31.25;
@@ -188,7 +193,7 @@ void setup() {
   // STARTUP BEEP
   delay(BEEP_DELAY);
   tone(BUZZER_PIN, BEEP_FREQ);
-  delay(1000);
+  delay(BEEP_LENGTH);
   tone(BUZZER_PIN, 0);
 
   // Startup delay - Check to enter debug mode

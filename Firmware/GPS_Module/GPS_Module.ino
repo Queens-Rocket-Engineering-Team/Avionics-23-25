@@ -1,7 +1,7 @@
 /*
  * Quick SPAC SRAD firmare for GPS module
  * Authors: Kennan Bays, Raquel Donovan
- * Aug.18.2024
+ * Jun.16.2024
  */
 
 #include "CANPackets.h"
@@ -14,11 +14,16 @@
 #include <SPI.h>
 #include "flashTable.h"
 
+
+//TODO: UPDATE defines
 #define SERIAL_ENABLE true
 #define SERIAL_BAUD 38400
 #define CANBUS_BAUD 500000 //500kbps
-#define BEEP_DELAY 4000
-#define BEEP_FREQ 1000
+
+//Buzzer Settings
+const uint32_t BEEP_DELAY = 4000;
+const uint32_t BEEP_LENGTH = 1000;
+const uint32_t BEEP_FREQ = 1000;
 
 
 // The TinyGPSPlus object
@@ -50,7 +55,6 @@ void checkGPS() {
   //Called once a second
 
   uint8_t numSat = gps.satellites.value();
-  if (gps.satellites.age() > 5000) {numSat = 0;}
   int32_t latInt = gps.location.lat()*1000000;
   int32_t lngInt = gps.location.lng()*1000000;
 
@@ -173,7 +177,6 @@ void logDataToFlash(){
 
   //Gathering data from GPS
   uint8_t numSatLog = gps.satellites.value();
-  if (gps.satellites.age() > 5000) {numSatLog = 0;}
   int32_t latIntLog = gps.location.rawLat().deg;
   if(gps.location.rawLat().negative){
     latIntLog = -latIntLog;

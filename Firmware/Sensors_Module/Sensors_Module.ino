@@ -38,9 +38,8 @@ const uint32_t TABLE_SIZE = 16646144;
 // 16MiB = 16777216B, 2x 64KiB blocks = 131072B
 // 16MiB - 128KiB = 16646144B
 
-#define CAM_RECORD_DELAY 360000‬ //5min after power on
-#define CAM_POWER_TIME 10800000 //3hrs after record start
-‬
+const uint32_t CAM_RECORD_DELAY = 360000; //5min after power on
+const uint32_t CAM_POWER_TIME = 10800000; //3hrs after record start
 
 //--- DATALOGGING SETTINGS
 

@@ -80,7 +80,7 @@ const uint32_t TABLE_SIZE = 16646144;
 #define DEC_DATAINT 20 //  [ms] interval bewteen each log to FLASH.
 #define LAND_THRESHOLD -0.3//[m/s] Velocity Threshold to declare land
 #define LAND_GRACE  2000 // [ms] Time for measurements to be above threshold before Landing is declared
-const uint8_t MAIN_DEPLOY_THRESHOLD = 1500/3.281;
+const uint16_t MAIN_DEPLOY_THRESHOLD = 1500/3.281;
 
 //--- LAND SETTINGS
 #define LAND_DATAINT 100  //[ms] interval bewteen each log to FLASH.
@@ -369,9 +369,9 @@ void loop(){
 
       //fire main parachute if necessary
       if(alt<= MAIN_DEPLOY_THRESHOLD){
-        digitalWrite(FIRE_MAIN_PIN,HIGH)
+        digitalWrite(FIRE_MAIN_PIN, HIGH);
         softSerial.println(F("FIRING MAIN"));
-        STATE = 4
+        STATE = 4;
       }//if
       break;
       

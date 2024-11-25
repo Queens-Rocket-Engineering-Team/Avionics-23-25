@@ -1,0 +1,13 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Espressif")(type "KiCad")(uri "${KIPRJMOD}/symbols/Espressif.kicad_sym")(options "")(descr ""))
+  (lib (name "QRET_Buck_PSU")(type "KiCad")(uri "${KIPRJMOD}/symbols/QRET_Buck_PSU.kicad_sym")(options "")(descr ""))
+  (lib (name "MAX98357AETE_T")(type "KiCad")(uri "${KIPRJMOD}/symbols/MAX98357AETE_T.kicad_sym")(options "")(descr ""))
+  (lib (name "USB_C")(type "KiCad")(uri "${KIPRJMOD}/symbols/USB_C.kicad_sym")(options "")(descr ""))
+  (lib (name "P3T1755DPZ")(type "KiCad")(uri "${KIPRJMOD}/symbols/P3T1755DPZ.kicad_sym")(options "")(descr ""))
+  (lib (name "E-Paper")(type "KiCad")(uri "${KIPRJMOD}/symbols/E-Paper.kicad_sym")(options "")(descr ""))
+  (lib (name "YIC31616GMSGG")(type "KiCad")(uri "${KIPRJMOD}/symbols/YIC31616GMSGG.kicad_sym")(options "")(descr ""))
+  (lib (name "TPB4056B2X-ES1R")(type "KiCad")(uri "${KIPRJMOD}/symbols/TPB4056B2X-ES1R.kicad_sym")(options "")(descr ""))
+  (lib (name "CONN4_LPPB022NFSS-RC_SUL_SOCKET")(type "KiCad")(uri "${KIPRJMOD}/symbols/CONN4_LPPB022NFSS-RC_SUL_SOCKET.kicad_sym")(options "")(descr ""))
+  (lib (name "NAU7802SGI")(type "KiCad")(uri "${KIPRJMOD}/symbols/NAU7802SGI.kicad_sym")(options "")(descr ""))
+)

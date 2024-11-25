@@ -42,3 +42,6 @@ fp-info-cache
 
 # this file that gets generated but is only needed locally for crash recovery type things
 \#auto_saved_files\#
+
+#vscode config
+*.vscode

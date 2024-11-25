@@ -10,6 +10,6 @@ This directory also contains the firmware for the Kuhglocke ground station (revi
 
 Our firmware uses a variety of external libraries. Most libraries can be found through the Arduino library manager, and those that cannot have the corresponding GitHub link beside their include statements. We have taken care not to include any external libraries within our repository; only code we have written (or have modified and credited) are included here.
 
-- QMA6100P library was written by Tristan (ft. Brent)
+- QMA6100P library was written by Tristan (ft. Brent) [See QMA6100P repository.](https://github.com/t-alderson/QMA6100P_Arduino_Library)
 - The RDES compression & FlashTable system was developed by Kennan. [See RDES repository.](https://github.com/Kenneract/Realtime-Deviation-Encoding-Scheme)
 - The modified NAU7802_2CH library was written by Sparkfun & forked by Kennan [See NAU7802_2CH repository.](https://github.com/Kenneract/NAU7802_Arduino_2CH)

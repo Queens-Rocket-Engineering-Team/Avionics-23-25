@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kuhglocke - Debug</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <div class="island">
+		<center>
+			<h1>Kuhglocke Debug Data</h1>
+			<p>(Live Statistics)</p>
+		</center>
+    </div>
+
+    <div class="island">
+		<h2>Kuhglocke Codebase</h2>
+
+		<p class="inlineTitle">Firmware:</p>
+		<p class="inlineValue">%FirmwareVersion%</p>
+		<p></p>
+		<p class="inlineTitle">Compile Date:</p>
+		<p class="inlineValue">%CompileDate%</p>
+		<p></p>
+		
+		<p class="inlineTitle">System Uptime:</p>
+		<p class="inlineValue" id="sysUptime">?</p>
+		<p></p>
+		<p class="inlineTitle">Core1 Loop Time:</p>
+		<p class="inlineValue" id="core1LoopTime">?</p>
+		<p></p>
+		<p class="inlineTitle">Core1 Slowest Loop Time:</p>
+		<p class="inlineValue" id="core1MaxLoopTime">?</p>
+		<p></p>
+		<p class="inlineTitle">Free Heap:</p>
+		<p class="inlineValue" id="freeHeap">?</p>
+		<p></p>
+		
+		<p class="inlineTitle">Core0 Loop Time:</p>
+		<p class="inlineValue" id="core0LoopTime">?</p>
+		<p></p>
+		<p class="inlineTitle">Core0 Free Stack:</p>
+		<p class="inlineValue" id="core0FreeStack">?</p>
+		<p></p>
+		
+		
+		<p class="inlineTitle">Onboard Temp:</p>
+		<p class="inlineValue" id="onboardTemp">?</p>
+		<p></p>
+    </div>
+
+    <div class="island">
+		<h2>Kuhglocke Power Metrics</h2>
+		
+		<p class="inlineTitle">PSU Voltage:</p>
+		<p class="inlineValue" id="psuVolt">?</p>
+		<p></p>
+		<p class="inlineTitle">Battery Voltage:</p>
+		<p class="inlineValue" id="battVolt">?</p>
+		<p></p>
+		<p class="inlineTitle">Battery SoC:</p>
+		<p class="inlineValue" id="battSoC">?</p>
+		<p></p>
+		<p class="inlineTitle">System Current:</p>
+		<p class="inlineValue" id="sysCurrent">?</p>
+		<p></p>
+		<p class="inlineTitle">Battery Status:</p>
+		<p class="inlineValue" id="battStatus">?</p>
+		<p></p>
+		<p class="inlineTitle">USB Mode:</p>
+		<p class="inlineValue" id="usbMode">?</p>
+		<p></p>
+    </div>
+		
+	<div class="island">
+		<h2>Kuhglocke Storage</h2>
+		<p class="inlineTitle">SD Card Present:</p>
+		<p class="inlineValue" id="sdPresent">?</p>
+		<p></p>
+		<p class="inlineTitle">SD Size:</p>
+		<p class="inlineValue" id="sdSize">?</p>
+		<p></p>
+		<p class="inlineTitle">SD Free:</p>
+		<p class="inlineValue" id="sdFree">?</p>
+		<p></p>	
+		<p class="inlineTitle">Current Log ID:</p>
+		<p class="inlineValue" id="sdLogID">?</p>
+		<p></p>
+		<p class="inlineTitle">SPIFFS Size:</p>
+		<p class="inlineValue" id="spiffsSize">?</p>
+		<p></p>
+		<p class="inlineTitle">SPIFFS Free:</p>
+		<p class="inlineValue" id="spiffsFree">?</p>
+		<p></p>
+		
+    </div>
+		
+    <div class="island">
+		<h2>Kuhglocke GPS Radio</h2>
+		
+		<p class="inlineTitle">Time Since Last Fix:</p>
+		<p class="inlineValue" id="lastFixTime">?</p>
+		<p></p>
+		<p class="inlineTitle">Satellites:</p>
+		<p class="inlineValue" id="gpsSatellites">?</p>
+		<p></p>
+		<p class="inlineTitle">Latitude:</p>
+		<p class="inlineValue" id="latitude">?</p>
+		<p></p>
+		<p class="inlineTitle">Longitude:</p>
+		<p class="inlineValue" id="longitude">?</p>
+		<p></p>
+		<p class="inlineTitle">Altitude ASL:</p>
+		<p class="inlineValue" id="altitude">?</p>
+		<p></p>
+		<p class="inlineTitle">Timestamp:</p>
+		<p class="inlineValue" id="gpsTimestamp">?</p>
+		<p></p>
+    </div>
+	
+
+    <div class="island">
+		<h2>Kuhglocke Interface Panel (N/A)</h2>
+		<p><b>Depressed Button</b>: None</p>
+		<p><b>Indicators</b>: [#] [#] [#] [#] [#]</p>
+		<p><b>LED Brightness</b>: 12%%</p>
+    </div>
+	
+    <div class="island">
+		<h2>Kuhglocke Speaker (N/A)</h2>
+		<p><b>System Volume</b>: 50%%</p>
+		<p><b>Muted</b>: No</p>
+    </div>
+	
+    <div class="island">
+		<h2>Kuhglocke WiFi Radio</h2>
+		<p class="inlineTitle">Power Output:</p>
+		<p class="inlineValue">%WiFiPower%dBm</p>
+		<p></p>
+		<p class="inlineTitle">Channel:</p>
+		<p class="inlineValue">%WiFiChannel%</p>
+		<p></p>
+    </div>
+	
+	<div class="island">
+		<h2>Kuhglocke RFM95W Radio</h2>
+		
+		<p class="inlineTitle">Centre Frequency:</p>
+		<p class="inlineValue" id="rfmFrequency">?</p>
+		<p></p>
+		<p class="inlineTitle">Bandwidth:</p>
+		<p class="inlineValue" id="rfmBandwidth">?</p>
+		<p></p>
+		<p class="inlineTitle">SpreadingFactor:</p>
+		<p class="inlineValue" id="rfmSpreadingFactor">?</p>
+		<p></p>
+		
+		<p class="inlineTitle">AFC Enabled:</p>
+		<p class="inlineValue" id="rfmAFC">?</p>
+		<p></p>
+		<p class="inlineTitle">Last Freq Error:</p>
+		<p class="inlineValue" id="lastFreqErr">?</p>
+		<p></p>
+		<p class="inlineTitle">Manual Frequency Correction:</p>
+		<p class="inlineValue" id="rfmFreqCorrection">?</p>
+		<p></p>
+		
+		
+    </div>
+	
+    <div class="island">
+		<h2>Rocket Packet Data</h2>
+
+		<p class="inlineTitle">Satellites:</p>
+		<p class="inlineValue" id="rocketSatellites">?</p>
+		<p></p>
+		<p class="inlineTitle">Latitude:</p>
+		<p class="inlineValue" id="rocketLatitude">?</p>
+		<p></p>
+		<p class="inlineTitle">Longitude:</p>
+		<p class="inlineValue" id="rocketLongitude">?</p>
+		<p></p>
+		<p class="inlineTitle">Altitude AGL:</p>
+		<p class="inlineValue" id="rocketAltitude">?</p>
+		<p></p>
+		<p class="inlineTitle">Status:</p>
+		<p class="inlineValue" id="rocketStatus">?</p>
+		<p></p>
+		<hr>
+		<p class="inlineTitle">Time Since Ping:</p>
+		<p class="inlineValue" id="lastPingTime">?</p>
+		<p></p>
+		<p class="inlineTitle">Last RSSI:</p>
+		<p class="inlineValue" id="lastRSSI">?</p>
+		<p></p>
+		<p class="inlineTitle">Last SNR:</p>
+		<p class="inlineValue" id="lastSNR">?</p>
+		<p></p>
+		<p class="inlineTitle">Last Packet Valid:</p>
+		<p class="inlineValue" id="lastPacketValid">?</p>
+		<p></p>
+		<p class="inlineTitle">Last Data Packet:</p>
+		<p class="inlineValue" id="lastPacketData">?</p>
+		<p></p>
+		
+    </div>
+		<button onclick="freqOffsetUp()">FREQ OFFSET + 1000Hz</button>
+		<button onclick="freqOffsetDown()">FREQ OFFSET - 1000Hz</button>
+		<button onclick="radioReload()">APPLY RADIO SETTINGS</button>
+	<div>
+	
+	
+	
+	</div>
+	
+
+  </body>
+
+
+  <script type="text/javascript">
+
+	setInterval(updateValues, 700); // Time in ms
+
+	function updateValues() {
+		//new AJAX request to the server
+		const request = new XMLHttpRequest();
+		request.open("GET", `/debugData`);
+
+		 //when response received
+		request.onload = () => {
+
+			//get the response text
+			const response = request.responseText;
+
+			//Split data apart again
+			chunks = response.split(",");
+
+			sysUptime = (Number(chunks[0])/1000).toFixed(1);
+			core1LoopTime = Number(chunks[1]);
+			core1MaxLoopTime = Number(chunks[2]);
+			freeHeap = (Number(chunks[3])).toFixed(1);
+			onboardTemp = (Number(chunks[4])/100).toFixed(1);
+			
+			psuVolt = (Number(chunks[5])/1000.0).toFixed(2);
+			battVolt = (Number(chunks[6])/1000.0).toFixed(2);
+			battSoC = Number(chunks[7]);
+			sysCurrent = Number(chunks[8]);
+			battStatus = chunks[9];
+			usbMode = chunks[10];
+			
+			gpsFixAge = Number(chunks[11]);
+			gpsSatellites = Number(chunks[12]);
+			gpsLat = (Number(chunks[13])).toFixed(6);
+			gpsLon = (Number(chunks[14])).toFixed(6);
+			gpsAlt = Number(chunks[15]);
+			gpsTime = chunks[16];
+			
+			sdPresent = chunks[17];
+			sdSize = (Number(chunks[18])).toFixed(0);
+			sdFree = (Number(chunks[19])).toFixed(0);
+			sdLogID = Number(chunks[20]);
+			spiffsSize = (Number(chunks[21])).toFixed(1);
+			spiffsFree = (Number(chunks[22])).toFixed(1);
+
+			rfmFrequency = (Number(chunks[23])).toFixed(2);
+			rfmBandwidth = Number(chunks[24]);
+			rfmSpreadingFactor = Number(chunks[25]);
+			lastPingTime = Number(chunks[26]);
+			lastPacketData = chunks[27];
+			lastRSSI = Number(chunks[28]);
+			lastSNR = (Number(chunks[29])).toFixed(1);
+			lastFreqErr = (Number(chunks[30])).toFixed(1);
+			lastPacketValid = chunks[31];
+			rfmAFC = chunks[32];
+			
+			rocketSatellites = chunks[33];
+			rocketLatitude = (Number(chunks[34])).toFixed(6);
+			rocketLongitude = (Number(chunks[35])).toFixed(6);
+			rocketAltitude = ((Number(chunks[36]))*3.281).toFixed(2);
+			rocketStatus = chunks[37];
+			
+			curFreqOffset = chunks[38];
+			
+			core0FreeStack = ((Number(chunks[39]))/1024).toFixed(2);
+			core0LoopTime = Number(chunks[40]);
+			
+
+			//Display
+			document.getElementById(`sysUptime`).innerHTML = `${sysUptime}s`;
+			document.getElementById(`core1LoopTime`).innerHTML = `${core1LoopTime}ms`;
+			document.getElementById(`core1MaxLoopTime`).innerHTML = `${core1MaxLoopTime}ms`;
+			document.getElementById(`freeHeap`).innerHTML = `${freeHeap}KiB`;
+			document.getElementById(`onboardTemp`).innerHTML = `${onboardTemp}&deg;C`;
+			
+			document.getElementById(`psuVolt`).innerHTML = `${psuVolt}V*`;
+			document.getElementById(`battVolt`).innerHTML = `${battVolt}V`;
+			document.getElementById(`battSoC`).innerHTML = `${battSoC}%%`;
+			document.getElementById(`sysCurrent`).innerHTML = `${sysCurrent}mA`;
+			document.getElementById(`battStatus`).innerHTML = `${battStatus}`;
+			document.getElementById(`usbMode`).innerHTML = `${usbMode}`;
+			
+			document.getElementById(`sdPresent`).innerHTML = `${sdPresent}`;
+			document.getElementById(`sdSize`).innerHTML = `${sdSize}MiB`;
+			document.getElementById(`sdFree`).innerHTML = `${sdFree}MiB`;
+			document.getElementById(`sdLogID`).innerHTML = `#${sdLogID}`;
+			document.getElementById(`spiffsSize`).innerHTML = `${spiffsSize}KiB`;
+			document.getElementById(`spiffsFree`).innerHTML = `${spiffsFree}KiB`;
+			
+			document.getElementById(`lastFixTime`).innerHTML = `${gpsFixAge}`;
+			document.getElementById(`gpsSatellites`).innerHTML = `${gpsSatellites}`;
+			document.getElementById(`latitude`).innerHTML = `${gpsLat}`;
+			document.getElementById(`longitude`).innerHTML = `${gpsLon}`;
+			document.getElementById(`altitude`).innerHTML = `${gpsAlt}ft`;
+			document.getElementById(`gpsTimestamp`).innerHTML = `${gpsTime}`;
+
+			document.getElementById(`rfmFrequency`).innerHTML = `${rfmFrequency}MHz`;
+			document.getElementById(`rfmBandwidth`).innerHTML = `${rfmBandwidth}KHz`;
+			document.getElementById(`rfmSpreadingFactor`).innerHTML = `${rfmSpreadingFactor}`;
+			document.getElementById(`lastPingTime`).innerHTML = `${lastPingTime}ms`;
+			document.getElementById(`lastPacketData`).innerHTML = `${lastPacketData}`;
+			document.getElementById(`lastRSSI`).innerHTML = `${lastRSSI}dBm`;
+			document.getElementById(`lastSNR`).innerHTML = `${lastSNR}dB`;
+			document.getElementById(`lastFreqErr`).innerHTML = `${lastFreqErr}Hz`;
+			document.getElementById(`lastPacketValid`).innerHTML = `${lastPacketValid}`;
+			document.getElementById(`rfmAFC`).innerHTML = `${rfmAFC}`;
+			
+			document.getElementById(`rocketSatellites`).innerHTML = `${rocketSatellites}`;
+			document.getElementById(`rocketLatitude`).innerHTML = `${rocketLatitude}`;
+			document.getElementById(`rocketLongitude`).innerHTML = `${rocketLongitude}`;
+			document.getElementById(`rocketAltitude`).innerHTML = `${rocketAltitude}ft`;
+			document.getElementById(`rocketStatus`).innerHTML = `${rocketStatus}`;
+			
+			document.getElementById(`rfmFreqCorrection`).innerHTML = `${curFreqOffset}Hz`;
+			
+			document.getElementById(`core0FreeStack`).innerHTML = `${core0FreeStack}KiB`;
+			document.getElementById(`core0LoopTime`).innerHTML = `${core0LoopTime}ms`;
+			
+		}; 
+		
+		//Send the request
+    request.timeout = 1000;
+		request.send();
+	}//updateValues()
+
+	function setSamplerate(rate) {
+      //value = whatever
+      document.getElementById(`sysUptime`).innerHTML = `${rate}ms`;
+    }//setSamplerate()
+
+
+	function freqOffsetUp() {
+		//new AJAX request to the server
+		const request = new XMLHttpRequest();
+		request.open("GET", `/FreqUp`);
+
+		 //when response received
+		request.onload = () => {
+			//get the response text
+			const response = request.responseText;
+		}; 
+		
+		//Send the request
+		request.timeout = 1000;
+		request.send();
+	}//freqOffsetUp()
+
+	function freqOffsetDown() {
+		//new AJAX request to the server
+		const request = new XMLHttpRequest();
+		request.open("GET", `/FreqDown`);
+
+		 //when response received
+		request.onload = () => {
+			//get the response text
+			const response = request.responseText;
+		}; 
+		
+		//Send the request
+		request.timeout = 1000;
+		request.send();
+	}//freqOffsetDown()
+	
+
+	function radioReload() {
+		//new AJAX request to the server
+		const request = new XMLHttpRequest();
+		request.open("GET", `/RadioReload`);
+
+		 //when response received
+		request.onload = () => {
+			//get the response text
+			const response = request.responseText;
+		}; 
+		
+		//Send the request
+		request.timeout = 1000;
+		request.send();
+	}//freqOffsetDown()
+
+
+  </script>
+  
+  <center><p>Kuhglocke Ground Station</p></center>
+
+</html>

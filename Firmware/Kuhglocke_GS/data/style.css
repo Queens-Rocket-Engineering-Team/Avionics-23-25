@@ -1,0 +1,94 @@
+
+html {
+  font-size: 14px;
+  color: black;
+  font-family: "Arial";
+  background-color: #C1C3FF;
+}
+
+p {
+	margin: 5px;
+}
+
+h1 {
+	margin: 5px;
+}
+
+h2 {
+	margin: 10px 0;
+	margin-left: 2px;
+}
+
+button {
+	padding: 4px;
+	margin: 4px;
+	font-weight: bolder;
+}
+
+input[type=text] {
+	width: 90%;
+	padding: 3px;
+	margin: 10px 0;
+	box-sizing: border-box;
+}
+
+input[type=submit] {
+	padding: 4px;
+	margin: 4px;
+	font-weight: bolder;
+}
+
+
+.island {
+  /* Class for <div>s, make a dark & islandred area centered on the screen. (large margins)*/
+  /*border: 1px solid green;*/
+  margin-right: 20%;
+  margin-left: 20%;
+  /*padding: 0.5%;*/
+  margin-bottom: 5px;
+  position:relative;
+  border-radius: 5px;
+  padding: 3px;
+}
+.island:before{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+}
+
+/* Use a media query to swap to compact-style if in portrait mode */
+@media screen and (orientation: portrait) {
+  .island {
+    /* Class for <div>s, make a LARGE dark & blurred area centered on the screen. (small margins)*/
+    /*border: 1px solid green;*/
+    margin-right: 0%;
+    margin-left: 1%;
+    /*padding: 2%;*/
+    margin-bottom: 5%;
+    position:relative;
+    border-radius: 8px;
+  }
+}
+
+.inlineTitle {
+	display: inline;
+	margin-right: 0;
+	font-weight: bold;
+}
+
+.inlineValue {
+	display: inline;
+	margin: 0;
+}
+
+hr {
+    width: 95%;
+    border: 1px solid #8080B0;
+    margin: 8px auto;
+}

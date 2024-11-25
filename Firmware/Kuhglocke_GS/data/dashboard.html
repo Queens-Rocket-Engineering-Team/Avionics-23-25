@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kuhglocke - Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <div class="island">
+		<center>
+			<h1>Kuhglocke Dashboard</h1>
+			<p>(Overview)</p>
+		</center>
+    </div>
+	
+    <div class="island">
+		<h2>Rocket Packet Data</h2>
+		<p class="inlineTitle">Latitude:</p>
+		<p class="inlineValue" id="rocketLatitude">?</p>
+		<p></p>
+		<p class="inlineTitle">Longitude:</p>
+		<p class="inlineValue" id="rocketLongitude">?</p>
+		<p></p>
+		<p class="inlineTitle">Satellites:</p>
+		<p class="inlineValue" id="rocketSatellites">?</p>
+		<p></p>
+		<p class="inlineTitle">Altitude AGL:</p>
+		<p class="inlineValue" id="rocketAltitude">?</p>
+		<p></p>
+		<p class="inlineTitle">SRAD Status:</p>
+		<p class="inlineValue" id="rocketStatus">?</p>
+		<p></p>
+		<hr>
+		<p class="inlineTitle">Ping Age:</p>
+		<p class="inlineValue" id="lastPingTime">?</p>
+		<p></p>
+		<p class="inlineTitle">Last RSSI:</p>
+		<p class="inlineValue" id="lastRSSI">?</p>
+		<p></p>
+		<p class="inlineTitle">Last SNR:</p>
+		<p class="inlineValue" id="lastSNR">?</p>
+		<p></p>
+		<p class="inlineTitle">Last Freq Error:</p>
+		<p class="inlineValue" id="lastFreqErr">?</p>
+		<p></p>
+		<p class="inlineTitle">Manual Frequency Correction:</p>
+		<p class="inlineValue" id="rfmFreqCorrection">?</p>
+		<p></p>
+		
+    </div>
+	
+	<div class="island">
+		<h2>Manual Frequency Offset</h2>
+		<button onclick="freqOffsetUp()">FREQ OFFSET + 1000Hz</button>
+		<button onclick="freqOffsetDown()">FREQ OFFSET - 1000Hz</button>
+		<button onclick="radioReload()">APPLY RADIO SETTINGS</button>
+	</div>
+	
+    <div class="island">
+		<h2>Kuhglocke Status</h2>
+		<p class="inlineTitle">Battery:</p>
+		<p class="inlineValue" id="battVolt">?</p>
+		<p></p>
+		<p class="inlineTitle">Current Log ID:</p>
+		<p class="inlineValue" id="sdLogID">?</p>
+		<p></p>
+		<hr>
+		<p class="inlineTitle">GPS Fix Age:</p>
+		<p class="inlineValue" id="lastFixTime">?</p>
+		<p></p>
+		<p class="inlineTitle">Latitude:</p>
+		<p class="inlineValue" id="latitude">?</p>
+		<p></p>
+		<p class="inlineTitle">Longitude:</p>
+		<p class="inlineValue" id="longitude">?</p>
+		<p></p>
+		<p class="inlineTitle">Satellites:</p>
+		<p class="inlineValue" id="gpsSatellites">?</p>
+		<p></p>
+		<p class="inlineTitle">Altitude ASL:</p>
+		<p class="inlineValue" id="altitude">?</p>
+		<p></p>
+    </div>	
+
+  </body>
+
+
+  <script type="text/javascript">
+
+	setInterval(updateValues, 700); // Time in ms
+
+	function updateValues() {
+		//new AJAX request to the server
+		const request = new XMLHttpRequest();
+		request.open("GET", `/debugData`);
+
+		 //when response received
+		request.onload = () => {
+
+			//get the response text
+			const response = request.responseText;
+
+			//Split data apart again
+			chunks = response.split(",");
+
+			sysUptime = (Number(chunks[0])/1000).toFixed(1);
+			core1LoopTime = Number(chunks[1]);
+			core1MaxLoopTime = Number(chunks[2]);
+			freeHeap = (Number(chunks[3])).toFixed(1);
+			onboardTemp = (Number(chunks[4])/100).toFixed(1);
+			
+			psuVolt = (Number(chunks[5])/1000.0).toFixed(2);
+			battVolt = (Number(chunks[6])/1000.0).toFixed(2);
+			battSoC = Number(chunks[7]);
+			sysCurrent = Number(chunks[8]);
+			battStatus = chunks[9];
+			usbMode = chunks[10];
+			
+			gpsFixAge = Number(chunks[11]);
+			gpsSatellites = Number(chunks[12]);
+			gpsLat = (Number(chunks[13])).toFixed(6);
+			gpsLon = (Number(chunks[14])).toFixed(6);
+			gpsAlt = Number(chunks[15]);
+			gpsTime = chunks[16];
+			
+			sdPresent = chunks[17];
+			sdSize = (Number(chunks[18])).toFixed(0);
+			sdFree = (Number(chunks[19])).toFixed(0);
+			sdLogID = Number(chunks[20]);
+			spiffsSize = (Number(chunks[21])).toFixed(1);
+			spiffsFree = (Number(chunks[22])).toFixed(1);
+
+			rfmFrequency = (Number(chunks[23])).toFixed(2);
+			rfmBandwidth = Number(chunks[24]);
+			rfmSpreadingFactor = Number(chunks[25]);
+			lastPingTime = (Number(chunks[26])/1000).toFixed(1);
+			lastPacketData = chunks[27];
+			lastRSSI = Number(chunks[28]);
+			lastSNR = (Number(chunks[29])).toFixed(1);
+			lastFreqErr = (Number(chunks[30])).toFixed(1);
+			lastPacketValid = chunks[31];
+			rfmAFC = chunks[32];
+			
+			rocketSatellites = chunks[33];
+			rocketLatitude = (Number(chunks[34])).toFixed(6);
+			rocketLongitude = (Number(chunks[35])).toFixed(6);
+			rocketAltitude = ((Number(chunks[36]))*3.281).toFixed(2);
+			rocketStatus = chunks[37];
+			
+			curFreqOffset = chunks[38];
+			
+			core0FreeStack = ((Number(chunks[39]))/1024).toFixed(2);
+			core0LoopTime = Number(chunks[40]);
+			
+
+			//Display
+			document.getElementById(`battVolt`).innerHTML = `${battSoC}%% (${battVolt}V)`;
+		
+			document.getElementById(`sdLogID`).innerHTML = `#${sdLogID}`;
+			
+			document.getElementById(`lastFixTime`).innerHTML = `${gpsFixAge}ms`;
+			document.getElementById(`gpsSatellites`).innerHTML = `${gpsSatellites}`;
+			document.getElementById(`latitude`).innerHTML = `${gpsLat}`;
+			document.getElementById(`longitude`).innerHTML = `${gpsLon}`;
+			document.getElementById(`altitude`).innerHTML = `${gpsAlt}ft`;
+			
+			document.getElementById(`lastPingTime`).innerHTML = `${lastPingTime}s`;
+			document.getElementById(`lastRSSI`).innerHTML = `${lastRSSI}dBm`;
+			document.getElementById(`lastSNR`).innerHTML = `${lastSNR}dB`;
+			document.getElementById(`lastFreqErr`).innerHTML = `${lastFreqErr}Hz`;
+			
+			document.getElementById(`rocketSatellites`).innerHTML = `${rocketSatellites}`;
+			document.getElementById(`rocketLatitude`).innerHTML = `${rocketLatitude}`;
+			document.getElementById(`rocketLongitude`).innerHTML = `${rocketLongitude}`;
+			document.getElementById(`rocketAltitude`).innerHTML = `${rocketAltitude}ft`;
+			document.getElementById(`rocketStatus`).innerHTML = `${rocketStatus}`;
+			
+			document.getElementById(`rfmFreqCorrection`).innerHTML = `${curFreqOffset}Hz`;
+
+		}; 
+		
+		//Send the request
+    request.timeout = 1000;
+		request.send();
+	}//updateValues()
+
+	function setSamplerate(rate) {
+      //value = whatever
+      document.getElementById(`sysUptime`).innerHTML = `${rate}ms`;
+    }//setSamplerate()
+
+
+	function freqOffsetUp() {
+		//new AJAX request to the server
+		const request = new XMLHttpRequest();
+		request.open("GET", `/FreqUp`);
+
+		 //when response received
+		request.onload = () => {
+			//get the response text
+			const response = request.responseText;
+		}; 
+		
+		//Send the request
+		request.timeout = 1000;
+		request.send();
+	}//freqOffsetUp()
+
+	function freqOffsetDown() {
+		//new AJAX request to the server
+		const request = new XMLHttpRequest();
+		request.open("GET", `/FreqDown`);
+
+		 //when response received
+		request.onload = () => {
+			//get the response text
+			const response = request.responseText;
+		}; 
+		
+		//Send the request
+		request.timeout = 1000;
+		request.send();
+	}//freqOffsetDown()
+	
+
+	function radioReload() {
+		//new AJAX request to the server
+		const request = new XMLHttpRequest();
+		request.open("GET", `/RadioReload`);
+
+		 //when response received
+		request.onload = () => {
+			//get the response text
+			const response = request.responseText;
+		}; 
+		
+		//Send the request
+		request.timeout = 1000;
+		request.send();
+	}//freqOffsetDown()
+
+
+  </script>
+  
+  <center><p>Kuhglocke Ground Station</p></center>
+
+</html>

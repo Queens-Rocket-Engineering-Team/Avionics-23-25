@@ -1,0 +1,8 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "footprints")(type "KiCad")(uri "${KIPRJMOD}/footprints")(options "")(descr ""))
+  (lib (name "Espressif")(type "KiCad")(uri "${KIPRJMOD}/footprints/Espressif.pretty")(options "")(descr ""))
+  (lib (name "LMR66100")(type "KiCad")(uri "${KIPRJMOD}/footprints/LMR66100.pretty")(options "")(descr ""))
+  (lib (name "TPB4056B2X")(type "KiCad")(uri "${KIPRJMOD}/footprints/TPB4056B2X.pretty")(options "")(descr ""))
+  (lib (name "NAU7802SGI")(type "KiCad")(uri "${KIPRJMOD}/footprints/NAU7802SGI.pretty")(options "")(descr ""))
+)

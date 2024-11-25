@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kuhglocke - Terms</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+<body>
+  <div class="island">
+    <h1>Ground Station Radio Terminology</h1>
+    <p>A small overview of common phrases and acronyms surrounding the ground station and general radio operation.</p>
+  </div>
+  
+	<div class="island">
+		<p><b>RSSI</b> = Received Signal Strength Indicator. Always negative. Higher value is better.</p>
+		<p><b>SNR</b> = Signal to Noise Ratio. Usually positive, can be negative. Higher value better. Our range is approximately 16dB (best) to -15dB (worst).</p>
+		<p><b>Frequency Error</b> =  Offset between receiver centre frequency and incoming LoRa signal. Calculated as RecvFreq-TransFreq, closer to zero is better. If greater than 25% of bandwidth, may not capture signal.</p>
+		<p><b>Frequency</b> is the carrier frequency for data. Higher frequency means shorter range but faster transmission.</p>
+		<p><b>Bandwidth</b> is the frequency used to encode data within the carrier. Higher frequency means shorter range but faster transmission.</p>
+		<p><b>Spreading Factor</b> is how much a transmission is spread out. Higher spreading means higher range, but slower transmission.</p>
+		<p><b>Coding Rate</b> is how many bits are transmitted to yield 4 useful bits. Higher coding rate is more reliable, but slower. Receiver does not need to know this.</p>
+		<p><b>Frequency Correction</b> is an offset applied to the receiver's frequency to correct the frequency error from transmitter and receiver oscillator tolerances. Frequency shifts with temperature, so this is not a perfect solution.</p>
+
+		<p><b>AFC</b> = Automatic Frequency Correction/Control. The term AFC is used to describe a circuit that adjusts itself to stay in resonance with an external frequency. For Kuhglocke, this is a software algorithm which attempts to reduce the frequency error between rocket and ground station due to thermal drift.</p>
+		
+		<p><b>TCXO</b> = Temperature Compensated Crystal Oscillator. A type of precision clock that remains stable over a wide range of temperatures. Using a radio transceiver based on an TCXO would signigicantly reduce frequency error due to thermal drift.</p>
+
+	</div>
+
+</body>
+</html>

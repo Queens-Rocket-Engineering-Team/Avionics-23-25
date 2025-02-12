@@ -14370,7 +14370,7 @@
   (gr_text "Drogue" (at 137.6 113.3) (layer "B.SilkS") (tstamp 342d1572-1fdb-4f1f-a455-420ea818cf3a)
     (effects (font (size 1.5 1.5) (thickness 0.3) bold) (justify left bottom mirror))
   )
-  (gr_text "Oka Rev 1.0\nQRET Mar 2024\n\nJoshua Xiang\nKennan Bays" (at 161.25 68.95) (layer "B.SilkS") (tstamp 63f75bff-f716-4973-be3d-dd6e654f2cff)
+  (gr_text "Oka Rev 1.1\nQRET Feb 2025\n\nJoshua Xiang\nKennan Bays" (at 161.25 68.95) (layer "B.SilkS") (tstamp 63f75bff-f716-4973-be3d-dd6e654f2cff)
     (effects (font (size 1.5 1.5) (thickness 0.25)) (justify top mirror))
   )
   (gr_text "+Y" (at 124.75 63.85 90) (layer "F.SilkS") (tstamp 061e1599-6a04-4714-9c7f-a60eb635602e)

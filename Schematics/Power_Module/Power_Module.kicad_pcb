@@ -9452,7 +9452,7 @@
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp d2c69865-7384-4f1a-aeb3-f9daa664e4ed))
   (gr_line (start 150.25 45.55) (end 150.25 39.75)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp edbb29da-2147-412e-9b09-8cf4faa9aaff))
-  (gr_text "Halloumi Rev 1.0\nQRET Mar 2024\n\nRajan Laird\nKennan Bays\nOak Campbell" (at 165 50.9) (layer "B.SilkS") (tstamp 295b58da-65e7-4594-be70-62ac3b21b619)
+  (gr_text "Halloumi Rev 2.0\nQRET Feb 2025\n\nRajan Laird\nKennan Bays\nOak Campbell" (at 165 50.9) (layer "B.SilkS") (tstamp 295b58da-65e7-4594-be70-62ac3b21b619)
     (effects (font (size 1.5 1.5) (thickness 0.25)) (justify top mirror))
   )
   (gr_text "Secondary\nBattery" (at 153.2 97.5) (layer "B.SilkS") (tstamp 32159c43-778c-472f-95fc-d6be9fceeb38)

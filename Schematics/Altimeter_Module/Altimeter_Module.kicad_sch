@@ -6,7 +6,8 @@
 
   (title_block
     (title "QRET 23-24 SRAD Altimeter Module")
-    (date "2024-03-28")
+    (date "2025-02-12")
+    (rev "V1.1")
     (company "Queen's Rocket Engineering Team")
     (comment 1 "Contributors: Joshua Xiang, Kennan Bays")
     (comment 4 "GRID = 0.635mm")

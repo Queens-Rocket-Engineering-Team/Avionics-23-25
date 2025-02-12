@@ -5001,7 +5001,7 @@
     (effects (font (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
     (uuid e12406f7-19d1-41f5-80ba-3e430f400fef)
   )
-  (text "Vf=2.8V, I=0.4mA, R=1.2k" (at 263.525 264.16 0)
+  (text "Vf=2.8V, R=0.15mA, R=3.3k" (at 263.525 264.16 0)
     (effects (font (size 1.27 1.27) italic) (justify left bottom))
     (uuid f7775717-7c52-4985-8c61-5261aa969b82)
   )
@@ -6953,7 +6953,7 @@
     (property "Reference" "R5" (at 268.605 257.175 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "1.2k" (at 268.605 259.715 90)
+    (property "Value" "3.3k" (at 268.605 259.715 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 268.605 257.937 90)
@@ -6962,11 +6962,11 @@
     (property "Datasheet" "~" (at 268.605 259.715 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C22765" (at 268.605 259.715 0)
+    (property "LCSC" "C22978" (at 268.605 259.715 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 93751543-cda1-46e3-a1f9-555738aa455a))
-    (pin "2" (uuid 4aa15915-cbcf-414e-9c7f-56efd69bff37))
+    (pin "1" (uuid ad5c470d-8b3a-4f5d-8635-ecf43a46b881))
+    (pin "2" (uuid 1191dadb-d201-4e98-9dbd-27da7f84e525))
     (instances
       (project "Altimeter_Module"
         (path "/29db4100-776d-46b8-a17b-170206e82f23"

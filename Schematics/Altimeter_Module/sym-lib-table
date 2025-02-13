@@ -6,4 +6,5 @@
   (lib (name "QRET_Buck_PSU-symbols")(type "KiCad")(uri "${KIPRJMOD}/symbols/QRET_Buck_PSU-symbols.kicad_sym")(options "")(descr ""))
   (lib (name "CONN_2-1445057-2_TYCO")(type "KiCad")(uri "${KIPRJMOD}/symbols/CONN_2-1445057-2_TYCO.kicad_sym")(options "")(descr ""))
   (lib (name "USB_C")(type "KiCad")(uri "${KIPRJMOD}/symbols/USB_C.kicad_sym")(options "")(descr ""))
+  (lib (name "TPM8837C-SO1R")(type "KiCad")(uri "${KIPRJMOD}/symbols/TPM8837C-SO1R.kicad_sym")(options "")(descr ""))
 )

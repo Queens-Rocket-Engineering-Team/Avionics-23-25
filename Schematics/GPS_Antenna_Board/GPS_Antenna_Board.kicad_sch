@@ -7,7 +7,7 @@
   (title_block
     (title "QRET 23-24 SRAD GPS Antenna Board")
     (date "2025-02-16")
-    (rev "V1.1")
+    (rev "V1.2")
     (company "Queen's Rocket Engineering Team")
     (comment 1 "Contributors: Tristan Alderson, Kennan Bays")
     (comment 4 "GRID = 1.27mm")

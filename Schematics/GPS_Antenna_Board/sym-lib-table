@@ -2,4 +2,5 @@
   (version 7)
   (lib (name "CONN_47080-4001_MOL_SATA")(type "KiCad")(uri "${KIPRJMOD}/symbols/CONN_47080-4001_MOL_SATA.kicad_sym")(options "")(descr ""))
   (lib (name "QRET_Buck_PSU-symbols")(type "KiCad")(uri "${KIPRJMOD}/symbols/QRET_Buck_PSU-symbols.kicad_sym")(options "")(descr ""))
+  (lib (name "CONN_GT8E-6P-2H(55)")(type "KiCad")(uri "${KIPRJMOD}/symbols/CONN_GT8E-6P-2H(55).kicad_sym")(options "")(descr ""))
 )

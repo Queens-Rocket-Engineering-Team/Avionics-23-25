@@ -11087,7 +11087,7 @@
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp d2c69865-7384-4f1a-aeb3-f9daa664e4ed))
   (gr_line (start 42.15 25.95) (end 42.15 20.15)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp edbb29da-2147-412e-9b09-8cf4faa9aaff))
-  (gr_text "Cheddar Rev 1.0\nQRET Mar 2024\n\nTristan Alderson\nKennan Bays" (at 56.9 31.2) (layer "B.SilkS") (tstamp 7de47237-1548-4232-ba7c-76e3820e7aa7)
+  (gr_text "Cheddar Rev 2.0\nQRET Feb 2025\n\nTristan Alderson\nKennan Bays" (at 56.9 31.2) (layer "B.SilkS") (tstamp 7de47237-1548-4232-ba7c-76e3820e7aa7)
     (effects (font (size 1.5 1.5) (thickness 0.25)) (justify top mirror))
   )
   (gr_text "To GPS\nAntenna\nBoard" (at 36.85 71.8) (layer "B.SilkS") (tstamp a71d2ba2-3a35-435d-b764-d3df0a76d662)

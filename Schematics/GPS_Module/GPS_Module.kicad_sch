@@ -5,9 +5,9 @@
   (paper "B")
 
   (title_block
-    (title "QRET 23-24 SRAD GPS Module")
-    (date "2025-02-15")
-    (rev "V1.0")
+    (title "QRET 23-25 SRAD GPS Module")
+    (date "2025-02-16")
+    (rev "V2.0")
     (company "Queen's Rocket Engineering Team")
     (comment 1 "Contributors: Tristan Alderson, Kennan Bays")
     (comment 4 "GRID = 0.635mm")

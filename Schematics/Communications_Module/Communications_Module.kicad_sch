@@ -6,8 +6,8 @@
 
   (title_block
     (title "QRET 23-24 SRAD Communications Module")
-    (date "2024-03-28")
-    (rev "V1.0")
+    (date "2025-02-24")
+    (rev "V2.0")
     (company "Queen's Rocket Engineering Team")
     (comment 1 "Contributors: Oak Campbell, Kennan Bays")
     (comment 4 "GRID = 0.635mm")

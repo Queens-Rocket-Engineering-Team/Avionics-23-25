@@ -9538,7 +9538,7 @@
     (property "Value" "SWD_01x04_Pin" (at 41.275 185.9971 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "SWD_Header:SWD_PinHeader_1x04_P2.54mm_Horizontal" (at 31.75 176.53 0)
+    (property "Footprint" "SWD_Header:SWD_PinHeader_1x04_P2.54mm_Horizontal_SMD" (at 31.75 176.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 40.64 177.8 0)

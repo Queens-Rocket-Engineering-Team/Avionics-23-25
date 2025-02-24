@@ -4,4 +4,5 @@
   (lib (name "QRET_CANBUS")(type "KiCad")(uri "${KIPRJMOD}/symbols/ISO1042BQDWVQ1.kicad_sym")(options "")(descr ""))
   (lib (name "QRET_Edge_Connector")(type "KiCad")(uri "${KIPRJMOD}/symbols/EdgeConnector.kicad_sym")(options "")(descr ""))
   (lib (name "USB_C")(type "KiCad")(uri "${KIPRJMOD}/symbols/USB_C.kicad_sym")(options "")(descr ""))
+  (lib (name "LoRa1262F30")(type "KiCad")(uri "${KIPRJMOD}/symbols/LoRa1262F30.kicad_sym")(options "")(descr ""))
 )

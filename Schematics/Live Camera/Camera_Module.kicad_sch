@@ -5,8 +5,8 @@
 	(uuid "e77d0584-110f-4b35-98c2-0ebac97a828e")
 	(paper "B")
 	(title_block
-		(title "QRET 24-25 SRAD Camera Module (????)")
-		(date "2025-02-20")
+		(title "QRET 24-25 SRAD Camera Module (FizzBuzz? Ocellus?)")
+		(date "2025-02-26")
 		(rev "V1.0")
 		(company "Queen's Rocket Engineering Team")
 		(comment 1 "Contributors: Ethan Toste, Kennan Bays, Noah Del Rizzo, Fedor Kim")
@@ -8907,6 +8907,12 @@
 		)
 	)
 	(junction
+		(at 149.225 213.36)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0159dcd7-e5ee-4623-8db7-9bf01259609e")
+	)
+	(junction
 		(at 407.035 143.51)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -9091,12 +9097,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "708bcd02-7756-41e3-9954-83da70e3f032")
-	)
-	(junction
-		(at 173.99 252.095)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "70a4b754-0538-4523-a328-02d3fc3bdccb")
 	)
 	(junction
 		(at 172.72 40.005)
@@ -10024,16 +10024,6 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 252.095) (xy 173.99 252.095)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4913fa24-de83-4363-8c84-d272e024817f")
-	)
-	(wire
-		(pts
 			(xy 351.155 146.05) (xy 356.235 146.05)
 		)
 		(stroke
@@ -10191,16 +10181,6 @@
 			(type default)
 		)
 		(uuid "5eabab37-36c2-4e50-aed7-a68ea29bb872")
-	)
-	(wire
-		(pts
-			(xy 149.225 232.41) (xy 151.765 232.41)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5fee9929-6621-435b-b817-e0cb7141c2c3")
 	)
 	(wire
 		(pts
@@ -11481,6 +11461,18 @@
 		(uuid 3f04eead-f28c-433a-bc23-2b57f6707d80)
 	)
 	(rectangle
+		(start 182.245 125.095)
+		(end 271.78 227.33)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 668929ab-b509-4c97-9b17-929e6086abaa)
+	)
+	(rectangle
 		(start 339.725 59.69)
 		(end 361.95 97.155)
 		(stroke
@@ -11792,17 +11784,6 @@
 		)
 		(uuid "4e8834d2-ad13-4773-ae93-6a4ab7bf22b3")
 	)
-	(text "Put near edges of board (small & hard to solder)"
-		(exclude_from_sim no)
-		(at 109.855 265.43 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4e979c52-68a5-4932-829b-8e2c653b00f1")
-	)
 	(text "Additional Filtering for Analogue VDD"
 		(exclude_from_sim no)
 		(at 80.01 20.32 0)
@@ -11837,6 +11818,17 @@
 			(justify right bottom)
 		)
 		(uuid "5ee9a56d-1db3-4141-991a-dc8ed1d28842")
+	)
+	(text "ADC12_IN9"
+		(exclude_from_sim no)
+		(at 193.675 176.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "65244d5e-2b7b-4e59-8889-be6b1988cae8")
 	)
 	(text "Crystal Oscillator"
 		(exclude_from_sim no)
@@ -11943,6 +11935,30 @@
 			(justify left bottom)
 		)
 		(uuid "9c087147-d1ab-4774-9995-272c22cbde6a")
+	)
+	(text "STM32F103CBT6"
+		(exclude_from_sim no)
+		(at 183.515 128.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "9fc6ab2e-21e6-4ad1-bc2e-91511fa97bd8")
+	)
+	(text "ADC12_IN6"
+		(exclude_from_sim no)
+		(at 258.445 161.29 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a63160a1-74d3-4996-ab2a-744cdb8fb0a6")
 	)
 	(text "Serial Wire Debug (SMD)"
 		(exclude_from_sim no)
@@ -12167,7 +12183,7 @@
 		)
 		(uuid "e6c77fc0-cc39-4f18-a60c-eac79d9c4731")
 	)
-	(text "Ideal Diodes (MUX)"
+	(text "Ideal Diodes (Input MUX + RPP)"
 		(exclude_from_sim no)
 		(at 80.645 205.74 0)
 		(effects
@@ -13150,7 +13166,7 @@
 			)
 		)
 	)
-	(global_label "5V_RAW"
+	(global_label "5V_USB"
 		(shape input)
 		(at 43.815 227.965 0)
 		(fields_autoplaced yes)
@@ -13229,28 +13245,6 @@
 		(uuid "a41b5c2f-3584-4803-afa0-0cb1cb6eaf78")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 352.9776 177.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "V_MUX"
-		(shape input)
-		(at 172.72 252.095 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "ab11a013-e1dd-4111-a69f-3c12b4dc5f8c")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 163.6872 252.095 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13568,7 +13562,7 @@
 			)
 		)
 	)
-	(global_label "5V_RAW"
+	(global_label "5V_USB"
 		(shape input)
 		(at 86.36 134.62 0)
 		(fields_autoplaced yes)
@@ -13784,28 +13778,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "V_MUX"
-		(shape output)
-		(at 151.765 232.41 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "e6ed44d9-15a0-413d-a8a9-8f8c0ac294b4")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.7978 232.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -21254,6 +21226,72 @@
 			(project "Camera_Module"
 				(path "/e77d0584-110f-4b35-98c2-0ebac97a828e"
 					(reference "Q4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 149.225 213.36 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "836f50f3-c9c6-4f3d-b159-92a079571c3e")
+		(property "Reference" "#PWR06"
+			(at 149.225 217.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 149.225 208.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 149.225 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 149.225 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 149.225 213.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "52d356e4-b4af-4488-8d47-e0394bb9a607")
+		)
+		(instances
+			(project "Camera_Module"
+				(path "/e77d0584-110f-4b35-98c2-0ebac97a828e"
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)

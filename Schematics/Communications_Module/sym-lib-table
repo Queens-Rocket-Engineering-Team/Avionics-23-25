@@ -5,4 +5,5 @@
   (lib (name "QRET_Edge_Connector")(type "KiCad")(uri "${KIPRJMOD}/symbols/EdgeConnector.kicad_sym")(options "")(descr ""))
   (lib (name "USB_C")(type "KiCad")(uri "${KIPRJMOD}/symbols/USB_C.kicad_sym")(options "")(descr ""))
   (lib (name "LoRa1262F30")(type "KiCad")(uri "${KIPRJMOD}/symbols/LoRa1262F30.kicad_sym")(options "")(descr ""))
+  (lib (name "TPM8837C-SO1R")(type "KiCad")(uri "${KIPRJMOD}/symbols/TPM8837C-SO1R.kicad_sym")(options "")(descr ""))
 )

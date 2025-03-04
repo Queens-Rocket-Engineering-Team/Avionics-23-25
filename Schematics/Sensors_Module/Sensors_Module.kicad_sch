@@ -6,8 +6,8 @@
 
   (title_block
     (title "QRET 23-24 SRAD Sensors Module (COTIJA)")
-    (date "2024-05-29")
-    (rev "V1.0")
+    (date "2025-03-03")
+    (rev "V2.0")
     (company "Queen's Rocket Engineering Team")
     (comment 1 "Contributors: Ethan Toste, Kennan Bays")
     (comment 4 "GRID = 0.635mm")

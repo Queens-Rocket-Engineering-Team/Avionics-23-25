@@ -7,4 +7,7 @@
   (lib (name "QRET_Buck_PSU-symbols")(type "KiCad")(uri "${KIPRJMOD}/symbols/QRET_Buck_PSU-symbols.kicad_sym")(options "")(descr ""))
   (lib (name "USB_C")(type "KiCad")(uri "${KIPRJMOD}/symbols/USB_C.kicad_sym")(options "")(descr ""))
   (lib (name "TPM8837C-SO1R")(type "KiCad")(uri "${KIPRJMOD}/symbols/TPM8837C-SO1R.kicad_sym")(options "")(descr ""))
+  (lib (name "ADS1256IDBR")(type "KiCad")(uri "${KIPRJMOD}/symbols/ADS1256IDBR.kicad_sym")(options "")(descr ""))
+  (lib (name "ACS37041KLHBLT-010B3")(type "KiCad")(uri "${KIPRJMOD}/symbols/ACS37041KLHBLT-010B3.kicad_sym")(options "")(descr ""))
+  (lib (name "OPA2727AIDR")(type "KiCad")(uri "${KIPRJMOD}/symbols/OPA2727AIDR.kicad_sym")(options "")(descr ""))
 )

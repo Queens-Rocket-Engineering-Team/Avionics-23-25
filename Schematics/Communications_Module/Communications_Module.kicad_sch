@@ -6,7 +6,7 @@
 
   (title_block
     (title "QRET 23-24 SRAD Communications Module")
-    (date "2025-02-27")
+    (date "2025-03-06")
     (rev "V2.0")
     (company "Queen's Rocket Engineering Team")
     (comment 1 "Contributors: Oak Campbell, Kennan Bays")
@@ -9662,7 +9662,7 @@
     (property "Datasheet" "https://www.usb.org/sites/default/files/documents/usb_type-c.zip" (at 26.035 247.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "JLCPCB" "C2936184" (at 22.225 247.65 0)
+    (property "JLCPCB" "C5178541" (at 22.225 247.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "A1" (uuid f15b23a6-1124-458d-98dc-fcd5aeed37be))

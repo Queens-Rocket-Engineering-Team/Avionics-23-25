@@ -5,8 +5,8 @@
 	(uuid "e77d0584-110f-4b35-98c2-0ebac97a828e")
 	(paper "B")
 	(title_block
-		(title "QRET 24-25 SRAD Camera Module (FizzBuzz? Ocellus?)")
-		(date "2025-02-26")
+		(title "QRET 24-25 SRAD Camera Module (Ocellus)")
+		(date "2025-03-06")
 		(rev "V1.0")
 		(company "Queen's Rocket Engineering Team")
 		(comment 1 "Contributors: Ethan Toste, Kennan Bays, Noah Del Rizzo, Fedor Kim")
@@ -16714,7 +16714,7 @@
 				(hide yes)
 			)
 		)
-		(property "JLCPCB" "C2936184"
+		(property "JLCPCB" "C5178541"
 			(at 21.59 248.285 0)
 			(effects
 				(font

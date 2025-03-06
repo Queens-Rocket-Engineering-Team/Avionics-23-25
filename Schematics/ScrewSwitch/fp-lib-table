@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "ScrewSwitchLibrary")(type "KiCad")(uri "${KIPRJMOD}/ScrewSwitchLibrary.pretty")(options "")(descr ""))
+)

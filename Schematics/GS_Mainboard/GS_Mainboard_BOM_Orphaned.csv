@@ -1,0 +1,9 @@
+Comment,Designator,Footprint
+RGB_OUT CONN HEADER VERT 3POS 2.54MM,"J3,J5",PinHeader_1x3_P2.54mm_Drill1.02mm
+RGB_IN CONN HEADER VERT 3POS 2.54MM,J4,PinHeader_1x3_P2.54mm_Drill1.02mm
+FAN1 CONN HEADER VERT 3POS 2.54MM,J6,PinHeader_1x3_P2.54mm_Drill1.02mm
+FAN2 CONN HEADER VERT 3POS 2.54MM,J7,PinHeader_1x3_P2.54mm_Drill1.02mm
+"RTX_PWR Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",J11,TerminalBlock_bornier-2_P5.08mm
+"BATT1 Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",J13,TerminalBlock_bornier-2_P5.08mm
+"BATT2 Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",J14,TerminalBlock_bornier-2_P5.08mm
+"SWITCH Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)",J15,TerminalBlock_bornier-2_P5.08mm

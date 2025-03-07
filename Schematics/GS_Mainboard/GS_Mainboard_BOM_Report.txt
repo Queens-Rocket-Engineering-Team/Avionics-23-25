@@ -1,0 +1,38 @@
+# Multi-Distributor BoM Report #
+
+Project Name: GS_Mainboard (has 133 symbols)
+KiCad Version: 7.0.8 (Python 3.9.16)
+Report Generated: Mar.07.2025 10:15:12
+Plugin Version: Oct.28.2024 (V1.0.12)
+Execution Time: 121ms (2ms JLoad, 84ms BoM, 1ms JChek)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - 
+
+JLCPCB BoM: True (40 rows)
+Digikey BoM: True (18 rows)
+Orphaned BoM: True (8 rows)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - 
+
+BoM Generation Notes:
+(none)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - 
+
+JLCPCB Parts Database File Present: True (365 parts, updated 2025.03.05)
+JLCPCB Parts Sanity-Checker Results (85 pass, 13 suspect, 2 not in database):
+- [D1]'s value is "DB_LED (YLW)", expected "Yellow"
+- [D2]'s value is "3.3V PWR (GRN)", expected "Green"
+- [D3]'s value is "5.0V PWR (GRN)", expected "Green"
+- [D4]'s value is "12V PWR (GRN)", expected "Green"
+- [Q1]'s footprint is "SOT-23", expected "SOT-23-3L"
+- [Q2]'s footprint is "SOT-23", expected "SOT-23-3L"
+- [Q3]'s footprint is "SOT-23", expected "SOT-23-3L"
+- [Q4]'s footprint is "SOT-23", expected "SOT-23-3L"
+- [Q5]'s footprint is "SOT-23", expected "SOT-23-3L"
+- [Q10]'s footprint is "SOT-23", expected "SOT-23-3L"
+- [Q11]'s footprint is "SOT-23", expected "SOT-23-3L"
+- [SW1]'s value is "SW_STM_RESET", expected "TS-1187A-B-A-B"
+- [SW2]'s value is "SW_STM_BOOT_MODE", expected "TS-1187A-B-A-B"
+- C5155213 (Q9) not in database
+- C5155213 (Q12) not in database

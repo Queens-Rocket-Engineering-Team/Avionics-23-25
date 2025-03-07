@@ -106,7 +106,7 @@
 			(psnegative no)
 			(psa4output no)
 			(plotreference yes)
-			(plotvalue no)
+			(plotvalue yes)
 			(plotfptext yes)
 			(plotinvisibletext no)
 			(sketchpadsonfab no)
@@ -27931,7 +27931,7 @@
 			(justify left bottom mirror)
 		)
 	)
-	(gr_text "Ocellus Rev 1.0\nQRET Mar 2025\n\nEthan Toste\nKennan Bays\nNoah Del Rizzo\nFedor Kim"
+	(gr_text "Camera Module V1.0\nQRET Mar 2025\n\nEthan Toste\nKennan Bays\nNoah Del Rizzo\nFedor Kim"
 		(locked yes)
 		(at 121.699999 57.3 0)
 		(layer "B.SilkS")
@@ -27957,7 +27957,7 @@
 			(justify bottom mirror)
 		)
 	)
-	(gr_text "Camera Module"
+	(gr_text "Camera Module V1.0"
 		(at 92.3 104.099998 90)
 		(layer "F.SilkS" knockout)
 		(uuid "09d55dc1-6564-4b5d-9703-dd89f72fe190")
@@ -27983,7 +27983,7 @@
 			(justify bottom)
 		)
 	)
-	(gr_text "OCELLUS V1.0"
+	(gr_text "OCELLUS"
 		(at 89.75 104.099998 90)
 		(layer "F.SilkS" knockout)
 		(uuid "19aee215-c1fc-400f-8fc9-f98c63c16038")
@@ -37887,15 +37887,6 @@
 		(uuid "5041b09a-b76c-4401-aed6-59a23aec8b16")
 		(members "bcbe31ac-b5dd-49c7-81a1-d5168ef096db" "c1290efa-6acd-4ee7-8550-81535c20b58a"
 			"dc1f90c9-a613-4557-aeb4-8d71544e07ef" "eabfce22-cc9e-48b0-a110-f5d300de39b1"
-		)
-	)
-	(group ""
-		(uuid "53751a4b-1f0c-4215-be38-445027d26588")
-		(members "09d55dc1-6564-4b5d-9703-dd89f72fe190" "19aee215-c1fc-400f-8fc9-f98c63c16038"
-			"5041b09a-b76c-4401-aed6-59a23aec8b16" "78a48367-3922-4a98-addb-a3e61eb434ed"
-			"a36d0b29-dfe7-4db8-855c-752ecb3d3dc9" "b4493a2b-282e-4fbb-8703-64d95ebf2d98"
-			"bcd938be-cf77-47c1-b466-52b6f8f21d68" "c31124f4-edc9-4d72-aeeb-8defd2206c24"
-			"fe8ec6e2-7e09-4f9a-a208-ffe325ea4cd3"
 		)
 	)
 	(group ""

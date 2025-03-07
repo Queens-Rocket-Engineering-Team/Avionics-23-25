@@ -1,0 +1,22 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 235e6551-f8bc-42ed-8277-1e6d1d06a12a)
+
+  (paper "A4")
+
+  (title_block
+    (title "Ground Station Mainboard")
+    (date "2025-03-06")
+    (rev "V1.0")
+    (company "QRET")
+    (comment 3 "Authors: Kennan Bays, Rowan Burke, Sam Scheufler, Clement S Gonsalves, Andrew Davis")
+  )
+
+  (lib_symbols
+  )
+
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

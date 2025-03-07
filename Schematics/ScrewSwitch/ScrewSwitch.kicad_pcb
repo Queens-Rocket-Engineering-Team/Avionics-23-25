@@ -84,7 +84,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory "ScrewSwitch-Gerbers")
+      (outputdirectory "gerbers/")
     )
   )
 
@@ -7751,7 +7751,7 @@
   (gr_text "2" (at 110 114.5325) (layer "B.SilkS" knockout) (tstamp 079b0add-fd8c-4aac-b1c6-960c2325f4a1)
     (effects (font (size 1.5 1.5) (thickness 0.25) bold) (justify top mirror))
   )
-  (gr_text "NECTAR Rev 1.0\nQRET Mar 2025\n\n\n\nKennan Bays\nOwen Price" (at 128 102.5) (layer "B.SilkS") (tstamp 15c1c870-4964-443d-bee5-7d0d74de69d6)
+  (gr_text "Kennan Bays\nOwen Price\n\n\n\nScrewSwitch PCB\nRev 1.0\nQRET Mar 2025" (at 128 101.7) (layer "B.SilkS") (tstamp 15c1c870-4964-443d-bee5-7d0d74de69d6)
     (effects (font (size 1.5 1.5) (thickness 0.25)) (justify top mirror))
   )
   (gr_text "4" (at 110 138.5325) (layer "B.SilkS" knockout) (tstamp 2c40cdca-367f-4158-adf4-d6268aa73ccf)

@@ -1,0 +1,41 @@
+Comment,Designator,Footprint,LCSC Part #
+10n Unpolarized capacitor,C1,C_0603_1608Metric,C57112
+4.7uF Unpolarized capacitor,"C3,C19",C_0805_2012Metric,C1779
+1uF Polarized capacitor,"C4,C8",C_0805_2012Metric,C28323
+100n Unpolarized capacitor,"C5,C6,C9,C10,C32,C33",C_0402_1005Metric,C1525
+100nF Unpolarized capacitor,"C7,C11,C14,C18,C20",C_0603_1608Metric,C14663
+10uF Unpolarized capacitor,C12,C_0603_1608Metric,C19702
+22uF Unpolarized capacitor,C13,C_0603_1608Metric,C59461
+22uF Unpolarized capacitor,"C15,C16",C_0805_2012Metric,C45783
+47uF Unpolarized capacitor,"C21,C22,C26,C31",C_0805_2012Metric,C16780
+33pF Unpolarized capacitor,C24,C_0402_1005Metric,C1562
+1uF Unpolarized capacitor,"C29,C30,C34,C35,C36,C37,C38,C39",C_0603_1608Metric,C15849
+0.1u Unpolarized capacitor,C40,C_0603_1608Metric,C14663
+DB_LED (YLW) Light emitting diode,D1,LED_0603_1608Metric,C72038
+3.3V PWR (GRN) Light emitting diode,D2,LED_0805_2012Metric,C2297
+5.0V PWR (GRN) Light emitting diode,D3,LED_0805_2012Metric,C2297
+12V PWR (GRN) Light emitting diode,D4,LED_0805_2012Metric,C2297
+100R Ferrite bead,FB1,R_0805_2012Metric,C1015
+"AO3400A 30V Vds, 5.7A Id, N-Channel MOSFET, SOT-23","Q1,Q2,Q3,Q4,Q5,Q10,Q11",SOT-23,C20917
+"AO4447A -6.7A Id, -20V Vds, P-Channel HEXFET Power MOSFET, SO-8","Q6,Q7,Q8",SOIC-8_3.9x4.9mm_P1.27mm,C125867
+"AO4406A 9.7A Id, 30V Vds, N-Channel HEXFET Power MOSFET, SO-8","Q9,Q12",SOIC-8_3.9x4.9mm_P1.27mm,C5155213
+10k Resistor,"R1,R17,R26,R35,R37,R38,R41,R44,R45,R46",R_0603_1608Metric,C25804
+100k Resistor,"R2,R3,R18,R21,R23,R25,R29,R40,R43",R_0603_1608Metric,C25803
+680R Resistor,R4,R_0603_1608Metric,C23228
+3.3k Resistor,R5,R_0603_1608Metric,C22978
+15k Resistor,"R6,R32,R33",R_0603_1608Metric,C22809
+68k Resistor,"R7,R8",R_0603_1608Metric,C23231
+3.6k Resistor,R9,R_0603_1608Metric,C22980
+33k Resistor,R10,R_0603_1608Metric,C4216
+6.2k Resistor,R11,R_0603_1608Metric,C4260
+1k Resistor,R12,R_0603_1608Metric,C21190
+30k Resistor,"R13,R14",R_0603_1608Metric,C22984
+47k Resistor,R15,R_0603_1608Metric,C25819
+13k Resistor,R16,R_0603_1608Metric,C22797
+510R Resistor,"R19,R20,R22,R24,R27,R39,R42",R_0603_1608Metric,C23193
+100k Resistor,R28,R_0402_1005Metric,C25741
+75k Resistor,"R34,R36",R_0603_1608Metric,C23242
+"SW_STM_RESET Push button switch, generic, two pins",SW1,SW_Push_1P1T_XKB_TS-1187A,C318884
+"SW_STM_BOOT_MODE Push button switch, generic, two pins",SW2,SW_Push_1P1T_XKB_TS-1187A,C318884
+"STM32F103C8T6 STMicroelectronics Arm Cortex-M3 MCU, 64KB flash, 20KB RAM, 72 MHz, 2.0-3.6V, 37 GPIO, LQFP48",U1,LQFP-48_7x7mm_P0.5mm,C8734
+LM66100DCKR ,"U5,U6",LMR66100_SC-70-6,C2869734

@@ -1,0 +1,19 @@
+Customer Reference,Note,Reference Designator,Footprint,Digi-Key Part Number,Quantity
+10uF,Polarized capacitor,C2,CP_Elec_4x5.4,732-8411-1-ND,1
+"1000uF, 25V",Polarized capacitor,C17,CP_Radial_D10.0mm_P5.00mm,493-1065-ND,1
+"2000uF, 25V",Polarized capacitor,C23,CP_Radial_D12.5mm_P5.00mm,C15127,1
+100uF,Polarized capacitor,C25,CP_Elec_6.3x5.9,732-8419-1-ND,1
+WS2812B,RGB LED with integrated controller,"D5,D6,D7,D8,D9",LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm,1568-COM-16347CT-ND,5
+15Vz,Zener diode,"D10,D11",D_SOD-123,BZT52C15-FDICT-ND,2
+RGB12V,"Generic screw terminal, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)",J8,TerminalBlock_bornier-4_P5.08mm,2057-EB21A-04-D-ND,1
+SRC_IND,"Generic screw terminal, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)",J12,TerminalBlock_TE_282834-3_1x03_P2.54mm_Horizontal,ED10562-ND,1
+BUTTS,"Generic screw terminal, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)",J16,TerminalBlock_bornier-4_P5.08mm,2057-EB21A-04-D-ND,1
+POWER,"Generic screw terminal, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)",J17,TerminalBlock_bornier-4_P5.08mm,2057-EB21A-04-D-ND,1
+12uH,Inductor,L1,L_Bourns_SRR1260,SRR1280-120MCT-ND,1
+4.7uH,Inductor,L2,L_Bourns_SRN8040TA,4816-HPC8040NC-4R7MCT-ND,1
+10k,"Temperature dependent resistor, negative temperature coefficient",TH1,R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,273-TX06F103F3435ERCT-ND,1
+LMR51430XDDCR,,U2,SOT-23-6_Handsoldering,296-LMR51430XDDCRCT-ND,1
+K7805JT-500R3,,U3,K7805JT_500R3,2725-K7803JT-500R3-LBCT-ND,1
+296-LMR51450FNDRRRCT-ND,,U4,LMR51450SDRRR,296-LMR51450FNDRRRCT-ND,1
+LM74700QDDFRQ1,,"U7,U8",LM74700_SOT-23-THIN_1P6X2P9_TEX-M,296-LM74700QDDFRQ1CT-ND,2
+ACS37041KLHBLT-010B3,Integrated Hall Effect Current Sensor in SOT23-W 5-Pin,U9,APS12628LLHALTBAP_HandSolder,620-ACS37041KLHBLT-010B3CT-ND,1

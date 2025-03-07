@@ -7,7 +7,7 @@
   (title_block
     (title "QRET Screw Switch PCB (2025)")
     (date "2025-03-06")
-    (comment 2 "Authors: Kennan Bays")
+    (comment 2 "Authors: Kennan Bays, Owen Price")
   )
 
   (lib_symbols

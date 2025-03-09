@@ -1148,7 +1148,7 @@
       (net 129 "+3.3V") (pinfunction "2") (pintype "passive") (tstamp faeab185-2c8f-4be7-8694-05dff2815d17))
     (pad "2" smd rect (at 3 1.875 180) (size 1 0.75) (layers "F.Cu" "F.Paste" "F.Mask")
       (net 129 "+3.3V") (pinfunction "2") (pintype "passive") (tstamp 839e599a-a972-45f0-91f4-1a6ccf7b8501))
-    (model "${KICAD7_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_Push_1P1T_XKB_TS-1187A.wrl"
+    (model "${KICAD7_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_SPST_TL3342.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -4943,7 +4943,7 @@
       (net 29 "STM_RESET") (pinfunction "2") (pintype "passive") (tstamp 6396a089-a215-48fc-95d1-e46db7b8528d))
     (pad "2" smd rect (at 3 1.875 180) (size 1 0.75) (layers "F.Cu" "F.Paste" "F.Mask")
       (net 29 "STM_RESET") (pinfunction "2") (pintype "passive") (tstamp c888e2b5-72be-4b1b-a92b-afa4feadaf11))
-    (model "${KICAD7_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_Push_1P1T_XKB_TS-1187A.wrl"
+    (model "${KICAD7_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_SPST_TL3342.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -5352,7 +5352,7 @@
       (net 53 "RESET_FL") (pinfunction "IO3") (pintype "bidirectional") (tstamp b795d890-45f5-415b-9ef2-16a3ab811a8c))
     (pad "8" smd roundrect (at 3.6 -1.905 270) (size 1.6 0.6) (layers "F.Cu" "F.Paste" "F.Mask") (roundrect_rratio 0.25)
       (net 129 "+3.3V") (pinfunction "VCC") (pintype "power_in") (tstamp d5486911-acdb-47c6-8b66-2fd32a3f7730))
-    (model "${KICAD6_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8_5.23x5.23mm_P1.27mm.wrl"
+    (model "${KICAD7_3DMODEL_DIR}/Package_SO.3dshapes/SOIC-8_5.275x5.275mm_P1.27mm.wrl"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))

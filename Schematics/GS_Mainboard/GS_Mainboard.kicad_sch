@@ -7914,6 +7914,31 @@
     )
   )
 
+  (symbol (lib_id "power:+5V") (at 374.65 118.11 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 47fff8ee-846c-4c54-a65e-c1fffd6eed25)
+    (property "Reference" "#PWR034" (at 378.46 118.11 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+5V" (at 371.4751 118.11 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 374.65 118.11 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 374.65 118.11 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid c099c41d-3f89-42f5-885a-35a1e62a9c19))
+    (instances
+      (project "GS_Mainboard"
+        (path "/235e6551-f8bc-42ed-8277-1e6d1d06a12a"
+          (reference "#PWR034") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:L") (at 359.41 27.94 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 4bb4aaba-5893-4eed-9063-f00509404343)
@@ -8534,46 +8559,6 @@
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
           (reference "C20") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:+3.3V") (at 374.65 128.27 90) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 62a729b4-2718-48bb-a7ca-b7995d605994)
-    (property "Reference" "#PWR036" (at 378.46 128.27 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+3.3V" (at 368.3 128.27 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 374.65 128.27 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 374.65 128.27 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 4f75cee8-f4b2-433f-91bb-3ad4b3584338))
-    (instances
-      (project "GS_Mainboard"
-        (path "/235e6551-f8bc-42ed-8277-1e6d1d06a12a"
-          (reference "#PWR036") (unit 1)
-        )
-      )
-      (project "Altimeter_Module"
-        (path "/29db4100-776d-46b8-a17b-170206e82f23"
-          (reference "#PWR016") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR022") (unit 1)
-        )
-      )
-      (project "processor"
-        (path "/ccfbe2af-01d0-4f8a-8e0b-98df5d6602a9"
-          (reference "#PWR?") (unit 1)
         )
       )
     )
@@ -12860,6 +12845,31 @@
     )
   )
 
+  (symbol (lib_id "power:+12V") (at 374.65 128.27 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid cb8ccdb5-acbc-46b0-b0ee-a88f289571a3)
+    (property "Reference" "#PWR036" (at 378.46 128.27 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+12V" (at 371.475 128.27 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 374.65 128.27 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 374.65 128.27 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid b45302f4-53c3-47f1-aa73-2130f28774d4))
+    (instances
+      (project "GS_Mainboard"
+        (path "/235e6551-f8bc-42ed-8277-1e6d1d06a12a"
+          (reference "#PWR036") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:C") (at 26.67 213.36 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cc61f095-cd44-429e-a965-bb78c1c84ec4)
@@ -14313,46 +14323,6 @@
       (project "Communications_Module"
         (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
           (reference "#PWR02") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:+3.3V") (at 374.65 118.11 90) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid faed3547-a870-4826-bb46-14d568ca28d7)
-    (property "Reference" "#PWR034" (at 378.46 118.11 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+3.3V" (at 368.3 118.11 90)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 374.65 118.11 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 374.65 118.11 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid b4c2d3bd-eff5-4b37-aefe-efbbbcaaab49))
-    (instances
-      (project "GS_Mainboard"
-        (path "/235e6551-f8bc-42ed-8277-1e6d1d06a12a"
-          (reference "#PWR034") (unit 1)
-        )
-      )
-      (project "Altimeter_Module"
-        (path "/29db4100-776d-46b8-a17b-170206e82f23"
-          (reference "#PWR016") (unit 1)
-        )
-      )
-      (project "Communications_Module"
-        (path "/ace06731-9b48-45c3-868d-c65fed1a8f9b"
-          (reference "#PWR022") (unit 1)
-        )
-      )
-      (project "processor"
-        (path "/ccfbe2af-01d0-4f8a-8e0b-98df5d6602a9"
-          (reference "#PWR?") (unit 1)
         )
       )
     )

@@ -10158,7 +10158,7 @@
     (property "Datasheet" "~" (at 40.64 168.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Digikey" "2057-PH1RB-04-UA-ND" (at 31.75 177.165 0)
+    (property "Digikey" "952-3233-ND" (at 31.75 177.165 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 0340bd5e-5b8c-42d7-95e0-b983f711d96d))

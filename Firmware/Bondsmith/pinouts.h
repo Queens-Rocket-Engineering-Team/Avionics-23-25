@@ -1,0 +1,30 @@
+// Header file that contains all pinouts for Bondsmith
+#define BATT1_SENSE_PIN PA0
+#define BATT2_SENSE_PIN PA1
+#define CURR_SENSE_PIN PA2
+#define RAIL_5V_SENSE_PIN PA3
+#define PSU_TEMP_PIN PA4
+#define RAIL_12V_SENSE_PIN PA5
+#define CURR_SENSOR_PWR_PIN PA6
+#define BATT1_DISABLE_PIN PA7
+#define BATT2_DISABLE_PIN PA8
+#define PI_TX_PIN PA9
+#define PI_RX_PIN PA10
+#define FAN_PWM_PIN PA11
+#define FAN_TACH_PIN PA12
+#define STATUS_LED_PIN PA15
+
+#define GPIO_PB0_PIN PB0
+#define GPIO_PB1_PIN PB1
+#define RGB12_B_PIN PB3
+#define RGB12_G_PIN PB4
+#define RGB12_R_PIN PB5
+#define LID_SENSE_PIN PB6
+#define BUTT3_SENSE_PIN PB7
+#define BUTT2_SENSE_PIN PB8
+#define BUTT1_SENSE_PIN PB9
+#define GPIO_SCL_PIN PB10
+#define GPIO_SDA_PIN PB11
+#define AUX_PWR_ENABLE_PIN PB13
+#define RGB_DATA_PIN PB14
+#define VRX_PWR_ENABLE_PIN PB15

@@ -271,6 +271,32 @@ def draw_parachute_status(img, ready, deployed, center):
     draw_text(img, f"PARACHUTE: {status}", (x + 15, y + 5), 
              color=COLORS['primary_text'], scale=0.5)
 
+def draw_logo(img, logo, margin=10):
+    #find positions
+    lh, lw = logo.shape[:2]
+    ih, iw = img.shape[:2]
+    y1 = ih - lh - margin
+    y2 = y1 + lh
+    x1 = iw - lw - margin
+    x2 = x1 + lw
+
+    #check bounds
+    if y1 < 0 or x1 < 0:
+        return
+
+    #blend alpha channel
+    if logo.shape[2] == 4:
+        print('blending alpha')
+        alpha_logo = logo[:, :, 3] / 255.0
+        for c in range(3):
+            img[y1:y2, x1:x2, c] = (
+                alpha_logo * logo[:, :, c] +
+                (1 - alpha_logo) * img[y1:y2, x1:x2, c]
+            ).astype(np.uint8)
+    else:
+        img[y1:y2, x1:x2] = logo
+
+
 # --------------------------- MAIN LOOP ---------------------------
 
 def main_lc():
@@ -281,6 +307,16 @@ def main_lc():
 
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
+
+    #logo, options are white, blue, or black
+    logo = cv2.imread('images/QRET_white.png', cv2.IMREAD_UNCHANGED)
+    if logo is not None:
+        #resizing logo
+        max_logo_width = FRAME_WIDTH//6
+        scale = min(1.0, max_logo_width / logo.shape[1])
+        logo = cv2.resize(logo, (int(logo.shape[1]*scale), int(logo.shape[0]*scale)), interpolation=cv2.INTER_AREA)
+    else:
+        print("Logo image not found or failed to load.")
 
     t0 = time.time()
     cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_NORMAL)
@@ -378,6 +414,8 @@ def main_lc():
             stage_y = FRAME_HEIGHT - 35
             stage_x = FRAME_WIDTH // 2 - 225
             draw_stage_progress(frame, data['current_stage'], (stage_x, stage_y))
+
+            draw_logo(frame, logo)
 
             cv2.imshow(WINDOW_NAME, frame)
             if cv2.waitKey(1) & 0xFF in (27, ord('q')):

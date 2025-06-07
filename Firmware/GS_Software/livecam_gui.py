@@ -286,7 +286,6 @@ def draw_logo(img, logo, margin=10):
 
     #blend alpha channel
     if logo.shape[2] == 4:
-        print('blending alpha')
         alpha_logo = logo[:, :, 3] / 255.0
         for c in range(3):
             img[y1:y2, x1:x2, c] = (
@@ -320,6 +319,12 @@ def main_lc():
 
     t0 = time.time()
     cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_NORMAL)
+    
+    # --- Video Writers ---
+    now_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    raw_writer = cv2.VideoWriter(f'video_output/raw_capture_{now_str}.avi', fourcc, 30.0, (FRAME_WIDTH, FRAME_HEIGHT))
+    overlay_writer = cv2.VideoWriter(f'video_output/overlay_capture_{now_str}.avi', fourcc, 30.0, (FRAME_WIDTH, FRAME_HEIGHT))
 
     #preliminary initialization 
     #if time switch to OOP to avoid this
@@ -350,6 +355,9 @@ def main_lc():
             ret, frame = cap.read()
             if not ret:
                 break
+
+            #save raw frame
+            raw_writer.write(frame.copy())
 
             prev_data = data
             data = get_live_data(t0, prev_data)
@@ -415,13 +423,19 @@ def main_lc():
             stage_x = FRAME_WIDTH // 2 - 225
             draw_stage_progress(frame, data['current_stage'], (stage_x, stage_y))
 
+            # DRAW LOGO
             draw_logo(frame, logo)
+
+            #save overlaid video
+            overlay_writer.write(frame)
 
             cv2.imshow(WINDOW_NAME, frame)
             if cv2.waitKey(1) & 0xFF in (27, ord('q')):
                 break
     finally:
         cap.release()
+        raw_writer.release()
+        overlay_writer.release()
         cv2.destroyAllWindows()
 
 if __name__ == "__main__":

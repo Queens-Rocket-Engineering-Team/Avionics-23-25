@@ -41,7 +41,7 @@ FONT         = cv2.FONT_HERSHEY_SIMPLEX
 COLORS = {
     'primary_text': (255, 255, 255),      # White
     'secondary_text': (200, 200, 200),    # Light gray
-    'accent': (0, 170, 255),              # Bright blue
+    'ascent': (0, 170, 255),              # Bright blue
     'success': (0, 255, 150),             # Modern green
     'warning': (255, 190, 0),             # Amber
     'danger': (255, 80, 80),              # Modern red
@@ -52,19 +52,16 @@ COLORS = {
 }
 
 # Value ranges (for bar scaling)
-ALT_RANGE     = (0, 3000)     # metres
-VEL_RANGE     = (-50, 300)    # m/s
+ALT_RANGE     = (0, 4000)     # metres
+VEL_RANGE     = (-60, 300)    # m/s
 ACC_RANGE     = (-20, 60)     # m/s²
 BATT_RANGE    = (9.0, 13.0)   # volts
 RSSI_RANGE    = (-90, -40)    # dBm (unused for now)
 
 # Flight stages for progression indicator
-FLIGHT_STAGES = ["Standby", "Launch", "Boost", "Coast", "Apogee", "Descent", "Landing"]
+FLIGHT_STAGES = ["Rail", "Ascent", "Drogue", "Main", "Landed", "Ballistic"]
 
-# --------------------------------------------------------------
-# 🛰️  FAKE DATA GENERATOR — replace with real data capture
-# --------------------------------------------------------------
-
+# Read and store data from Kuhglocke
 def get_live_data(t0: float, prev_data: dict) -> Dict:
     """Return a dictionary with live telemetry. Currently simulated."""
     t = time.time() - t0
@@ -94,14 +91,7 @@ def get_live_data(t0: float, prev_data: dict) -> Dict:
             "battery": float(raw_data['BattVolt']), #CHECK WHICH BATTERY
             "int_temp": float(raw_data['AmbientTemp']),
             "video_conn_ok": True, #need to add error handling for when camera is offline and update this
-            "parachute_ready": True, #what does this mean
-            "parachute_deployed": False, #look into state handling
-            "current_stage": False, #look into state handling
-            "orientation": { #this data isn't transmitted
-                "pitch": random.uniform(-15, 15),  # deg
-                "roll": random.uniform(-10, 10),   # deg
-                "yaw": random.uniform(-180, 180)   # deg
-            },
+            "current_stage": prev_data['current_stage'],
             "gs_connected":True
         }
 
@@ -110,6 +100,7 @@ def get_live_data(t0: float, prev_data: dict) -> Dict:
     except Exception as e:
         #print(f"Error updating GUI: {e}")
         data = prev_data
+        data['mission_time']=t
         data['gs_connected'] = False
         
         return data
@@ -201,7 +192,7 @@ def draw_info_panel(img, title, items, top_left, width=300, item_height=25):
     draw_rounded_rect(img, (x, y), width, panel_height, COLORS['surface'], alpha=0.85)
     
     # Title
-    draw_text(img, title, (x + 15, y + 25), color=COLORS['accent'], scale=0.65, thickness=2)
+    draw_text(img, title, (x + 15, y + 25), color=COLORS['ascent'], scale=0.65, thickness=2)
     
     # Items
     for i, item in enumerate(items):
@@ -217,15 +208,15 @@ def draw_stage_progress(img, current_stage, top_left, width=450, height=24):
     draw_rounded_rect(img, (x, y), width, height, COLORS['progress_bg'], alpha=0.8)
     
     # Progress fill with gradient
-    progress = (current_stage + 1) / len(FLIGHT_STAGES)
+    progress = (current_stage+1) / (len(FLIGHT_STAGES)-1)
     fill_width = int(progress * width)
     
     if fill_width > 0:
-        draw_rounded_rect(img, (x, y), fill_width, height, COLORS['accent'], alpha=0.9)
+        draw_rounded_rect(img, (x, y), fill_width, height, COLORS['ascent'], alpha=0.9)
     
     # Stage markers
     for i in range(len(FLIGHT_STAGES)):
-        marker_x = x + int((i / (len(FLIGHT_STAGES) - 1)) * width)
+        marker_x = x + int((i / ((len(FLIGHT_STAGES)) - 1)) * width)
         cv2.line(img, (marker_x, y + 2), (marker_x, y + height - 2), COLORS['secondary_text'], 2)
     
     # Current stage indicator (modern triangle)
@@ -236,7 +227,7 @@ def draw_stage_progress(img, current_stage, top_left, width=450, height=24):
     
     # Current stage text
     draw_text(img, f"STAGE: {FLIGHT_STAGES[current_stage].upper()}", 
-             (x, y - 20), color=COLORS['accent'], scale=0.6, thickness=2)
+             (x, y - 20), color=COLORS['ascent'], scale=0.6, thickness=2)
 
 
 def draw_crosshair(img, center, size=20, color=None, thickness=2):
@@ -254,31 +245,6 @@ def draw_crosshair(img, center, size=20, color=None, thickness=2):
     # Vertical lines
     cv2.line(img, (x, y - size), (x, y - gap), color, thickness)
     cv2.line(img, (x, y + gap), (x, y + size), color, thickness)
-    
-
-
-def draw_parachute_status(img, ready, deployed, center):
-    """Draw modern parachute status indicator."""
-    if deployed:
-        status = "DEPLOYED"
-        color = COLORS['success']
-    elif ready:
-        status = "READY"
-        color = COLORS['warning']
-    else:
-        status = "ARMED"
-        color = COLORS['danger']
-    
-    x, y = center
-    # Outer glow
-    cv2.circle(img, center, 10, (color[0]//3, color[1]//3, color[2]//3), -1)
-    # Main circle
-    cv2.circle(img, center, 8, color, -1)
-    # Inner highlight
-    cv2.circle(img, (x - 2, y - 2), 3, (255, 255, 255), -1)
-    
-    draw_text(img, f"PARACHUTE: {status}", (x + 15, y + 5), 
-             color=COLORS['primary_text'], scale=0.5)
 
 def draw_logo(img, logo, margin=10):
     #find positions
@@ -304,6 +270,18 @@ def draw_logo(img, logo, margin=10):
     else:
         img[y1:y2, x1:x2] = logo
 
+#fake velocity function to vaguely simulate flight and test states
+def fake_vel(t):
+    if t <20:
+        return 0
+    elif 20 <= t and t < 35:
+        return 270-20*(t-20)
+    elif 35 <= t and t< 45:
+        return -30
+    elif 45 <= t and t <55:
+        return -5
+    else:
+        return 0
 
 # --------------------------- MAIN LOOP ---------------------------
 
@@ -326,18 +304,23 @@ def main_lc():
     else:
         print("Logo image not found or failed to load.")
 
+    #time variables 
     t0 = time.time()
-    t_check_conn = t0
+    t_check = t0
+
     cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_NORMAL)
-    
-    # --- Video Writers ---
+
+    #booleans for state machine
+    parachute_deployed = False
+    boost_achieved = False
+
+    #video writers
     now_str = datetime.now().strftime("%Y%m%d_%H%M%S")
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    raw_writer = cv2.VideoWriter(f'video_output/{now_str}_raw_capture.avi', fourcc, 30.0, (FRAME_WIDTH, FRAME_HEIGHT))
-    overlay_writer = cv2.VideoWriter(f'video_output/{now_str}_overlay_capture.avi', fourcc, 30.0, (FRAME_WIDTH, FRAME_HEIGHT))
+    raw_writer = cv2.VideoWriter(f'video_output/{now_str}_raw_capture.avi', fourcc, 15.0, (FRAME_WIDTH, FRAME_HEIGHT))
+    overlay_writer = cv2.VideoWriter(f'video_output/{now_str}_overlay_capture.avi', fourcc, 15.0, (FRAME_WIDTH, FRAME_HEIGHT))
 
-    #preliminary initialization 
-    #if time switch to OOP to avoid this
+    #preliminary initialization to avoid error
     data = {
         "mission_time": 0,
         "uptime": 0,
@@ -350,14 +333,7 @@ def main_lc():
         "battery": 0,
         "int_temp": 0,
         "video_conn_ok": True,
-        "parachute_ready": True,
-        "parachute_deployed": False,
-        "current_stage": False,
-        "orientation": {
-            "pitch": 0,
-            "roll": 0,
-            "yaw": 0
-        },
+        "current_stage": 0,
         "gs_connected": True
     }
 
@@ -370,6 +346,7 @@ def main_lc():
             #save raw frame
             raw_writer.write(frame.copy())
 
+            #retrieving data
             prev_data = data
             data = get_live_data(t0, prev_data)
 
@@ -378,14 +355,15 @@ def main_lc():
             current_time = datetime.now().strftime("%H:%M:%S UTC")
             mission_time = f"T+{data['mission_time']:.1f}s"
             
-            #checking if time to check video status
-            if time.time() - t_check_conn > 10:
+            data['velocity'] = fake_vel(time.time()-t0)            
+           
+            #check video status and state every 5 seconds
+            if time.time() - t_check > 1:
                 t_check_conn = time.time()
 
                 #convert to grayscale and measure mean
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
                 mean_brightness = gray.mean()
-                print(f"Mean image brightness: {mean_brightness:.2f}")
 
                 #if image is dark, camera likely isn't connected
                 if mean_brightness < 25:
@@ -393,9 +371,36 @@ def main_lc():
                 else:
                     data['video_conn_ok'] = True
 
+
+                #non rigerous state machine lol, just velocity based
+
+                ascent_check = data['velocity'] > 5
+                drogue_check = data['velocity'] < -25 and data['velocity'] > -45
+                main_check = data['velocity'] < 0 and data['velocity'] > -20
+                landed_check = data['velocity'] < 5 and data['velocity'] > -5
+                ballistic_check = data['velocity'] < -45
+
+                if landed_check and not (parachute_deployed or boost_achieved):#rail
+                    status=0
+                elif ascent_check:#boost
+                    status=1
+                    boost_achieved=True
+                elif drogue_check:#drogue
+                    status=2
+                    parachute_deployed=True
+                elif main_check:#main
+                    status=3
+                    parachute_deployed=True
+                elif landed_check and parachute_deployed:#landed
+                    status=4
+                elif ballistic_check and parachute_deployed:#ballistic
+                    status=5
+                
+                data['current_stage'] = status
+                
             # Time display with background
             draw_rounded_rect(frame, (margin - 5, 5), 350, 35, COLORS['surface'], alpha=0.85)
-            draw_text(frame, current_time, (margin + 5, 30), color=COLORS['accent'], scale=0.7, thickness=2)
+            draw_text(frame, current_time, (margin + 5, 30), color=COLORS['ascent'], scale=0.7, thickness=2)
             draw_text(frame, mission_time, (margin + 180, 30), color=COLORS['warning'], scale=0.7, thickness=2)
 
             # LEFT COLUMN - TELEMETRY BARS --------------------------------
@@ -406,19 +411,6 @@ def main_lc():
             y_pos += 40
             draw_modern_bar(frame, "ACCELERATION (M/S²)", data['acceleration'], *ACC_RANGE, (margin, y_pos))
             
-
-            #kuhglocke doesn't transmit orientation :(
-            """
-            # ORIENTATION PANEL
-            y_pos += 60
-            orientation_items = [
-                f"Pitch: {data['orientation']['pitch']:+6.1f}°",
-                f"Roll:  {data['orientation']['roll']:+6.1f}°",
-                f"Yaw:   {data['orientation']['yaw']:+6.1f}°"
-            ]
-            draw_info_panel(frame, "ORIENTATION", orientation_items, (margin, y_pos), width=250)
-            """
-
             # TOP RIGHT PANEL - MOVED FURTHER TO CORNER ------------------
             right_margin = 15
             right_x = FRAME_WIDTH - 320 - right_margin
@@ -442,14 +434,10 @@ def main_lc():
             btm_y = FRAME_HEIGHT - 20
             
             # Kuhglocke connection indicator
-            draw_modern_indicator(frame, "KUHGLOCKE", data['gs_connected'], (margin + 10, btm_y-30))
+            draw_modern_indicator(frame, "KUHGLOCKE", data['gs_connected'], (margin + 150, btm_y))
 
             # Video connection indicator
             draw_modern_indicator(frame, "VIDEO LINK", data['video_conn_ok'], (margin + 10, btm_y))
-            
-            # Parachute status
-            draw_parachute_status(frame, data['parachute_ready'], data['parachute_deployed'], 
-                                (margin + 150, btm_y))
 
             # FLIGHT STAGE PROGRESSION ------------------------------------
             stage_y = FRAME_HEIGHT - 35

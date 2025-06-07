@@ -15,7 +15,9 @@ def fetch_transmitter_data():
     while True: 
         try:
             #Sends a GET request to the transmitter
-            response = requests.get(url, timeout=10) 
+            #(connect timeout, read timeout)
+            #make sure read timeout is smaller than camera refresh rate
+            response = requests.get(url, timeout=(10,0.05)) 
 
             # Raises an exception if the HTTP response contains an error status code
             response.raise_for_status() 
@@ -25,7 +27,7 @@ def fetch_transmitter_data():
             #raw_data = "212269,3,12,238.3,2375,3300,3941,76,205,Discharging,Power + Data,4294967295,0,0.000000,0.000000,0.00,1,No,?,?,?,1463.6,1430.0,905.40,31.25,10,212270,0000000000000000000000000000,0,0.00,0,NO,NO,0,0.000000,0.000000,0,0,0,8612,1"
 
 
-                # Define the schema based on the provided GitHub code
+            # Define the schema based on the provided GitHub code
             schema = [
                 "Uptime", "MainLoopSpeed", "MaxMainLoopSpeed", "FreeHeap", "AmbientTemp",
                 "PSUVolt", "BattVolt", "BattSoC", "SysCurrent", "BattStatus", "USBMode",

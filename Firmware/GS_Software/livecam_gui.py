@@ -69,41 +69,50 @@ def get_live_data(t0: float, prev_data: dict) -> Dict:
     """Return a dictionary with live telemetry. Currently simulated."""
     t = time.time() - t0
 
-    #read data from groud station
-    raw_data = fetch_transmitter_data()
+    try:
+        #read data from groud station
+        raw_data = fetch_transmitter_data()
 
-    #initialize some values to zero for first second to avoid error
-    if t < 1:
-        vert_vel = 0
-        vert_accel = 0
-    else:
-        vert_vel = calculate_vertical_velocity(raw_data, prev_data['velocity'], prev_data['uptime'])
-        vert_accel = calculate_vertical_acceleration(vert_vel, raw_data,  prev_data['velocity'], prev_data['uptime'])
+        #initialize some values to zero for first second to avoid error
+        if t < 1:
+            vert_vel = 0
+            vert_accel = 0
+        else:
+            vert_vel = calculate_vertical_velocity(raw_data, prev_data['velocity'], prev_data['uptime'])
+            vert_accel = calculate_vertical_acceleration(vert_vel, raw_data,  prev_data['velocity'], prev_data['uptime'])
 
 
-    data = {
-        "mission_time": t,
-        "uptime": float(raw_data['Uptime']),
-        "altitude": float(raw_data['Alt']), #VS RcktAlt
-        "velocity": float(vert_vel),
-        "acceleration": float(vert_accel),
-        "latitude": float(raw_data['Lat']), #VS RcktLat
-        "longitude": float(raw_data['Lon']), #VS RcktLon
-        "pressure": 101.3 - float(raw_data['Alt'][-1]) * 0.012, # crude ISA model
-        "battery": float(raw_data['BattVolt']), #CHECK WHICH BATTERY
-        "int_temp": float(raw_data['AmbientTemp']),
-        "video_conn_ok": True, #need to add error handling for when camera is offline and update this
-        "parachute_ready": True, #what does this mean
-        "parachute_deployed": False, #look into state handling
-        "current_stage": False, #look into state handling
-        "orientation": { #this isn't transmitted
-            "pitch": random.uniform(-15, 15),  # deg
-            "roll": random.uniform(-10, 10),   # deg
-            "yaw": random.uniform(-180, 180)   # deg
+        data = {
+            "mission_time": t,
+            "uptime": float(raw_data['Uptime']),
+            "altitude": float(raw_data['Alt']), #VS RcktAlt
+            "velocity": float(vert_vel),
+            "acceleration": float(vert_accel),
+            "latitude": float(raw_data['Lat']), #VS RcktLat
+            "longitude": float(raw_data['Lon']), #VS RcktLon
+            "pressure": 101.3 - float(raw_data['Alt'][-1]) * 0.012, # crude ISA model
+            "battery": float(raw_data['BattVolt']), #CHECK WHICH BATTERY
+            "int_temp": float(raw_data['AmbientTemp']),
+            "video_conn_ok": True, #need to add error handling for when camera is offline and update this
+            "parachute_ready": True, #what does this mean
+            "parachute_deployed": False, #look into state handling
+            "current_stage": False, #look into state handling
+            "orientation": { #this data isn't transmitted
+                "pitch": random.uniform(-15, 15),  # deg
+                "roll": random.uniform(-10, 10),   # deg
+                "yaw": random.uniform(-180, 180)   # deg
+            },
+            "gs_connected":True
         }
-    }
 
-    return data
+        return data
+
+    except Exception as e:
+        #print(f"Error updating GUI: {e}")
+        data = prev_data
+        data['gs_connected'] = False
+        
+        return data
 
 # --------------------------- DRAW HELPERS ---------------------------
 
@@ -323,8 +332,8 @@ def main_lc():
     # --- Video Writers ---
     now_str = datetime.now().strftime("%Y%m%d_%H%M%S")
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    raw_writer = cv2.VideoWriter(f'video_output/raw_capture_{now_str}.avi', fourcc, 30.0, (FRAME_WIDTH, FRAME_HEIGHT))
-    overlay_writer = cv2.VideoWriter(f'video_output/overlay_capture_{now_str}.avi', fourcc, 30.0, (FRAME_WIDTH, FRAME_HEIGHT))
+    raw_writer = cv2.VideoWriter(f'video_output/{now_str}_raw_capture.avi', fourcc, 30.0, (FRAME_WIDTH, FRAME_HEIGHT))
+    overlay_writer = cv2.VideoWriter(f'video_output/{now_str}_overlay_capture.avi', fourcc, 30.0, (FRAME_WIDTH, FRAME_HEIGHT))
 
     #preliminary initialization 
     #if time switch to OOP to avoid this
@@ -347,7 +356,8 @@ def main_lc():
             "pitch": 0,
             "roll": 0,
             "yaw": 0
-        }
+        },
+        "gs_connected": True
     }
 
     try:
@@ -409,14 +419,17 @@ def main_lc():
             draw_crosshair(frame, center)
 
             # BOTTOM STATUS INDICATORS ------------------------------------
-            btm_y = FRAME_HEIGHT - 80
+            btm_y = FRAME_HEIGHT - 20
             
+            # Kuhglocke connection indicator
+            draw_modern_indicator(frame, "KUHGLOCKE", data['gs_connected'], (margin + 10, btm_y-30))
+
             # Video connection indicator
             draw_modern_indicator(frame, "VIDEO LINK", data['video_conn_ok'], (margin + 10, btm_y))
             
             # Parachute status
             draw_parachute_status(frame, data['parachute_ready'], data['parachute_deployed'], 
-                                (margin + 200, btm_y))
+                                (margin + 150, btm_y))
 
             # FLIGHT STAGE PROGRESSION ------------------------------------
             stage_y = FRAME_HEIGHT - 35

@@ -327,6 +327,7 @@ def main_lc():
         print("Logo image not found or failed to load.")
 
     t0 = time.time()
+    t_check_conn = t0
     cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_NORMAL)
     
     # --- Video Writers ---
@@ -377,6 +378,21 @@ def main_lc():
             current_time = datetime.now().strftime("%H:%M:%S UTC")
             mission_time = f"T+{data['mission_time']:.1f}s"
             
+            #checking if time to check video status
+            if time.time() - t_check_conn > 10:
+                t_check_conn = time.time()
+
+                #convert to grayscale and measure mean
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                mean_brightness = gray.mean()
+                print(f"Mean image brightness: {mean_brightness:.2f}")
+
+                #if image is dark, camera likely isn't connected
+                if mean_brightness < 25:
+                    data['video_conn_ok'] = False
+                else:
+                    data['video_conn_ok'] = True
+
             # Time display with background
             draw_rounded_rect(frame, (margin - 5, 5), 350, 35, COLORS['surface'], alpha=0.85)
             draw_text(frame, current_time, (margin + 5, 30), color=COLORS['accent'], scale=0.7, thickness=2)
@@ -390,6 +406,9 @@ def main_lc():
             y_pos += 40
             draw_modern_bar(frame, "ACCELERATION (M/S²)", data['acceleration'], *ACC_RANGE, (margin, y_pos))
             
+
+            #kuhglocke doesn't transmit orientation :(
+            """
             # ORIENTATION PANEL
             y_pos += 60
             orientation_items = [
@@ -398,6 +417,7 @@ def main_lc():
                 f"Yaw:   {data['orientation']['yaw']:+6.1f}°"
             ]
             draw_info_panel(frame, "ORIENTATION", orientation_items, (margin, y_pos), width=250)
+            """
 
             # TOP RIGHT PANEL - MOVED FURTHER TO CORNER ------------------
             right_margin = 15

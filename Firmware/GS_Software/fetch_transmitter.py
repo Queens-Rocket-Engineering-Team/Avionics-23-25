@@ -12,45 +12,44 @@ def fetch_transmitter_data():
     # URL of the webpage hosted on the transmitter wifi network
     url = "http://192.168.4.1/debugData" #Comment out when testing without device >>>>>>
 
-    while True: 
-        try:
-            #Sends a GET request to the transmitter
-            #(connect timeout, read timeout)
-            #make sure read timeout is smaller than camera refresh rate
-            response = requests.get(url, timeout=(10,0.05)) 
+    try:
+        #Sends a GET request to the transmitter
+        #(connect timeout, read timeout)
+        #make sure read timeout is smaller than camera refresh rate
+        response = requests.get(url, timeout=(0.1,0.03)) 
 
-            # Raises an exception if the HTTP response contains an error status code
-            response.raise_for_status() 
+        # Raises an exception if the HTTP response contains an error status code
+        response.raise_for_status() 
 
-            # Gets raw data as string
-            raw_data = response.text 
-            #raw_data = "212269,3,12,238.3,2375,3300,3941,76,205,Discharging,Power + Data,4294967295,0,0.000000,0.000000,0.00,1,No,?,?,?,1463.6,1430.0,905.40,31.25,10,212270,0000000000000000000000000000,0,0.00,0,NO,NO,0,0.000000,0.000000,0,0,0,8612,1"
+        # Gets raw data as string
+        raw_data = response.text 
+        #raw_data = "212269,3,12,238.3,2375,3300,3941,76,205,Discharging,Power + Data,4294967295,0,0.000000,0.000000,0.00,1,No,?,?,?,1463.6,1430.0,905.40,31.25,10,212270,0000000000000000000000000000,0,0.00,0,NO,NO,0,0.000000,0.000000,0,0,0,8612,1"
 
 
-            # Define the schema based on the provided GitHub code
-            schema = [
-                "Uptime", "MainLoopSpeed", "MaxMainLoopSpeed", "FreeHeap", "AmbientTemp",
-                "PSUVolt", "BattVolt", "BattSoC", "SysCurrent", "BattStatus", "USBMode",
-                "FixAge", "NumSat", "Lat", "Lon", "Alt", "Timestamp",
-                "SDPresent", "SDCapacity", "SDAvailable", "LogID", "SPIFFSSize", "SPIFFSFree",
-                "LoRaFreq", "LoRaBand", "LoRaSF", "LastPingTime", "LastPacket", "LastRSSI",
-                "LastSNR", "LastFreqErr", "LastPcktValid", "AFCOn",
-                "RcktSats", "RcktLat", "RcktLon", "RcktAlt", "RcktStatus",
-                "CurFreqOffset", "Core0FreeStack", "Core0LoopTime"
-            ]
+        # Define the schema based on the provided GitHub code
+        schema = [
+            "Uptime", "MainLoopSpeed", "MaxMainLoopSpeed", "FreeHeap", "AmbientTemp",
+            "PSUVolt", "BattVolt", "BattSoC", "SysCurrent", "BattStatus", "USBMode",
+            "FixAge", "NumSat", "Lat", "Lon", "Alt", "Timestamp",
+            "SDPresent", "SDCapacity", "SDAvailable", "LogID", "SPIFFSSize", "SPIFFSFree",
+            "LoRaFreq", "LoRaBand", "LoRaSF", "LastPingTime", "LastPacket", "LastRSSI",
+            "LastSNR", "LastFreqErr", "LastPcktValid", "AFCOn",
+            "RcktSats", "RcktLat", "RcktLon", "RcktAlt", "RcktStatus",
+            "CurFreqOffset", "Core0FreeStack", "Core0LoopTime"
+        ]
 
-            # Split the raw data string by commas 
-            values = raw_data.split(',')
+        # Split the raw data string by commas 
+        values = raw_data.split(',')
 
-            # Map the schema to the values, N/A for things without values
-            readable_data = {schema[i]: values[i] if i < len(values) else "N/A" for i in range(len(schema))}
+        # Map the schema to the values, N/A for things without values
+        readable_data = {schema[i]: values[i] if i < len(values) else "N/A" for i in range(len(schema))}
 
-        #Error handling
-        except requests.exceptions.RequestException as e:
-            print(f"Error fetching data: {e}")
-            raise e
-        
-        return readable_data
+    #Error handling
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching data: {e}")
+        raise e
+    
+    return readable_data
 
 
 #======================================================

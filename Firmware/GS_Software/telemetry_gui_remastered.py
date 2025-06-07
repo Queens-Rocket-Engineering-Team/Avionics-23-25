@@ -9,10 +9,6 @@ from fetch_transmitter import (
     calculate_vertical_acceleration
 )
 
-#for camera window
-import cv2
-from PIL import Image, ImageTk
-
 class TelemetryApp:
     def __init__(self, root):
         self.root = root
@@ -32,17 +28,6 @@ class TelemetryApp:
         self.altitude_data = deque(maxlen=self.max_points)
         self.velocity_data = deque(maxlen=self.max_points)
         self.acceleration_data = deque(maxlen=self.max_points)
-
-        # ====================
-        # Webcame window
-        # ====================
-
-        self.webcam_window = tk.Toplevel(self.root)
-        self.webcam_window.title("Webcam Feed")
-        self.webcam_label = tk.Label(self.webcam_window)
-        self.webcam_label.pack()
-        self.cap = cv2.VideoCapture(0)
-        self.update_webcam()
 
         # ====================
         # UI Layout
@@ -171,16 +156,6 @@ class TelemetryApp:
 
         # Call this again after 1000 ms
         self.root.after(1000, self.update_gui)
-
-    def update_webcam(self):
-        ret, frame = self.cap.read()
-        if ret:
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            img = Image.fromarray(frame)
-            imgtk = ImageTk.PhotoImage(image=img)
-            self.webcam_label.imgtk = imgtk
-            self.webcam_label.configure(image=imgtk)
-        self.webcam_window.after(30, self.update_webcam)
 
 if __name__ == "__main__":
     print("Starting Telemetry GUI...")

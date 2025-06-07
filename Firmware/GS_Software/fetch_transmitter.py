@@ -4,7 +4,6 @@ import os #Used for testing as of now
 import math
 import time
 
-
 def fetch_transmitter_data():
     """
     Fetches data from the transmitter's HTTP endpoint in a continuous loop.
@@ -124,3 +123,8 @@ def test_display_telemetry_data(readable_data):
     for key, value in readable_data.items():
         print(f"{key}: {value}")
     print("-" * 40)
+
+if __name__ == '__main__':
+    while True:
+        print(fetch_transmitter_data())
+        time.sleep(1)

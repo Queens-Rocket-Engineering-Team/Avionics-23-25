@@ -24,6 +24,13 @@ import random
 from typing import Dict
 from datetime import datetime
 
+#for ground station communication
+from fetch_transmitter import (
+    fetch_transmitter_data,
+    calculate_vertical_velocity,
+    calculate_vertical_acceleration
+)
+
 # --------------------------- CONFIG ---------------------------
 WINDOW_NAME = "Rocket Live Telemetry"
 FRAME_WIDTH  = 1280
@@ -58,51 +65,44 @@ FLIGHT_STAGES = ["Standby", "Launch", "Boost", "Coast", "Apogee", "Descent", "La
 # 🛰️  FAKE DATA GENERATOR — replace with real data capture
 # --------------------------------------------------------------
 
-def get_live_data(t0: float) -> Dict:
+def get_live_data(t0: float, prev_data: dict) -> Dict:
     """Return a dictionary with live telemetry. Currently simulated."""
     t = time.time() - t0
 
-    # Simple ballistic-ish altitude curve
-    altitude = max(0.0, 350 + 40*t - 0.5*t*t)      # m
-    velocity = 40 - t                               # m/s
-    acceleration = -1.0                             # m/s² (placeholder)
+    #read data from groud station
+    raw_data = fetch_transmitter_data()
 
-    # Determine current flight stage based on time
-    if t < 2:
-        current_stage = 0  # Standby
-    elif t < 5:
-        current_stage = 1  # Launch
-    elif t < 15:
-        current_stage = 2  # Boost
-    elif t < 25:
-        current_stage = 3  # Coast
-    elif t < 35:
-        current_stage = 4  # Apogee
-    elif t < 60:
-        current_stage = 5  # Descent
+    #initialize some values to zero for first second to avoid error
+    if t < 1:
+        vert_vel = 0
+        vert_accel = 0
     else:
-        current_stage = 6  # Landing
+        vert_vel = calculate_vertical_velocity(raw_data, prev_data['velocity'], prev_data['uptime'])
+        vert_accel = calculate_vertical_acceleration(vert_vel, raw_data,  prev_data['velocity'], prev_data['uptime'])
+
 
     data = {
         "mission_time": t,
-        "altitude": altitude,
-        "velocity": velocity,
-        "acceleration": acceleration,
-        "latitude": 44.22530 + random.uniform(-0.0001, 0.0001),
-        "longitude": -76.49510 + random.uniform(-0.0001, 0.0001),
-        "pressure": 101.3 - altitude * 0.012,        # crude ISA model
-        "battery": 12.6 - 0.002 * t,
-        "int_temp": 25 + 2 * math.sin(t / 30),
-        "video_conn_ok": random.random() > 0.05,
-        "parachute_ready": t > 25,
-        "parachute_deployed": t > 35,
-        "current_stage": current_stage,
-        "orientation": {
+        "uptime": float(raw_data['Uptime']),
+        "altitude": float(raw_data['Alt']), #VS RcktAlt
+        "velocity": float(vert_vel),
+        "acceleration": float(vert_accel),
+        "latitude": float(raw_data['Lat']), #VS RcktLat
+        "longitude": float(raw_data['Lon']), #VS RcktLon
+        "pressure": 101.3 - float(raw_data['Alt'][-1]) * 0.012, # crude ISA model
+        "battery": float(raw_data['BattVolt']), #CHECK WHICH BATTERY
+        "int_temp": float(raw_data['AmbientTemp']),
+        "video_conn_ok": True, #need to add error handling for when camera is offline and update this
+        "parachute_ready": True, #what does this mean
+        "parachute_deployed": False, #look into state handling
+        "current_stage": False, #look into state handling
+        "orientation": { #this isn't transmitted
             "pitch": random.uniform(-15, 15),  # deg
             "roll": random.uniform(-10, 10),   # deg
             "yaw": random.uniform(-180, 180)   # deg
-        },
+        }
     }
+
     return data
 
 # --------------------------- DRAW HELPERS ---------------------------
@@ -284,13 +284,38 @@ def main():
     t0 = time.time()
     cv2.namedWindow(WINDOW_NAME, cv2.WINDOW_NORMAL)
 
+    #preliminary initialization 
+    #if time switch to OOP to avoid this
+    data = {
+        "mission_time": 0,
+        "uptime": 0,
+        "altitude": 0,
+        "velocity": 0,
+        "acceleration": 0,
+        "latitude": 0,
+        "longitude": 0,
+        "pressure": 0,
+        "battery": 0,
+        "int_temp": 0,
+        "video_conn_ok": True,
+        "parachute_ready": True,
+        "parachute_deployed": False,
+        "current_stage": False,
+        "orientation": {
+            "pitch": 0,
+            "roll": 0,
+            "yaw": 0
+        }
+    }
+
     try:
         while True:
             ret, frame = cap.read()
             if not ret:
                 break
 
-            data = get_live_data(t0)
+            prev_data = data
+            data = get_live_data(t0, prev_data)
 
             # TOP STATUS BAR WITH MODERN STYLING ---------------------------
             margin = 15

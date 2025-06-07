@@ -157,8 +157,11 @@ class TelemetryApp:
         # Call this again after 1000 ms
         self.root.after(1000, self.update_gui)
 
-if __name__ == "__main__":
+def main_tel():
     print("Starting Telemetry GUI...")
     root = tk.Tk()
     app = TelemetryApp(root)
     root.mainloop()
+
+if __name__ == "__main__":
+    main_tel()

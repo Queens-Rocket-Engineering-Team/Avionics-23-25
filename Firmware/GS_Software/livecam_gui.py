@@ -273,7 +273,8 @@ def draw_parachute_status(img, ready, deployed, center):
 
 # --------------------------- MAIN LOOP ---------------------------
 
-def main():
+def main_lc():
+    print('Starting Live Camera GUI...')
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
         raise RuntimeError("Could not open camera 0")
@@ -386,4 +387,4 @@ def main():
         cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main()
+    main_lc()

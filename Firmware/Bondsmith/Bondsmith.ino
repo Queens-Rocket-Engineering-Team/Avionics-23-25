@@ -1,7 +1,7 @@
 /*
  * Authors: Kennan Bays
  * Created: Jun.3.2025
- * Updated: Jun.4.2025
+ * Updated: Jun.5.2025
  * Hardware: Bondsmith PCB Rev1.0 (STM32F103C8T6)
  * Environment: Arduino 1.8.10, STM32duino 2.7? (likely works with newer cores)
  * Purpose: Firmware for the Bondsmith Motherboard inside the QRET 2025 briefcase ground station.
@@ -26,12 +26,15 @@
 #include "pinouts.h"
 #include <HardwareSerial.h>
 #include <movingAvg.h>          // https://github.com/JChristensen/movingAvg
+#include <Adafruit_NeoPixel.h>
 //TODO: Include STM32duino low power library to improve power consumption
 
 
+
 // # # # # DEFINITIONS # # # # 
-//#define FW_SIGNATURE "Jun.4.2025" // Firmware signature string. Update after major changes; allows end-user to check firmware version.
+//#define FW_SIGNATURE "Jun.5.2025" // Firmware signature string. Update after major changes; allows end-user to check firmware version.
 #define SERIAL_BAUD_RATE 115200
+#define NUM_RGB_LEDS 5
 
 // # # # # CONSTANTS # # # #
 // Internal STM32 V(ref) voltage (default 1200mV)
@@ -87,6 +90,7 @@ movingAvg batt1RawFilter(20);
 movingAvg batt2RawFilter(20);
 movingAvg currentRawFilter(20);
 
+Adafruit_NeoPixel indicators(NUM_RGB_LEDS, RGB_DATA_PIN, NEO_GRB + NEO_KHZ800);
 
 /*
  * Reads internal voltage reference and back-calculates
@@ -152,12 +156,15 @@ void setup() {
   digitalWrite(VRX_PWR_ENABLE_PIN, HIGH);
 
   // Turn fan on 100%
-  setFanPower(128);
+  setFanPower(255);
 
   // Turn on current sensor (TODO: Disable this for power saving in the future)
   digitalWrite(CURR_SENSOR_PWR_PIN, HIGH);
+
+  // Initialize RGB indicator LEDs
+  indicators.begin();
   
-  // Flash debug LED to signal startup
+  // Flash debug LED to signal startupp
   for (uint8_t i=0; i<8; i++) {
     digitalWrite(STATUS_LED_PIN, HIGH);
     delay(100);
@@ -321,6 +328,33 @@ void setFanPower(uint8_t pwr) {
 
 
 
+// Given a battery voltage and the indicator LED index,
+// updates the colour of the LED
+void setBatteryIndicator(uint16_t mv, uint8_t ledIndex) {
+  //>=16V = Full
+  // 15.6V = Good
+  // 14.8V = Fair
+  // 13.2V = Low
+  // 12.8 = Very low
+  //<=12V = DEAD
+  
+  if (mv >= 16000) {
+    indicators.setPixelColor(ledIndex, indicators.Color(0, 128, 0));
+  } else if (mv >= 15600) {
+    indicators.setPixelColor(ledIndex, indicators.Color(32, 128, 0));
+  } else if (mv >= 14800) {
+    indicators.setPixelColor(ledIndex, indicators.Color(64, 128, 0));
+  } else if (mv >= 13200) {
+    indicators.setPixelColor(ledIndex, indicators.Color(96, 64, 0));
+  } else if (mv >= 12800) {
+    indicators.setPixelColor(ledIndex, indicators.Color(128, 16, 0));
+  } else if (mv <= 12000) {
+    indicators.setPixelColor(ledIndex, indicators.Color(255, 0, 0));
+  }//if
+
+  indicators.show();
+}//setBatteryIndicator()
+
 void loop() {
 
   // Check if should measure sensors
@@ -359,5 +393,9 @@ void loop() {
   } else if (curFanPower > 0) {
     setFanPower(0);
   }//if
+
+  // Manage indicator LEDs
+  setBatteryIndicator(lastBatt1Volt, 0);
+  setBatteryIndicator(lastBatt2Volt, 1);
 
 }//loop()

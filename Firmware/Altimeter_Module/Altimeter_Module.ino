@@ -245,6 +245,8 @@ void setup(){
     mpu6050.setGyroRange(MPU6050_RANGE_500_DEG);
     mpu6050.setFilterBandwidth(MPU6050_BAND_21_HZ);
 
+
+
   /*--------------------*\
   |    KX134 SETUP    |
   \*--------------------*/
@@ -252,16 +254,29 @@ void setup(){
   //float qmaOffsetY = -0.485;
   //float qmaOffsetZ = 0.825;
 
-  usb.print("SEARCHING: KX134");
-  
-  while(!kxAccel.begin(KX134_ADDR)) {       //Wait for kx134 to connect
-      delay(10);  
-  }
-  usb.println("  - CONNECTED");    //kx134 connected
-  
-  kxAccel.softwareReset();
-  kxAccel.setRange(SFE_KX134_RANGE32G);
-  //kxAccel.setOffset(qmaOffsetX,qmaOffsetY,qmaOffsetZ);
+  // usb.print("SEARCHING: KX134");
+
+  // while(!kxAccel.begin(KX134_ADDR)) {       // Wait for kx134 to connect
+  //     delay(10);  
+  //     for (byte address = 1; address < 127; ++address) {
+  //       Wire.beginTransmission(address);
+  //       byte error = Wire.endTransmission();
+
+  //       if (error == 0) {
+  //         Serial.print("Found device at 0x");
+  //         Serial.println(address, HEX);
+  //       }
+  //     }
+  // }
+  // usb.println("  - CONNECTED");
+
+  // usb.println("Resetting KX134...");
+  // kxAccel.softwareReset();
+  // delay(100); // Wait for reset to complete
+
+  // usb.println("Setting range...");
+  // kxAccel.setRange(SFE_KX134_RANGE32G);
+  // usb.println("KX134 configured.");
 
   // Get base measurements
   usb.println("Aquiring base Pressure...");
@@ -293,7 +308,7 @@ void setup(){
 
   usb.println("Beginning PreFlight...");
 
-  kxAccel.enableAccel();  //Start accelerometer reading
+  // kxAccel.enableAccel();  //Start accelerometer reading
 
   digitalWrite(STATUS_LED_PIN, HIGH);
 
@@ -306,6 +321,7 @@ void setup(){
 // ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---   ---
 
 void loop(){
+
   /*---------|----------*\
       |SENSOR READING|    
   \*---------|----------*/
@@ -326,13 +342,14 @@ void loop(){
   mpu6050.getEvent(&a, &g, &temp);
 
   //read accelerometer
-  kxAccel.getAccelData(&kxData);
+  //kxAccel.getAccelData(&kxData);
   //kxAccel.offsetValues(kxData.xData, kxData.yData, kxData.zData);
 
   //--- CANBUS DATA SENDING
   if (millis() - lastSend >= CANBUS_DATAINT){
     //send Temperature, altitude, and Flight stage
     //sendCANtemp(T);
+    usb.println(alt);
     sendCANaltitude(alt);
     sendCANstage(STATE);
     lastSend = millis();
@@ -346,7 +363,7 @@ void loop(){
     case 0:   //Pre-Flight Stage  
       // Data logging
       if( millis() - lastLog >= PRE_DATAINT){
-        logDataToFlash(P,P_filter,T,&a,&g,&kxData);
+        logDataToFlash(P,P_filter,T,&a,&g);
         lastLog = millis();
       }//if
       //Perform Launch Checks
@@ -359,7 +376,7 @@ void loop(){
     case 1:   //Ascending
       //logging data 
       if( millis() - lastLog >= ASC_DATAINT){
-        logDataToFlash(P,P_filter,T,&a,&g,&kxData);
+        logDataToFlash(P,P_filter,T,&a,&g);
         lastLog = millis();
       }//if
        
@@ -378,7 +395,7 @@ void loop(){
     case 3:   //Descending with drogue
       //logging data
       if( millis() - lastLog >= DROGUE_DATAINT){
-        logDataToFlash(P,P_filter,T,&a,&g,&kxData);
+        logDataToFlash(P,P_filter,T,&a,&g);
         lastLog = millis();
       }//if
 
@@ -395,13 +412,13 @@ void loop(){
       //logging data
       if(millis() - mainTimer <= 5000){
         if(millis() - lastLog >= MAIN_DATAINTFAST){
-          logDataToFlash(P,P_filter,T,&a,&g,&kxData);
+          logDataToFlash(P,P_filter,T,&a,&g);
           lastLog = millis();
         }//if
       }//if
       else if(millis() - mainTimer > 5000){
         if(millis() - lastLog >= MAIN_DATAINTSLOW){
-          logDataToFlash(P,P_filter,T,&a,&g,&kxData);
+          logDataToFlash(P,P_filter,T,&a,&g);
           lastLog = millis();
         }//if
       }//if
@@ -421,7 +438,7 @@ void loop(){
       //logging data
       if (millis() - landingTimer <= 1800000){
         if( millis() - lastLog >= LAND_DATAINT){
-          logDataToFlash(P,P_filter,T,&a,&g,&kxData);
+          logDataToFlash(P,P_filter,T,&a,&g);
           lastLog = millis();
 
         }//if
@@ -429,7 +446,7 @@ void loop(){
       //slower logging rate after 30 mins to save power
       else if (millis() - landingTimer > 1800000 && millis() - landingTimer < 3600000){
         if( millis() - lastLog >= LAND_SLOW_DATAINT){
-          logDataToFlash(P,P_filter,T,&a,&g,&kxData);
+          logDataToFlash(P,P_filter,T,&a,&g);
           lastLog = millis();
 
         }//if
@@ -447,9 +464,8 @@ void loop(){
      |  DATA LOGGING |    
 \*---/\---/\---/\---/\---*/
 
-void logDataToFlash( float pressure,float pressure_filter,float temp,sensors_event_t *a,
-                    sensors_event_t *g,outputData *kxData){
-  uint32_t dataArr[11] = {0,0,0,0,0,0,0,0,0,0,0};
+void logDataToFlash( float pressure,float pressure_filter,float temp,sensors_event_t *a, sensors_event_t *g){
+  uint32_t dataArr[8] = {0,0,0,0,0,0,0,0};
 
   dataArr[0] = millis();
   dataArr[1] = uint32_t(pressure);
@@ -458,21 +474,24 @@ void logDataToFlash( float pressure,float pressure_filter,float temp,sensors_eve
   // dataArr[4] = static_cast<uint32_t>(a->acceleration.x*1e6);
   // dataArr[5] = static_cast<uint32_t>(a->acceleration.y*1e6);
   dataArr[3] = flash.unsignify(a->acceleration.z*10000);
-
-  dataArr[4] = flash.unsignify(kxData->xData*10000);
-  dataArr[5] = flash.unsignify(kxData->yData*10000);
-  dataArr[6] = flash.unsignify(kxData->zData*10000);
   
   //gyro data
-  dataArr[7] = flash.unsignify(g->gyro.x*10000);
-  dataArr[8] = flash.unsignify(g->gyro.y*10000);
-  dataArr[9] = flash.unsignify(g->gyro.z*10000);
+  dataArr[4] = flash.unsignify(g->gyro.x*10000);
+  dataArr[5] = flash.unsignify(g->gyro.y*10000);
+  dataArr[6] = flash.unsignify(g->gyro.z*10000);
+
+  // dataArr[7] = flash.unsignify(altitudeFind(pressure_filter, altimeterBasePres(500),altimeterBaseTemp(500)));
 
   //state
-  dataArr[10] = STATE;
+  dataArr[7] = STATE;
 
   //write to FLASH
-  flash.writeRow(dataArr);
+  bool success = flash.writeRow(dataArr);
+  if (success) {
+    //usb.println("[MDE] Data logged successfully");
+  } else {
+      usb.println("[MDE] Flash write failed!");
+  }
 
 }//logDataToFlash()
 
@@ -602,6 +621,13 @@ void debugMode() {
       // "DumpFlash" command; dump all flash contents via serial
       flash.beginDataDump(&usb);
     }//if
+    if (cmd == 'L') {
+      float P = ms5611.GetPres();              //Get variables for pressure and temperature
+      float T = ms5611.GetTemp()/100 + 273;
+      float P_filter = kalmanFilter.updateEstimate(P);
+      mpu6050.getEvent(&a, &g, &temp);
+      logDataToFlash(P,P_filter,T,&a,&g);
+    }  
     if (cmd == 'E') {
       // "EraseFlash" command; completely erase contents of flash.
       // Should be restarted afterwards
@@ -613,7 +639,7 @@ void debugMode() {
     }//if
     if (cmd == 'Q') {
         // QUERY SENSORS
-        kxAccel.enableAccel();
+        // kxAccel.enableAccel();
           //Read pressure/temperature
         ms5611.Readout();
         usb.println("[MDE] --MS5611--");
@@ -634,17 +660,17 @@ void debugMode() {
       usb.println(g.gyro.z);
       
         //read accelerometer
-      outputData kxData;
-      kxAccel.getAccelData(&kxData);
+      // outputData kxData;
+      //kxAccel.getAccelData(&kxData);
       //kxAccel.offsetValues(kxData.xData, kxData.yData, kxData.zData);
 
-      usb.println("[MDE] --kxAccel--");
-      usb.print("[MDE] X Acceleration (g): ");
-      usb.println(kxData.xData);
-      usb.print("[MDE] Y Acceleration (g): ");
-      usb.println(kxData.yData);
-      usb.print("[MDE] Z Acceleration (g): ");
-      usb.println(kxData.zData);   
+      // usb.println("[MDE] --kxAccel--");
+      // usb.print("[MDE] X Acceleration (g): ");
+      // usb.println(kxData.xData);
+      // usb.print("[MDE] Y Acceleration (g): ");
+      // usb.println(kxData.yData);
+      // usb.print("[MDE] Z Acceleration (g): ");
+      // usb.println(kxData.zData);   
     }//if
 
   }//while

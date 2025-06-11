@@ -1,7 +1,7 @@
 /*
  * Authors: Kennan Bays
  * Created: Jun.3.2025
- * Updated: Jun.5.2025
+ * Updated: Jun.10.2025
  * Hardware: Bondsmith PCB Rev1.0 (STM32F103C8T6)
  * Environment: Arduino 1.8.10, STM32duino 2.7? (likely works with newer cores)
  * Purpose: Firmware for the Bondsmith Motherboard inside the QRET 2025 briefcase ground station.
@@ -373,26 +373,26 @@ void loop() {
     digitalWrite(STATUS_LED_PIN, LOW);
   }//if (report now)
 
-  // Manage fan
-  if (curFanPower == 0) {
-    // FAN OFF; check to see if turn on
-    if (lastPsuTemp > FAN_OFF_TO_LOW) {
-      setFanPower(FAN_LOW_POWER);
-    }//if (above low temp)
-  } else if (curFanPower == FAN_LOW_POWER) {
-    // FAN ON LOW; check if go off or higher
-    if (lastPsuTemp > FAN_LOW_TO_HIGH) {
-      setFanPower(FAN_HIGH_POWER);
-    } else if (lastPsuTemp < FAN_LOW_TO_OFF) {
-      setFanPower(0);
-    }//if
-  } else if (curFanPower == FAN_HIGH_POWER) {
-    if (lastPsuTemp < FAN_HIGH_TO_LOW) {
-      setFanPower(FAN_LOW_POWER);
-    }//if
-  } else if (curFanPower > 0) {
-    setFanPower(0);
-  }//if
+  // Manage fan (TODO: REMOVED TO KEEP FAN AT 100% SPEED)
+  //  if (curFanPower == 0) {
+  //    // FAN OFF; check to see if turn on
+  //    if (lastPsuTemp > FAN_OFF_TO_LOW) {
+  //      setFanPower(FAN_LOW_POWER);
+  //    }//if (above low temp)
+  //  } else if (curFanPower == FAN_LOW_POWER) {
+  //    // FAN ON LOW; check if go off or higher
+  //    if (lastPsuTemp > FAN_LOW_TO_HIGH) {
+  //      setFanPower(FAN_HIGH_POWER);
+  //    } else if (lastPsuTemp < FAN_LOW_TO_OFF) {
+  //      setFanPower(0);
+  //    }//if
+  //  } else if (curFanPower == FAN_HIGH_POWER) {
+  //    if (lastPsuTemp < FAN_HIGH_TO_LOW) {
+  //      setFanPower(FAN_LOW_POWER);
+  //    }//if
+  //  } else if (curFanPower > 0) {
+  //    setFanPower(0);
+  //  }//if
 
   // Manage indicator LEDs
   setBatteryIndicator(lastBatt1Volt, 0);

@@ -6,7 +6,7 @@ Altimeter Module Firmware
 Sensors used:
  - ms5611 : Pressure and Temperature
  - mpu6050 : Gyroscope
- - kx134 : accelerometer
+ - kx134 : accelerometer (SIKE)
 
 Written by:
     Brent Naumann
@@ -337,6 +337,10 @@ void loop(){
 
   //Find Altitude from filtered Pressure
   float alt = altitudeFind(P_filter,Po,To);
+
+  // TODO: FIX IN THE FUTURE
+  // Override the inaccurate altitude system using raw pressure reading (im assuming its in pascals)
+  alt = (288.15d/0.0065d) * (1-pow(P_filter/101325.0f, 0.190284f));
 
   //read gyro
   mpu6050.getEvent(&a, &g, &temp);

@@ -49,7 +49,7 @@ uint16_t flashDelay = 250; // How frequently the debug LED should be toggled
 uint32_t lastFlash = 0; // Last millis() the debug LED was toggle at
 
 const uint8_t TABLE_NAME = 0;
-const uint8_t TABLE_COLS = 11;
+const uint8_t TABLE_COLS = 8;
 const uint32_t TABLE_SIZE = 16646144;
 // IMPORTANT!!!; AT LEAST 2 BLOCK OF SPACE MUST BE RESERVED FOR FILE SYSTEM
 // 16MiB = 16777216B, 2x 64KiB blocks = 131072B

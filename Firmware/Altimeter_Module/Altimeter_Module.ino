@@ -744,7 +744,7 @@ void sendCANaltitude(float alt){
 
   //Adjust altitude into uin32_t 
   //pushes decimals to first 8 bits
-  uint32_t altint = (alt*100);
+  int32_t altint = (alt);
   
   //Start shifting bits (b0 = LSB)
   uint8_t b0 = altint & 0xFF;

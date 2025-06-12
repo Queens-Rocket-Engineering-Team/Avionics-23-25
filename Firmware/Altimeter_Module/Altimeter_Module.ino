@@ -203,16 +203,17 @@ void setup(){
     //toggleStatusLED();
   }//while
   usb.println("  - CONNECTED");
-      SerialFlash.eraseAll();
-      while (SerialFlash.ready() == false) {}  
+  
+  while (SerialFlash.ready() == false) {}  
   // Initialize FlashTable object
-  for (int i=0; i<3; i++) {
-  // tone(BUZZER_A_PIN, BUZZER_TONE_Q);
-  delay(100);
-  noTone(BUZZER_A_PIN);
-  delay(100);
-  }
   flash.init(&SerialFlash, &usb);
+  // Note done loading
+  for (int i=0; i<3; i++) {
+    startBuzzer();
+    delay(100);
+    stopBuzzer();
+    delay(100);
+  }
 
 
   /*------------------*\

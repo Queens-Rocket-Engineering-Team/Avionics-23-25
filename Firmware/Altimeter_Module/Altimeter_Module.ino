@@ -1,27 +1,21 @@
 /*
-QRET SRAD Avionics module - AIM
-Altimeter Module Firmware
-    V 1.0
+Authors: Brent Naumann, Tristan Alderson, Kennan Bays, Caelan Donovan
+Env: Arduino 1.8.10, STM32duino 2.7.1
+Updated: Jun.12.2025
+Purpose: QRET SRAD Avionics module - AIM Altimeter Module Firmware V 2.0 (STINGER)
+
 
 Sensors used:
  - ms5611 : Pressure and Temperature
  - mpu6050 : Gyroscope
  - kx134 : accelerometer (SIKE)
 
-Written by:
-    Brent Naumann
-    Tristan Alderson
-    Kennan Bays
-    Caelan Donovan
-Flash capability proveded by: 
-    Kennan Bays`
+
 
 */
 //Libraries to include
 #include <Wire.h>
-
 #include <SimpleKalmanFilter.h>
-#include <MS5xxx.h>
 #include <Adafruit_MPU6050.h>
 #include <SparkFun_KX13X.h> 
 #include <SerialFlash.h>
@@ -32,6 +26,7 @@ Flash capability proveded by:
 #include "STM32_CAN.h"
 #include "pinouts.h"
 #include <HardwareSerial.h>
+#include "MS5611.h" // https://github.com/RobTillaart/MS5611
 
 
 // TODO: RE-WORK BUZZER FOR ALL MODULES
@@ -93,7 +88,9 @@ HardwareSerial usb(USB_RX_PIN, USB_TX_PIN);
 //#define usb Serial              //For debugging when not using CANBUS
 
 SimpleKalmanFilter kalmanFilter(M_UNCERT,EST_UNCERT,NOISE_SENS); 
-MS5xxx ms5611(&Wire);
+MS5611 ms5611(MS5611_ADDR, &Wire);
+
+
 Adafruit_MPU6050 mpu6050;
 SparkFun_KX134 kxAccel;
 
@@ -222,14 +219,13 @@ void setup(){
   |    MS5611 SETUP    |
   \*------------------*/
   usb.print("SEARCHING: MS5611");      
-  ms5611.connect(); 
-  
-  while(ms5611.connect()>0) {  //Wait for ms5611 to connect
-    delay(10);   
-  }//while
-  usb.println("  - CONNECTED");      //ms5611 connected
-  ms5611.ReadProm();                    //Read the calibration coefficients
-  ms5611.setOversampling(0x0);
+  while (!ms5611.begin()) {
+    delay(10);
+  }
+  usb.println("  - CONNECTED"); //MS5611 connected
+
+  // Set oversampling
+  ms5611.setOversampling(OSR_ULTRA_LOW);
 
   /*-------------------*\
   |    MPU6050 SETUP    |
@@ -327,10 +323,11 @@ void loop(){
   \*---------|----------*/
   
   //read pressure/temp
-  ms5611.Readout();     //Read the data from the ms5611, which gets stored in the ms5xxx object
-  
-  float P = ms5611.GetPres();              //Get variables for pressure and temperature
-  float T = ms5611.GetTemp()/100 + 273;
+  ms5611.read();     //Read the data from the ms5611, which gets stored in object
+
+  //Get variables for pressure and temperature
+  float P = ms5611.getPressurePascal();  // Pascals
+  float T = ms5611.getTemperature(); // Celcius
 
   //Kalman Filtering on pressure
   float P_filter = kalmanFilter.updateEstimate(P);
@@ -353,6 +350,11 @@ void loop(){
   if (millis() - lastSend >= CANBUS_DATAINT){
     //send Temperature, altitude, and Flight stage
     //sendCANtemp(T);
+    usb.print("Pres(Pa): ");
+    usb.print(P_filter, 2);
+    usb.print(", Temp(C): ");
+    usb.print(T);
+    usb.print(", Alt(m): ");
     usb.println(alt);
     sendCANaltitude(alt);
     sendCANstage(STATE);
@@ -612,7 +614,7 @@ void debugMode() {
 
     if (cmd == 'I') {
       // "Identify" command; return board name
-      usb.println(F("[MDE] OKA_ALT"));
+      usb.println(F("[MDE] STINGER_ALT"));
     }//if
     if (cmd == 'F') {
       // "FlashInfo" command; return flash usage stats
@@ -626,8 +628,10 @@ void debugMode() {
       flash.beginDataDump(&usb);
     }//if
     if (cmd == 'L') {
-      float P = ms5611.GetPres();              //Get variables for pressure and temperature
-      float T = ms5611.GetTemp()/100 + 273;
+      // LOG DATA
+      //Get variables for pressure and temperature
+      float P = ms5611.getPressurePascal(); //pascals
+      float T = ms5611.getTemperature(); //celcius
       float P_filter = kalmanFilter.updateEstimate(P);
       mpu6050.getEvent(&a, &g, &temp);
       logDataToFlash(P,P_filter,T,&a,&g);
@@ -645,12 +649,12 @@ void debugMode() {
         // QUERY SENSORS
         // kxAccel.enableAccel();
           //Read pressure/temperature
-        ms5611.Readout();
+        ms5611.read();
         usb.println("[MDE] --MS5611--");
-        usb.print(F("[MDE] Temperature (0.01C): "));
-        usb.println(ms5611.GetTemp()/100 + 273);
+        usb.print(F("[MDE] Temperature (1.00C): "));
+        usb.println(ms5611.getTemperature());
         usb.print(F("[MDE] Pressure (Pa): "));
-        usb.println(ms5611.GetPres());
+        usb.println(ms5611.getPressurePascal());
 
         //read gyro
       sensors_event_t a, g, temp;
@@ -707,8 +711,8 @@ float altimeterBaseTemp(int sample){
   float sum = 0;
 
   for (int i=0 ; i<sample ; i++){
-    ms5611.Readout();
-    float Ti = ms5611.GetTemp()/100 + 273;
+    ms5611.read();
+    float Ti = ms5611.getTemperature(); //celcius
     sum +=Ti;
   }//for
   float To = sum/sample;
@@ -720,8 +724,8 @@ float altimeterBasePres(int sample){
   float sum = 0;
   
   for (int i=0 ; i<sample ; i++){
-    ms5611.Readout();
-    float Pi = ms5611.GetPres();
+    ms5611.read();
+    float Pi = ms5611.getPressurePascal(); //pascals
     sum +=Pi;
   }//for
   float Po = sum/sample;

@@ -28,6 +28,6 @@
 #define SW_CLK_PIN PA14
 #define STATUS_LED_PIN PA15
 
-#define MS5607_ADDR 0x76
+#define MS5611_ADDR 0x76
 #define MPU6050_ADDR 0x69
 #define KX134_ADDR 0x1F

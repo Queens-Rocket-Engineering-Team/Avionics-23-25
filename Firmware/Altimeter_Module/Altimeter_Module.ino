@@ -34,7 +34,7 @@ Sensors used:
 #define BUZZER_TONE_Q 500
 const uint32_t BEEP_FREQ = 1000;
 
-#define SERIAL_BAUD_RATE 38400
+#define SERIAL_BAUD_RATE 115200
 //#define SERIAL_BAUD_RATE 9600
 
 //--- FILTER SETTINGS

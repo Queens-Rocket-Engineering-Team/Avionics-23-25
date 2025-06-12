@@ -59,7 +59,7 @@ const uint32_t TABLE_SIZE = 16646144;
 #define CANBUS_DATAINT 500 //[ms] interval bewteen each CANBUS message send.
 
 //--- PREFLIGHT SETTINGS
-#define PRE_DATAINT 50  //[ms] interval bewteen each log to FLASH.
+#define PRE_DATAINT 35  //[ms] interval bewteen each log to FLASH.
 
 //--- LAUNCH SETTINGS
 #define LAUNCH_THRESHOLD  25  // [m/s]-mpu ; [g]-qma. Acceleration threshold to declare launch
@@ -94,7 +94,7 @@ MS5611 ms5611(MS5611_ADDR, &Wire);
 Adafruit_MPU6050 mpu6050;
 SparkFun_KX134 kxAccel;
 
-FlashTable flash = FlashTable(TABLE_COLS, 16384, TABLE_SIZE, TABLE_NAME, 256);
+FlashTable flash = FlashTable(TABLE_COLS, 16384, TABLE_SIZE, TABLE_NAME, 128);
 
 STM32_CAN canb( CAN1, ALT );    //CAN1 ALT is PB8+PB9
 static CAN_message_t CAN_TX_msg ;
@@ -470,7 +470,7 @@ void loop(){
      |  DATA LOGGING |    
 \*---/\---/\---/\---/\---*/
 
-void logDataToFlash( float pressure,float pressure_filter,float temp,sensors_event_t *a, sensors_event_t *g){
+void logDataToFlash( float pressure, float pressure_filter, float temp,sensors_event_t *a, sensors_event_t *g){
   uint32_t dataArr[8] = {0,0,0,0,0,0,0,0};
 
   dataArr[0] = millis();

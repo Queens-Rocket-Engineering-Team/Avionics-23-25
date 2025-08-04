@@ -1,18 +1,15 @@
 /*
-Authors: Brent Naumann, Tristan Alderson, Kennan Bays, Caelan Donovan
+Authors: Brent Naumann, Tristan Alderson, Kennan Bays, Caelan Donovan, Ethan Toste
 Env: Arduino 1.8.10, STM32duino 2.7.1
-Updated: Jun.12.2025
+Updated: Aug.04.2025
 Purpose: QRET SRAD Avionics module - AIM Altimeter Module Firmware V 2.0 (STINGER)
-
 
 Sensors used:
  - ms5611 : Pressure and Temperature
  - mpu6050 : Gyroscope
  - kx134 : accelerometer (SIKE)
-
-
-
 */
+
 //Libraries to include
 #include <Wire.h>
 #include <SimpleKalmanFilter.h>
@@ -23,7 +20,7 @@ Sensors used:
 #include "flashTable.h"
 #include <tone.h>
 #include <CANpackets.h>
-#include "STM32_CAN.h"
+#include "STM32_CAN.h" //IMPORTANT: DO NOT DOWNLOAD THE LATEST VERSION (DOWNLOAD 1.1.2)
 #include "pinouts.h"
 #include <HardwareSerial.h>
 #include "MS5611.h" // https://github.com/RobTillaart/MS5611

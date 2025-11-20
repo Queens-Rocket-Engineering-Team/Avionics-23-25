@@ -456,7 +456,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "Backplane.kicad_pro",
+    "filename": "BackplaneAltimeterTest.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -602,7 +602,7 @@
   "sheets": [
     [
       "d6cecfea-6157-498d-8796-49576704a9cc",
-      ""
+      "Root"
     ]
   ],
   "text_variables": {}
